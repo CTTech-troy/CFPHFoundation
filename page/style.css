@@ -1,0 +1,278 @@
+.aboutus-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 40px 20px;
+  }
+  
+  .aboutus-content {
+    display: flex;
+    max-width: 100%;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    gap: 100px;
+  }
+  .aboutus-con{
+    margin-top: 60px;
+  }
+  .about-us-fill{
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .about-fill-container{
+    border: 1px solid #333;
+    width: 30%;
+    padding: 5px 20px;
+    border-radius: 20px;
+  } 
+  .about-fill-container i{
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 5px;
+    background-color: rgb(255, 142, 108);
+    color: white;
+    margin-left: -10px;
+    margin-right: 10px;
+  }
+  .aboutus-badge {
+    display: inline-block;
+    justify-content: flex-start;
+    color: #333;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+  }
+  
+  .aboutus-title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+    text-align: left;
+    /* margin-left: 150px; */
+    width: 600px;
+  }
+  
+  .aboutus-text {
+    font-size: 18px;
+    color: #666;
+    width: 450px;
+    /* margin: 15px 0; */
+  }
+  
+  .aboutus-learn-more {
+    display: flex;
+    background-color: #000;
+    color: white;
+    padding: 13px 35px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .aboutus-learn-more:hover {
+    background-color: #444;
+  }
+  
+  .aboutus-image {
+    max-width: 100%;
+    width: 80%;
+  }
+  
+  .aboutus-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  /* Small devices (phones, less than 600px) */
+@media (max-width: 600px) {
+  .aboutus-content {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  .aboutus-con{
+   margin-top: -10%;
+  }
+  
+  .aboutus-title {
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .aboutus-text {
+    font-size: 16px;
+    width: 100%;
+    text-align: justify;
+    /* text-align: left; */
+  }
+  
+  .aboutus-image {
+    width: 100%;
+  }
+
+  .about-fill-container {
+    width: 90%;
+  }
+.aboutus-learn-more{
+    font-size: 13px;
+    /* margin-left: -5%; */
+  }
+}
+
+/* Tablets (600px - 1024px) */
+@media (max-width: 1024px) {
+  .aboutus-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .aboutus-title {
+    font-size: 40px;
+    width: 90%;
+    text-align: left;
+  }
+
+  .aboutus-text {
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .about-fill-container {
+    width: 50%;
+  }
+}
+
+/* Medium screens (1025px - 1280px) */
+@media (max-width: 1280px) {
+  .aboutus-content {
+    gap: 60px;
+  }
+  aboutus-con{
+    margin-top: -10%;
+  }
+  .aboutus-title {
+    font-size: 30px;
+    width: 100%;
+  }
+
+  .aboutus-text {
+    width: 100%;
+  }
+  .aboutus-learn-more{
+    font-size: 13px;
+  }
+}
+
+/* Large screens (1281px and above) */
+@media (min-width: 1281px) {
+  .aboutus-content {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
+body {
+    --token-96b06de6-276f-47e3-a541-f01772f9ea0a: rgb(255, 255, 255);
+    --token-0a83fcf5-b3d4-464f-83bd-61e3a586db14: rgb(250, 250, 250);
+    --token-838f2938-1a37-48dd-ac42-9f49192f64f1: rgb(230, 230, 230);
+    --token-42eb5644-f375-4ec7-9f33-8ce4e4de06bc: rgb(80, 80, 80);
+    --token-46f3b392-d383-42bf-b1d7-1baf378dae55: rgb(3, 3, 3);
+    --token-817125d9-1adf-413c-a82d-90eac0caff3a: #fee581;
+    --token-79ce2f46-8a3b-4cb3-82e0-42f0912b884d: rgb(17, 17, 17);
+    --token-e22edf02-5e02-45f8-a07e-e6318256fc74: #ff8e6c;
+    --token-a06d83b4-d5b5-4207-9f35-db685116ca3a: #52db82;
+}
+.CorporatePartnerships-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    padding: 10px 180px;
+    align-items: center;
+  }
+  
+  .CorporatePartnerships-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    padding: 40px;
+    height: 350px;
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    border-radius: 13px;
+  }
+  
+  .CorporatePartnerships-icon {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    margin: 0 auto 10px;
+  }
+  
+  .CorporatePartnerships-green {
+    background-color: #52db82;
+  }
+  
+  .CorporatePartnerships-yellow {
+    background-color: #fee581;
+  }
+  
+  .CorporatePartnerships-orange {
+    background-color: #ff8e6c;
+  }
+  
+  .CorporatePartnerships-red {
+    background-color: #ff8e6c;
+  }
+  
+  .CorporatePartnerships-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: rgb(3, 3, 3);
+    font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+  }
+  
+  
+  .CorporatePartnerships-description {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+  }
+  
+  .CorporatePartnerships-button {
+    padding: 15px 30px;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    color: rgb(17, 17, 17);
+    font-size: 15px;
+    font-weight: 700;
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+  }
+  
+  .CorporatePartnerships-button:hover {
+    color: white;
+    background: #52db82;
+  }
+  

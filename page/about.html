@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Celebrity Food Home Pantry Foundation</title>
+
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/x-icon" href="../assets/logo-removebg-preview (1) copy.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#10b981",
+              secondary: "#1f2937",
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :where([class^="ri-"])::before {
+        content: "\f3c2";
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .counter {
+        font-weight: 700;
+        font-size: 3rem;
+        color: #10b981;
+      }
+      .navbar-scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .donation-card {
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+      .donation-card:hover {
+        border-color: #10b981;
+        transform: scale(1.05);
+      }
+      .donation-card.selected {
+        border-color: #10b981;
+        background: #f0fdf4;
+      }
+      .testimonial-card {
+        min-height: 300px;
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.5s ease;
+      }
+      .testimonial-card.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .animate-counter {
+        animation: countUp 2s ease-out;
+      }
+      @keyframes countUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .mobile-menu {
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      .mobile-menu.open {
+        transform: translateX(0);
+      }
+      /* remove background-image hero — we use an <img> so it's fully visible and responsive */
+      .hero-img {
+        display: block;
+        margin: 0 auto;
+        max-width: 1400px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        background-color: #f3f4f6; /* gray-100 fallback */
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 text-gray-900">
+      <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+              <img
+                src="../assets/logo-removebg-preview (1) copy.ico"
+                alt="Hope Foundation Logo"
+                class="h-20 w-20 mr-3"
+                id="nav-logo"
+                style="margin-top: 10px;"
+              />
+            </div>
+
+            <!-- NAV LINKS: changed to black -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="../index.html" class="text-black hover:text-primary transition-colors">Home</a>
+              <a href="#about" class="text-black hover:text-primary transition-colors">About</a>
+              <a href="../index.html#programs" class="text-black hover:text-primary transition-colors">Programs</a>
+              <a href="../index.html#stories" class="text-black hover:text-primary transition-colors">Stories</a>
+              <a href="../index.html#blog" class="text-black hover:text-primary transition-colors">Blog</a>
+              <a href="../index.html#contact" class="text-black hover:text-primary transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+              <button
+                id="donate-nav-btn"
+                class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-green-600 transition-colors whitespace-nowrap"
+              >
+                Donate Now
+              </button>
+
+              <button id="mobile-menu-btn" class="md:hidden text-black">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-menu-line ri-lg"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+              <img
+                src="../assets/logo-removebg-preview (1) copy.ico"
+                alt=""
+                class="h-20 w-20 mr-3"
+                id="mobile-nav-logo"
+                style="margin-top: 10px;"
+              />
+              <button id="close-menu" class="text-black">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-close-line ri-lg"></i>
+                </div>
+              </button>
+            </div>
+
+            <div class="space-y-6">
+              <a href="../index.html" class="block text-black hover:text-primary transition-colors">Home</a>
+              <a href="#about" class="block text-black hover:text-primary transition-colors">About</a>
+              <a href="../index.html#programs" class="block text-black hover:text-primary transition-colors">Programs</a>
+              <a href="../index.html#stories" class="block text-black hover:text-primary transition-colors">Stories</a>
+              <a href="../index.html#blog" class="block text-black hover:text-primary transition-colors">Blog</a>
+              <a href="../index.html#contact" class="block text-black hover:text-primary transition-colors">Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-bg w-full py-24 sm:py-32 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-secondary mb-6">About Us</h1>
+         <p class="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto">
+           Empowering communities through sustainable initiatives and environmental education.
+         </p>
+       </div>
+     </div>
+
+    <!-- Overview Section -->
+    <div class="bg-white py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="fade-in">
+            <h2 class="text-3xl font-bold text-secondary mb-6">Our Foundation</h2>
+            <p class="text-gray-600 mb-4">
+              We have provided food items on over 9,000 occasions to the needy, the elderly, widows, and persons with special needs.
+            </p>
+            <p class="text-gray-600 mb-4">
+              In addition, we have distributed clothes to more than 200 children, bringing hope and joy to their lives.
+            </p>
+
+            <!-- Milestones (updated: nice list with check icons) -->
+            <div class="text-gray-700">
+              <p class="font-semibold mb-4">Milestones</p>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <span class="flex-shrink-0">
+                    <svg class="w-6 h-6 text-primary mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 10-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </span>
+                  <span class="ml-3">Celebrated our 1st year of impact</span>
+                </li>
+
+                <li class="flex items-start">
+                  <span class="flex-shrink-0">
+                    <svg class="w-6 h-6 text-primary mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 10-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </span>
+                  <span class="ml-3">Distributed food items more than 9,000 times to individuals and families in need</span>
+                </li>
+
+                <!-- add more milestones here -->
+                <li class="flex items-start">
+                  <span class="flex-shrink-0">
+                    <svg class="w-6 h-6 text-primary mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 10-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </span>
+                  <span class="ml-3">Reached 200+ children with clothing donations</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="relative h-96 rounded-2xl overflow-hidden shadow-xl flex items-center justify-center">
+            <img
+              src="../assets/landingpage.jpg"
+              alt="Team collaborating on environmental projects"
+              class="w-full h-full object-contain bg-gray-100"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Founder & Leadership Section -->
+    <div class="bg-gray-50 py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-secondary mb-4">Our Leadership</h2>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            Meet the visionaries behind GreenHope who are dedicated to making a positive impact on our environment and communities.
+          </p>
+        </div>
+
+        <div class="fade-in grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+            <div class="flex flex-col sm:flex-row">
+              <div class="sm:w-1/3">
+                <img
+                  src="../assets/bandy.jpg"
+                  alt="Dele Oduyemi - Founder"
+                  class="w-full h-auto object-contain bg-gray-100 max-h-[320px]"
+                />
+              </div>
+              <div class="p-6 sm:w-2/3">
+                <h3 class="text-xl font-bold text-secondary mb-2">Dele Oduyemi</h3>
+                <p class="text-primary font-medium mb-3">Executive Director</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+            <div class="flex flex-col sm:flex-row">
+              <div class="sm:w-1/3">
+                <img
+                  src="../assets/AuntyTayo.jpg"
+                  alt="Tayo Oduyemi"
+                  class="w-full h-auto object-contain bg-gray-100 max-h-[320px]"
+                />
+              </div>
+              <div class="p-6 sm:w-2/3">
+                <h3 class="text-xl font-bold text-secondary mb-2">Tayo Oduyemi</h3>
+                <p class="text-primary font-medium mb-3">Cheif Executive Director</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-bold text-secondary text-center mb-8">Meet Our Team</h3>
+        <div class="fade-in grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+            <img src="../assets/tayp.jpg" alt="Akintayo Adesanya" class="w-full h-auto object-contain bg-gray-100 max-h-[260px]" />
+            <div class="p-4 text-center">
+              <h4 class="text-lg font-bold text-secondary">Akintayo Adesanya</h4>
+              <p class="text-primary text-sm">General Secretary</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+            <img src="../assets/IMG_0282 (1).png" alt="Shadrack Akinola" class="w-full h-auto object-contain bg-gray-100 max-h-[260px]" />
+            <div class="p-4 text-center">
+              <h4 class="text-lg font-bold text-secondary">Shadrack Akinola</h4>
+              <p class="text-primary text-sm">Project/PR Manager</p>
+            </div>
+          </div>
+
+          <!-- <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+            <img src="" alt="James Wilson" class="w-full h-56 object-cover" />
+            <div class="p-4 text-center">
+              <h4 class="text-lg font-bold text-secondary">James Wilson</h4>
+              <p class="text-primary text-sm">Community Outreach</p>
+            </div>
+          </div> -->
+
+          <!-- <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+            <img src="" alt="Maria Rodriguez" class="w-full h-56 object-cover" />
+            <div class="p-4 text-center">
+              <h4 class="text-lg font-bold text-secondary">Maria Rodriguez</h4>
+              <p class="text-primary text-sm">Education Coordinator</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+        
+    <!-- Mission, Vision, Values -->
+    <div class="bg-white py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-secondary mb-4">Mission, Vision & Values</h2>
+          <p class="text-gray-600 max-w-3xl mx-auto">The principles that guide our work and shape our impact in communities around the world.</p>
+        </div>
+
+        <div class="fade-in grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
+            <div class="text-primary mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" stroke-width="2" />
+                <circle cx="12" cy="12" r="6" stroke-width="2" />
+                <circle cx="12" cy="12" r="2" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-secondary mb-4">Our Mission</h3>
+            <p class="text-gray-600">
+To alleviate hunger and malnutrition in our community by providing food assistance to vulnerable individuals and families.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
+            <div class="text-primary mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-width="2" d="M1.5 12s4.5-7.5 10.5-7.5S22.5 12 22.5 12 18 19.5 12 19.5 1.5 12 1.5 12z" />
+                <circle cx="12" cy="12" r="3" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-secondary mb-4">Our Vision</h3>
+            <p class="text-gray-600">
+To create a world where everyone has access to nutritious food and the opportunity to thrive.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
+            <div class="text-primary mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21s-6-4.35-9-8.28C-1.2 7.5 2.4 2 7.5 2 10 2 12 4 12 4s2-2 4.5-2C21.6 2 25.2 7.5 21 12.72 18 16.65 12 21 12 21z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-secondary mb-4">Get Involved</h3>
+            <ul class="text-gray-600 space-y-2">
+              <li>• Volunteer: <br>Sign-up form, volunteer opportunities, and requirements</li>
+              <li>•  Donate: <br> Secure donation portal, donation options (one-time, recurring, in-kind)</li>
+              <li>• Fundraise:  <br>Ideas, tools, and resources for hosting fundraising events</li>
+              <li>• Sponsorship: <br> Opportunities for corporate partnerships and sponsorships</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div>
+            <img src="../assets/logo-removebg-preview (1) copy.ico" alt="" class="w-20 h-20" />
+            <p class="text-gray-300 mb-6">
+              Building better communities through sustainable programs that address hunger, education, healthcare, and economic empowerment.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors"><i class="ri-facebook-fill"></i></a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors"><i class="ri-twitter-x-fill"></i></a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors"><i class="ri-instagram-fill"></i></a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors"><i class="ri-linkedin-fill"></i></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-lg mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li><a href="#about" class="text-gray-300 hover:text-primary transition-colors">About Us</a></li>
+              <li><a href="#programs" class="text-gray-300 hover:text-primary transition-colors">Our Programs</a></li>
+              <li><a href="#stories" class="text-gray-300 hover:text-primary transition-colors">Success Stories</a></li>
+              <li><a href="#blog" class="text-gray-300 hover:text-primary transition-colors">News & Updates</a></li>
+              <li><a href="#contact" class="text-gray-300 hover:text-primary transition-colors">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-lg mb-6">Get Involved</h3>
+            <ul class="space-y-3">
+              <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Donate</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Volunteer</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Sponsor a Child</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Corporate Partners</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Fundraise</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-lg mb-6">Newsletter</h3>
+            <p class="text-gray-300 mb-4">Stay updated with our latest impact stories and ways to help.</p>
+            <div class="space-y-3">
+              <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent" />
+              <button class="w-full bg-primary text-white py-3 !rounded-button font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">Subscribe</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/20 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-300 text-sm">© 2025 CFPHFoundation. All rights reserved.</p>
+            <div class="flex items-center space-x-6 text-sm">
+              <a href="#" class="text-gray-300 hover:text-primary transition-colors">Privacy Policy</a>
+              <a href="#" class="text-gray-300 hover:text-primary transition-colors">Terms of Service</a>
+              <div class="flex items-center space-x-2">
+                <div class="w-6 h-6 flex items-center justify-center"><i class="ri-visa-fill text-gray-300"></i></div>
+                <div class="w-6 h-6 flex items-center justify-center"><i class="ri-mastercard-fill text-gray-300"></i></div>
+                <div class="w-6 h-6 flex items-center justify-center"><i class="ri-paypal-fill text-gray-300"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Fade-in observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+    </script>
+
+    <script>
+      // Navbar + mobile menu + smooth scroll (nav links forced to black)
+      document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.getElementById("navbar");
+        const navLinks = navbar ? navbar.querySelectorAll("a") : [];
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenuBtn = document.getElementById("close-menu");
+        const donateNavBtn = document.getElementById("donate-nav-btn");
+
+        function setNavColors() {
+          // Force nav links and mobile buttons to black for this page
+          navLinks.forEach((link) => {
+            link.classList.remove("text-white", "text-secondary");
+            link.classList.add("text-black");
+          });
+          if (mobileMenuBtn) {
+            mobileMenuBtn.classList.remove("text-white", "text-secondary");
+            mobileMenuBtn.classList.add("text-black");
+          }
+          if (closeMenuBtn) {
+            closeMenuBtn.classList.remove("text-white", "text-secondary");
+            closeMenuBtn.classList.add("text-black");
+          }
+          // keep navbar-scrolled behavior for background/shadow on scroll
+          if (window.scrollY > 50) {
+            navbar.classList.add("navbar-scrolled");
+          } else {
+            navbar.classList.remove("navbar-scrolled");
+          }
+        }
+
+        // initial state
+        setNavColors();
+
+        // update on scroll (only toggles scrolled background)
+        window.addEventListener("scroll", setNavColors);
+
+        // mobile menu controls
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener("click", () => mobileMenu.classList.add("open"));
+        }
+        if (closeMenuBtn && mobileMenu) {
+          closeMenuBtn.addEventListener("click", () => mobileMenu.classList.remove("open"));
+        }
+        if (mobileMenu) {
+          mobileMenu.addEventListener("click", (e) => {
+            if (e.target === mobileMenu) mobileMenu.classList.remove("open");
+          });
+        }
+
+        // smooth scroll for anchors, close mobile menu when navigating
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (mobileMenu) mobileMenu.classList.remove("open");
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+        });
+
+        // donate button fallback
+        if (donateNavBtn) {
+          donateNavBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const donateSection = document.getElementById("donate");
+            if (donateSection) {
+              donateSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else if (mobileMenu) {
+              mobileMenu.classList.remove("open");
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

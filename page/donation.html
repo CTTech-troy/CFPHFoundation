@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Your Donation - Hope Foundation</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#10b981',
+secondary: '#1f2937'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+},
+fontFamily: {
+'inter': ['Inter', 'sans-serif']
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+body {
+font-family: 'Inter', sans-serif;
+}
+.progress-step {
+position: relative;
+}
+.progress-step.completed::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 100%;
+width: 100%;
+height: 2px;
+background: #10b981;
+transform: translateY(-50%);
+z-index: 1;
+}
+.progress-step.active .step-circle {
+background: #10b981;
+color: white;
+}
+.progress-step.completed .step-circle {
+background: #10b981;
+color: white;
+}
+.card-input:focus {
+border-color: #10b981;
+box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+.payment-method.selected {
+border-color: #10b981;
+background: #f0fdf4;
+}
+.custom-checkbox {
+appearance: none;
+width: 1.25rem;
+height: 1.25rem;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+position: relative;
+cursor: pointer;
+}
+.custom-checkbox:checked {
+background: #10b981;
+border-color: #10b981;
+}
+.custom-checkbox:checked::after {
+content: '✓';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: white;
+font-size: 0.75rem;
+font-weight: bold;
+}
+.thank-you-preview {
+transform: translateY(20px);
+opacity: 0;
+transition: all 0.5s ease;
+}
+.thank-you-preview.show {
+transform: translateY(0);
+opacity: 1;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<div class="min-h-screen">
+<div class="bg-white shadow-sm">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<a href="https://readdy.ai/home/00f1d2d7-f5db-48e9-8f02-58d43bc44877/45b4cbd0-2bb2-4b59-9942-60be5b9dfea7" data-readdy="true" class="flex items-center text-gray-600 hover:text-primary transition-colors">
+<div class="w-6 h-6 flex items-center justify-center mr-2">
+<i class="ri-arrow-left-line ri-lg"></i>
+</div>
+Back to Main Site
+</a>
+</div>
+<div class="font-['Pacifico'] text-xl text-secondary">Hope Foundation</div>
+</div>
+</div>
+</div>
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="text-center mb-8">
+<h1 class="text-3xl md:text-4xl font-bold text-secondary mb-4">Complete Your Donation</h1>
+<p class="text-lg text-gray-600">Help us build better communities with your monthly contribution</p>
+</div>
+<div class="flex justify-center mb-12">
+<div class="flex items-center space-x-8">
+<div class="progress-step completed">
+<div class="step-circle w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-sm">1</div>
+<div class="text-sm text-center mt-2">Amount</div>
+</div>
+<div class="progress-step active">
+<div class="step-circle w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-sm">2</div>
+<div class="text-sm text-center mt-2">Details</div>
+</div>
+<div class="progress-step">
+<div class="step-circle w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-sm">3</div>
+<div class="text-sm text-center mt-2">Payment</div>
+</div>
+<div class="progress-step">
+<div class="step-circle w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-sm">4</div>
+<div class="text-sm text-center mt-2">Complete</div>
+</div>
+</div>
+</div>
+<div class="grid lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-8">
+<div class="bg-white rounded-xl shadow-lg p-6">
+<h2 class="text-xl font-bold text-secondary mb-6">Donor Information</h2>
+<form class="space-y-6">
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="Enter your first name">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="Enter your last name">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+<input type="email" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="Enter your email address">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+<input type="tel" class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="Enter your phone number">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Billing Address *</label>
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors mb-3" placeholder="Street address">
+<div class="grid md:grid-cols-3 gap-3">
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="City">
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="State">
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="ZIP Code">
+</div>
+</div>
+</form>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-6">
+<h2 class="text-xl font-bold text-secondary mb-6">Payment Method</h2>
+<div class="space-y-4 mb-6">
+<div class="payment-method selected border-2 rounded-lg p-4 cursor-pointer transition-colors" data-method="card">
+<div class="flex items-center space-x-3">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-bank-card-line ri-lg"></i>
+</div>
+<span class="font-medium">Credit / Debit Card</span>
+<div class="ml-auto flex space-x-2">
+<div class="w-8 h-5 flex items-center justify-center">
+<i class="ri-visa-fill text-blue-600"></i>
+</div>
+<div class="w-8 h-5 flex items-center justify-center">
+<i class="ri-mastercard-fill text-red-500"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="payment-method border-2 rounded-lg p-4 cursor-pointer transition-colors" data-method="paypal">
+<div class="flex items-center space-x-3">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-paypal-fill ri-lg text-blue-600"></i>
+</div>
+<span class="font-medium">PayPal</span>
+</div>
+</div>
+<div class="payment-method border-2 rounded-lg p-4 cursor-pointer transition-colors" data-method="google-pay">
+<div class="flex items-center space-x-3">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-google-fill ri-lg text-blue-500"></i>
+</div>
+<span class="font-medium">Google Pay</span>
+</div>
+</div>
+</div>
+<div id="card-form" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Card Number *</label>
+<div class="relative">
+<input type="text" required class="card-input w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="1234 5678 9012 3456" maxlength="19">
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-bank-card-line text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Expiry Date *</label>
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="MM/YY" maxlength="5">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">CVV *</label>
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="123" maxlength="4">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Name on Card *</label>
+<input type="text" required class="card-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-colors" placeholder="Enter name as it appears on card">
+</div>
+</div>
+<div id="paypal-form" class="hidden">
+<div class="text-center py-8">
+<div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full">
+<i class="ri-paypal-fill ri-2x text-blue-600"></i>
+</div>
+<p class="text-gray-600">You will be redirected to PayPal to complete your payment securely.</p>
+</div>
+</div>
+<div id="google-pay-form" class="hidden">
+<div class="text-center py-8">
+<div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full">
+<i class="ri-google-fill ri-2x text-blue-500"></i>
+</div>
+<p class="text-gray-600">You will be redirected to Google Pay to complete your payment securely.</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-6">
+<h2 class="text-xl font-bold text-secondary mb-6">Confirmation</h2>
+<div class="space-y-4">
+<label class="flex items-start space-x-3 cursor-pointer">
+<input type="checkbox" class="custom-checkbox mt-1" required>
+<div class="text-sm relative" id="subscription-info">
+<span class="text-gray-700 hover:text-primary transition-colors cursor-help">I confirm that I want to set up a recurring monthly donation of $100 to Hope Foundation. I understand that this amount will be automatically charged to my selected payment method each month until I choose to cancel.</span>
+<div id="subscription-tooltip" class="hidden absolute left-0 bottom-full mb-2 w-80 bg-white rounded-xl shadow-lg p-4 border border-gray-200 z-10">
+<h4 class="font-semibold text-secondary mb-2">Subscription Management</h4>
+<ul class="space-y-2 text-gray-600 text-sm mb-3">
+<li class="flex items-start space-x-2">
+<div class="w-4 h-4 flex-shrink-0 flex items-center justify-center mt-0.5">
+<i class="ri-edit-line text-primary"></i>
+</div>
+<span>Modify your donation amount or payment method anytime through your donor portal</span>
+</li>
+<li class="flex items-start space-x-2">
+<div class="w-4 h-4 flex-shrink-0 flex items-center justify-center mt-0.5">
+<i class="ri-calendar-line text-primary"></i>
+</div>
+<span>Change your billing date or payment frequency</span>
+</li>
+<li class="flex items-start space-x-2">
+<div class="w-4 h-4 flex-shrink-0 flex items-center justify-center mt-0.5">
+<i class="ri-close-circle-line text-primary"></i>
+</div>
+<span>Cancel your subscription with no questions asked</span>
+</li>
+</ul>
+<a href="#" class="inline-flex items-center space-x-1 text-primary hover:underline text-sm font-medium">
+<span>Manage My Donations</span>
+<i class="ri-arrow-right-line"></i>
+</a>
+</div>
+</div>
+</label>
+<label class="flex items-start space-x-3 cursor-pointer">
+<input type="checkbox" class="custom-checkbox mt-1" required>
+<div class="text-sm">
+<span class="text-gray-700">I agree to the <a href="#" class="text-primary hover:underline">Terms and Conditions</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a>.</span>
+</div>
+</label>
+<label class="flex items-start space-x-3 cursor-pointer">
+<input type="checkbox" class="custom-checkbox mt-1">
+<div class="text-sm">
+<span class="text-gray-700">I would like to receive email updates about Hope Foundation's programs and impact stories.</span>
+</div>
+</label>
+</div>
+<div class="mt-6 p-4 bg-green-50 rounded-lg">
+<div class="flex items-start space-x-3">
+<div class="w-5 h-5 flex items-center justify-center mt-0.5">
+<i class="ri-information-line text-primary"></i>
+</div>
+<div class="text-sm text-gray-700">
+<strong>Tax Deduction:</strong> Your donation is tax-deductible. You will receive a receipt for tax purposes after completing your donation.
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1">
+<div class="bg-white rounded-xl shadow-lg p-6 sticky top-8">
+<h2 class="text-xl font-bold text-secondary mb-6">Donation Summary</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-gray-600">Donation Type</span>
+<div class="flex items-center space-x-2">
+<span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">Monthly</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-gray-600">Monthly Amount</span>
+<span class="text-2xl font-bold text-primary">$100</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<span class="text-gray-500">Processing Fee</span>
+<span class="text-gray-500">$0.00</span>
+</div>
+<div class="border-t pt-4">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-secondary">Total Monthly</span>
+<span class="text-2xl font-bold text-secondary">$100</span>
+</div>
+</div>
+</div>
+<div class="mt-6 p-4 bg-blue-50 rounded-lg">
+<h3 class="font-semibold text-secondary mb-2">Your Impact</h3>
+<p class="text-sm text-gray-600">Your $100 monthly donation will provide medical care for 2 families, school supplies for 10 children, or clean water access for 5 households each month.</p>
+</div>
+<button id="complete-donation" class="w-full bg-primary text-white py-4 !rounded-button text-lg font-semibold hover:bg-green-600 transition-colors whitespace-nowrap mt-6">
+Complete Donation
+</button>
+<div class="flex justify-center items-center mt-4 space-x-4 text-xs text-gray-500">
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-shield-check-line"></i>
+</div>
+Secure
+</div>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-lock-line"></i>
+</div>
+256-bit SSL
+</div>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-verified-badge-line"></i>
+</div>
+PCI Compliant
+</div>
+</div>
+<div class="mt-6 text-center">
+<p class="text-xs text-gray-500 mb-2">Need help?</p>
+<a href="#" class="text-primary text-sm hover:underline">Contact Support</a>
+</div>
+</div>
+</div>
+</div>
+<div id="thank-you-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+<div class="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 thank-you-preview">
+<div class="text-center">
+<div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<div class="w-12 h-12 flex items-center justify-center">
+<i class="ri-check-line ri-2x text-primary"></i>
+</div>
+</div>
+<h2 class="text-2xl font-bold text-secondary mb-4">Thank You!</h2>
+<p class="text-gray-600 mb-6">Your monthly donation of $100 has been successfully set up. You're now part of our mission to build better communities worldwide.</p>
+</div>
+<div class="bg-gray-50 rounded-lg p-4 mb-6">
+<h3 class="font-semibold text-secondary mb-3">Donation Receipt</h3>
+<div class="space-y-2 text-sm">
+<div class="flex justify-between">
+<span class="text-gray-600">Transaction ID:</span>
+<span class="font-mono">#TXN-2024-001234</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-600">Amount:</span>
+<span class="font-semibold">$100/month</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-600">Next Payment:</span>
+<span>January 17, 2025</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-600">Payment Method:</span>
+<span>•••• •••• •••• 1234</span>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-primary text-white py-3 !rounded-button font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
+Download Receipt
+</button>
+<div class="flex space-x-3">
+<button class="flex-1 border-2 border-gray-300 text-gray-700 py-3 !rounded-button font-semibold hover:border-primary hover:text-primary transition-colors whitespace-nowrap">
+Share
+</button>
+<a href="https://readdy.ai/home/00f1d2d7-f5db-48e9-8f02-58d43bc44877/45b4cbd0-2bb2-4b59-9942-60be5b9dfea7" data-readdy="true" class="flex-1 border-2 border-primary text-primary py-3 !rounded-button font-semibold hover:bg-primary hover:text-white transition-colors whitespace-nowrap text-center">
+Return Home
+</a>
+</div>
+</div>
+<div class="mt-6 text-center">
+<p class="text-sm text-gray-600 mb-2">Follow your impact:</p>
+<div class="flex justify-center space-x-4">
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
+<i class="ri-twitter-x-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
+<i class="ri-instagram-fill"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script id="payment-method-selection">
+document.addEventListener('DOMContentLoaded', function() {
+const paymentMethods = document.querySelectorAll('.payment-method');
+const cardForm = document.getElementById('card-form');
+const paypalForm = document.getElementById('paypal-form');
+const googlePayForm = document.getElementById('google-pay-form');
+paymentMethods.forEach(method => {
+method.addEventListener('click', function() {
+paymentMethods.forEach(m => m.classList.remove('selected'));
+this.classList.add('selected');
+const methodType = this.getAttribute('data-method');
+cardForm.classList.add('hidden');
+paypalForm.classList.add('hidden');
+googlePayForm.classList.add('hidden');
+if (methodType === 'card') {
+cardForm.classList.remove('hidden');
+} else if (methodType === 'paypal') {
+paypalForm.classList.remove('hidden');
+} else if (methodType === 'google-pay') {
+googlePayForm.classList.remove('hidden');
+}
+});
+});
+});
+</script>
+<script id="card-formatting">
+document.addEventListener('DOMContentLoaded', function() {
+const cardNumberInput = document.querySelector('input[placeholder="1234 5678 9012 3456"]');
+const expiryInput = document.querySelector('input[placeholder="MM/YY"]');
+if (cardNumberInput) {
+cardNumberInput.addEventListener('input', function(e) {
+let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+if (formattedValue.length > 19) formattedValue = formattedValue.substr(0, 19);
+e.target.value = formattedValue;
+});
+}
+if (expiryInput) {
+expiryInput.addEventListener('input', function(e) {
+let value = e.target.value.replace(/\D/g, '');
+if (value.length >= 2) {
+value = value.substring(0, 2) + '/' + value.substring(2, 4);
+}
+e.target.value = value;
+});
+}
+});
+</script>
+<script id="subscription-tooltip">
+document.addEventListener('DOMContentLoaded', function() {
+const subscriptionInfo = document.getElementById('subscription-info');
+const tooltip = document.getElementById('subscription-tooltip');
+let isTooltipVisible = false;
+
+subscriptionInfo.addEventListener('click', function(e) {
+if (e.target.tagName.toLowerCase() !== 'input') {
+isTooltipVisible = !isTooltipVisible;
+tooltip.classList.toggle('hidden');
+}
+});
+
+document.addEventListener('click', function(e) {
+if (!subscriptionInfo.contains(e.target) && isTooltipVisible) {
+isTooltipVisible = false;
+tooltip.classList.add('hidden');
+}
+});
+});
+</script>
+
+<script id="form-validation">
+document.addEventListener('DOMContentLoaded', function() {
+const completeButton = document.getElementById('complete-donation');
+const thankYouModal = document.getElementById('thank-you-modal');
+const thankYouPreview = document.querySelector('.thank-you-preview');
+completeButton.addEventListener('click', function(e) {
+e.preventDefault();
+const requiredFields = document.querySelectorAll('input[required]');
+const checkboxes = document.querySelectorAll('input[type="checkbox"][required]');
+let isValid = true;
+requiredFields.forEach(field => {
+if (!field.value.trim()) {
+field.classList.add('border-red-500');
+isValid = false;
+} else {
+field.classList.remove('border-red-500');
+}
+});
+checkboxes.forEach(checkbox => {
+if (!checkbox.checked) {
+isValid = false;
+}
+});
+if (isValid) {
+thankYouModal.classList.remove('hidden');
+setTimeout(() => {
+thankYouPreview.classList.add('show');
+}, 100);
+} else {
+alert('Please fill in all required fields and accept the terms and conditions.');
+}
+});
+thankYouModal.addEventListener('click', function(e) {
+if (e.target === thankYouModal) {
+thankYouPreview.classList.remove('show');
+setTimeout(() => {
+thankYouModal.classList.add('hidden');
+}, 500);
+}
+});
+});
+</script>
+<script id="progress-indicator">
+document.addEventListener('DOMContentLoaded', function() {
+const steps = document.querySelectorAll('.progress-step');
+let currentStep = 1;
+function updateProgress() {
+steps.forEach((step, index) => {
+step.classList.remove('active', 'completed');
+if (index < currentStep) {
+step.classList.add('completed');
+} else if (index === currentStep) {
+step.classList.add('active');
+}
+});
+}
+updateProgress();
+});
+</script>
+</body>
+</html>

@@ -22,7 +22,7 @@ export default async function sendNewsletter(req, res) {
 
   const mailOptions = {
     from: `"Newsletter" <${process.env.SMTP_USER}>`,
-    to: emails.join(","), // Multiple recipients
+    to: emails.join(","), 
     subject,
     html,
   };

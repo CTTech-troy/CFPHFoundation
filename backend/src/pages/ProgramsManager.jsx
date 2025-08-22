@@ -10,16 +10,9 @@ import {
   PackageIcon,
 } from "lucide-react";
 
-// Firebase (RTDB only)
+// Firebase (RTDB)
 import { rtdb } from "../firebase";
-import {
-  ref as dbRef,
-  push,
-  set,
-  onValue,
-  remove,
-  update,
-} from "firebase/database";
+import { ref as dbRef, push, set, onValue, remove, update } from "firebase/database";
 
 // SweetAlert2
 import Swal from "sweetalert2";
@@ -34,7 +27,7 @@ export default function ProgramsManager() {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
-  // 🔹 Load programs from Realtime DB
+  // Load programs from Realtime DB
   useEffect(() => {
     const programsRef = dbRef(rtdb, "programs");
     const unsubscribe = onValue(programsRef, (snapshot) => {
@@ -54,14 +47,12 @@ export default function ProgramsManager() {
     return () => unsubscribe();
   }, []);
 
-  // 🔹 Log notification
+  // Log notification
   const logNotification = (action, program) => {
     const notificationsRef = dbRef(rtdb, "notifications");
     const newNotifRef = push(notificationsRef);
-
     const color =
       action === "added" ? "green" : action === "edited" ? "yellow" : "red";
-
     set(newNotifRef, {
       message: `Program "${program.title}" ${action}`,
       status: color,
@@ -83,16 +74,17 @@ export default function ProgramsManager() {
     setIsModalOpen(false);
   };
 
-  // 🔹 Convert File to Base64
+  // Convert File to Base64
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // returns base64 string
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
   };
 
+  // Save Program
   const handleSaveProgram = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -102,7 +94,7 @@ export default function ProgramsManager() {
 
     let iconUrl = formData.get("iconUrl"); // fallback if user pastes URL
 
-    // 🔹 If user selected a file, convert to Base64
+    // If user selected a file, convert to Base64
     if (file) {
       try {
         iconUrl = await convertToBase64(file);
@@ -131,7 +123,6 @@ export default function ProgramsManager() {
   const handleDelete = (id, title) => {
     const programRef = dbRef(rtdb, `programs/${id}`);
     remove(programRef);
-
     logNotification("deleted", { title });
     Swal.fire("Deleted!", "Program deleted successfully!", "error");
   };
@@ -169,7 +160,7 @@ export default function ProgramsManager() {
                   <div className="text-blue-600">
                     {program.iconUrl ? (
                       <img
-                        src={program.iconUrl}
+                        src={program.iconUrl} // Base64 works directly
                         alt="Program Icon"
                         className="w-10 h-10 object-cover rounded"
                       />
@@ -191,9 +182,7 @@ export default function ProgramsManager() {
                 <h3 className="mt-4 font-medium text-gray-900">
                   {program.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-600">
-                  {program.description}
-                </p>
+                <p className="mt-2 text-sm text-gray-600">{program.description}</p>
 
                 <div className="flex space-x-2 mt-4 pt-4 border-t border-gray-100">
                   <Button
@@ -276,7 +265,6 @@ export default function ProgramsManager() {
                 Program Icon
               </label>
 
-              {/* Drag & Drop Zone */}
               <div
                 className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md cursor-pointer"
                 onDragOver={(e) => e.preventDefault()}

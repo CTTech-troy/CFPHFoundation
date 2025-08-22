@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Registration</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="icon" type="image/x-icon" href="../assets/logo-removebg-preview (1) copy.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#10b981',
+secondary: '#1f2937'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+},
+fontFamily: {
+'inter': ['Inter', 'sans-serif']
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+body {
+font-family: 'Inter', sans-serif;
+}
+.hero-bg {
+background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/img13.jpg');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+}
+.counter {
+font-weight: 700;
+font-size: 3rem;
+color: #10b981;
+}
+.navbar-scrolled {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+.card-hover {
+transition: all 0.3s ease;
+}
+.card-hover:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+.donation-card {
+transition: all 0.3s ease;
+border: 2px solid transparent;
+}
+.donation-card:hover {
+border-color: #10b981;
+transform: scale(1.05);
+}
+.donation-card.selected {
+border-color: #10b981;
+background: #f0fdf4;
+}
+.testimonial-card {
+min-height: 300px;
+opacity: 0;
+transform: translateX(100px);
+transition: all 0.5s ease;
+}
+.testimonial-card.active {
+opacity: 1;
+transform: translateX(0);
+}
+.animate-counter {
+animation: countUp 2s ease-out;
+}
+@keyframes countUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+opacity: 0;
+transform: translateY(30px);
+transition: all 0.6s ease;
+}
+.fade-in.visible {
+opacity: 1;
+transform: translateY(0);
+}
+.mobile-menu {
+transform: translateX(100%);
+transition: transform 0.3s ease;
+}
+.mobile-menu.open {
+transform: translateX(0);
+}
+</style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#1f2937'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        .hero-gradient {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+        }
+    </style>
+</head>
+<body class="font-['Inter'] text-secondary">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+              <img
+                src="../assets/logo-removebg-preview (1) copy.ico"
+                alt="Hope Foundation Logo"
+                class="h-20 w-20 mr-3"
+                id="nav-logo"
+                style="margin-top: 10px;"
+              />
+            </div>
+
+            <!-- NAV LINKS: changed to black -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="../index.html" class="text-black hover:text-primary transition-colors">Home</a>
+              <a href="./about.html" class="text-black hover:text-primary transition-colors">About</a>
+              <a href="../index.html#programs" class="text-black hover:text-primary transition-colors">Programs</a>
+              <a href="./gallary.html" class="text-black hover:text-primary transition-colors">Stories</a>
+              <a href="../index.html#blog" class="text-black hover:text-primary transition-colors">Blog</a>
+              <a href="./Volunteer.html" class="text-black hover:text-primary transition-colors">Volunteer</a>
+              <a href="../index.html#contact" class="text-black hover:text-primary transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+              <button 
+                id="donate-nav-btn"
+                class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-green-600 transition-colors whitespace-nowrap"
+              >
+                Donate Now
+              </button>
+
+              <button id="mobile-menu-btn" class="md:hidden text-black">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-menu-line ri-lg"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+              <img
+                src="../assets/logo-removebg-preview (1) copy.ico"
+                alt=""
+                class="h-20 w-20 mr-3"
+                id="mobile-nav-logo"
+                style="margin-top: 10px;"
+              />
+              <button id="close-menu" class="text-black">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-close-line ri-lg"></i>
+                </div>
+              </button>
+            </div>
+
+            <div class="space-y-6">
+              <a href="../index.html" class="block text-black hover:text-primary transition-colors">Home</a>
+              <a href="./about.html" class="block text-black hover:text-primary transition-colors">About</a>
+              <a href="../index.html#programs" class="block text-black hover:text-primary transition-colors">Programs</a>
+              <a href="./gallary.html" class="block text-black hover:text-primary transition-colors">Stories</a>
+              <a href="../index.html#blog" class="block text-black hover:text-primary transition-colors">Blog</a>
+              <a href="./Volunteer.html" class="block text-black hover:text-primary transition-colors">Volunteer</a>
+              <a href="../index.html#contact" class="block text-black hover:text-primary transition-colors">Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class="pt-16 relative overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=A%20serene%20and%20inspiring%20scene%20showing%20diverse%20group%20of%20volunteers%20working%20together%20in%20a%20community%20garden%2C%20with%20soft%20natural%20lighting%20and%20a%20modern%20minimalist%20aesthetic.%20The%20image%20should%20have%20a%20clean%2C%20light%20background%20on%20the%20left%20side%20for%20text%20overlay%2C%20while%20the%20right%20side%20shows%20the%20volunteers%20in%20action&width=1920&height=600&seq=1&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="hero-gradient">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                <div class="w-full md:w-1/2">
+                    <h1 class="text-5xl font-bold mb-6">Join Our Volunteer Community</h1>
+                    <p class="text-lg mb-8">Make a meaningful impact in your community by sharing your time and skills. Together, we can create positive change.</p>
+                    <button class="bg-primary text-white px-8 py-3 !rounded-button hover:bg-primary/90 text-lg whitespace-nowrap">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-6">Why Volunteer With Us?</h2>
+                <p class="text-lg mb-6">
+                   We have provided food items on over 9,000 occasions to the needy, the elderly, widows, and persons with special needs. In addition, we have distributed clothes to more than 200 children, bringing hope and joy to their lives.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="ri-heart-line text-primary text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold mb-2">Make a Real Impact</h3>
+                            <p>Your time and skills directly help those in need within our community.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="ri-team-line text-primary text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold mb-2">Join a Supportive Community</h3>
+                            <p>Connect with like-minded individuals who share your passion for helping others.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <form id="volunteerForm" class="bg-white p-8 rounded-2xl shadow-lg">
+    <h3 class="text-2xl font-semibold mb-6">Register as a Volunteer</h3>
+    <div class="space-y-6">
+        <div>
+            <label class="block text-sm font-medium mb-2">Full Name</label>
+            <input id="fullName" type="text" class="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-2">Email Address</label>
+            <input id="email" type="email" class="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-2">Phone Number</label>
+            <input id="phone" type="tel" class="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-2">Area of Interest</label>
+            <div class="relative">
+                <select id="interest" class="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-primary appearance-none pr-8" required>
+                    <option value="">Select an area</option>
+                    <option value="education">Education Support</option>
+                    <option value="environment">Environmental Conservation</option>
+                    <option value="health">Healthcare Services</option>
+                    <option value="community">Community Development</option>
+                </select>
+                <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <i class="ri-arrow-down-s-line text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-2">Why do you want to volunteer?</label>
+            <textarea id="reason" class="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-primary h-32 resize-none" required></textarea>
+        </div>
+        <button type="submit" class="w-full bg-primary text-white py-3 !rounded-button hover:bg-primary/90">
+            Submit Application
+        </button>
+    </div>
+</form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-3xl font-bold text-center mb-12">Our Impact</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm text-center">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-user-heart-line text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">10,000+</h3>
+                    <p>Active Volunteers</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm text-center">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-time-line text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">100,000+</h3>
+                    <p>Volunteer Hours</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm text-center">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-community-line text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">500+</h3>
+                    <p>Community Projects</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Make a Difference?</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">Join our community of passionate volunteers and help us create positive change in the world.</p>
+            <button class="bg-white text-primary px-8 py-3 !rounded-button hover:bg-gray-100 font-semibold">Start Volunteering Today</button>
+        </div>
+    </div>
+    <script type="module" src="../js/volunterr.js"></script>
+<script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('button i.ri-menu-line');
+            const nav = document.querySelector('nav');
+            let isMenuOpen = false;
+
+            menuButton.addEventListener('click', function() {
+                if (!isMenuOpen) {
+                    const mobileMenu = document.createElement('div');
+                    mobileMenu.className = 'md:hidden absolute top-16 left-0 w-full bg-white shadow-lg py-4';
+                    mobileMenu.innerHTML = `
+                        <a href="#" class="block px-4 py-2 text-secondary hover:text-primary">Home</a>
+                        <a href="#" class="block px-4 py-2 text-secondary hover:text-primary">About</a>
+                        <a href="#" class="block px-4 py-2 text-secondary hover:text-primary">Programs</a>
+                        <div class="px-4 pt-2">
+                            <button class="w-full bg-primary text-white px-6 py-2 !rounded-button hover:bg-primary/90">Donate</button>
+                        </div>
+                    `;
+                    nav.appendChild(mobileMenu);
+                    menuButton.className = 'ri-close-line text-xl';
+                } else {
+                    const mobileMenu = nav.querySelector('.md\\:hidden.absolute');
+                    if (mobileMenu) {
+                        mobileMenu.remove();
+                    }
+                    menuButton.className = 'ri-menu-line text-xl';
+                }
+                isMenuOpen = !isMenuOpen;
+            });
+        });
+
+import { rtdb, ref, push } from './voluntree.js';
+
+document.getElementById('volunteerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Get form values
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const interest = document.getElementById('interest').value;
+    const reason = document.getElementById('reason').value.trim();
+
+    // Validate (basic)
+    if (!fullName || !email || !phone || !interest || !reason) {
+        Swal.fire('Error', 'Please fill out all fields.', 'error');
+        return;
+    }
+
+    // Save to Realtime Database
+    try {
+        const volunteersRef = ref(rtdb, 'volunteers');
+        await push(volunteersRef, {
+            fullName,
+            email,
+            phone,
+            interest,
+            reason,
+            timestamp: new Date().toISOString()
+        });
+
+        Swal.fire('Success', 'Thank you for registering as a volunteer!', 'success');
+
+        // Reset form
+        e.target.reset();
+    } catch (error) {
+        console.error(error);
+        Swal.fire('Error', 'Failed to submit your application. Try again.', 'error');
+    }
+});
+</script>
+    <script type="'module" src="../js/index.js">  </script>
+
+</body>
+</html>

@@ -14,13 +14,22 @@ import  FormSubmissions from './pages/FormSubmissions';
 import  NewsletterList from './pages/NewsletterList';
 import  EventHighlights from './pages/EventHighlights';
 import  GoogleAdsManager from './pages/GoogleAdsManager';
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
+import LoginPage from './pages/login.jsx';
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<DashboardLayout />}>
-          <Route index element={<Dashboard />} />
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={
+            <PrivateRoute>
+              <DashboardLayout />
+            </PrivateRoute>
+          }>
+            <Route index element={<Dashboard />} />
           <Route path="media" element={<MediaManager />} />
           <Route path="testimonials" element={<TestimonialsManager />} />
           <Route path="programs" element={<ProgramsManager />} />
@@ -33,8 +42,9 @@ export default function App() {
           <Route path="newsletter" element={<NewsletterList />} />
           <Route path="highlights" element={<EventHighlights />} />
           <Route path="google-ads" element={<GoogleAdsManager />} />
-        </Route>
-      </Routes>
-    </Router>
+          </Route>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }

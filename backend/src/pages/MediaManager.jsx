@@ -18,9 +18,19 @@ export default function MediaManager() {
   const [editingItem, setEditingItem] = useState(null);
   const [items, setItems] = useState([]);
   const [uploadedFile, setUploadedFile] = useState(null);
-  const [, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
-  // ✅ log + push notifications to Firebase
+  // Convert file to Base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // Log + push notifications to Firebase
   const logNotification = (type, message) => {
     const newNote = {
       type,
@@ -28,18 +38,16 @@ export default function MediaManager() {
       time: new Date().toISOString()
     };
 
-    // local log (optional sidebar in Media)
     setNotifications(prev => [
       { id: Date.now(), ...newNote },
       ...prev
     ]);
 
-    // push to Firebase for Dashboard
     const notifRef = ref(rtdb, "notifications");
     push(notifRef, newNote);
   };
 
-  // Fetch media
+  // Fetch media from Firebase
   useEffect(() => {
     const mediaRef = ref(rtdb, "media");
     const unsubscribe = onValue(mediaRef, (snapshot) => {
@@ -70,21 +78,24 @@ export default function MediaManager() {
 
   const handleCloseModal = () => {
     setEditingItem(null);
+    setUploadedFile(null);
     setIsModalOpen(false);
   };
 
-  const handleFileChange = (file) => setUploadedFile(file);
+  const handleFileChange = (file) => {
+    if(file.size > 5 * 1024 * 1024) {
+      Swal.fire("Error", "File too large. Max 5MB allowed.", "error");
+      return;
+    }
+    setUploadedFile(file);
+  };
 
   const handleSaveMedia = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const title = formData.get('title');
     const published = formData.get('published') === 'on';
-    let imageUrl = formData.get('imageUrl');
-
-    if (uploadedFile) {
-      imageUrl = URL.createObjectURL(uploadedFile);
-    }
+    let imageUrl = uploadedFile ? await fileToBase64(uploadedFile) : formData.get('imageUrl');
 
     try {
       if (editingItem) {
@@ -164,7 +175,7 @@ export default function MediaManager() {
         </Button>
       </div>
 
-      {/* Items */}
+      {/* Media Items */}
       {items.length === 0 ? (
         <div className="text-center text-gray-500 py-10">No media available</div>
       ) : (
@@ -186,7 +197,6 @@ export default function MediaManager() {
                     {item.published ? 'Published' : 'Draft'}
                   </div>
                 </div>
-
                 <div className="flex space-x-2 mt-4">
                   <Button variant="outline" size="sm" onClick={() => handleTogglePublish(item.id)} icon={<EyeIcon size={14} />}>
                     {item.published ? 'Unpublish' : 'Publish'}
@@ -209,9 +219,7 @@ export default function MediaManager() {
         <form onSubmit={handleSaveMedia}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                Title
-              </label>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
               <input
                 type="text"
                 id="title"
@@ -221,9 +229,13 @@ export default function MediaManager() {
                 required
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-              <FileUpload onFileChange={handleFileChange} previewUrl={editingItem?.imageUrl} />
+              <FileUpload 
+                onFileChange={handleFileChange} 
+                previewUrl={uploadedFile ? URL.createObjectURL(uploadedFile) : editingItem?.imageUrl} 
+              />
               <div className="mt-3">
                 <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">Or enter image URL</label>
                 <input
@@ -236,6 +248,7 @@ export default function MediaManager() {
                 />
               </div>
             </div>
+
             <div className="flex items-center">
               <input
                 id="published"
@@ -244,10 +257,9 @@ export default function MediaManager() {
                 defaultChecked={editingItem?.published || false}
                 className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
               />
-              <label htmlFor="published" className="ml-2 block text-sm text-gray-700">
-                Publish immediately
-              </label>
+              <label htmlFor="published" className="ml-2 block text-sm text-gray-700">Publish immediately</label>
             </div>
+
             <div className="flex justify-end space-x-3 pt-4">
               <Button type="button" variant="outline" onClick={handleCloseModal}>Cancel</Button>
               <Button type="submit" icon={editingItem ? <PencilIcon size={16} /> : <UploadIcon size={16} />}>

@@ -3,563 +3,696 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Celebrity Food Home Pantry Foundation</title>
+<title>Celebrity Food Home Pantry Foundation - Fighting Hunger, Building Communities</title>
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<meta name="description" content="Celebrity Food Home Pantry Foundation provides food assistance, community outreach, and support programs to fight hunger and build stronger communities in Nigeria.">
+<meta name="keywords" content="food pantry, charity Nigeria, hunger relief, food donation, community outreach, volunteer opportunities, Lagos charity">
+<meta name="author" content="Celebrity Food Home Pantry Foundation">
+<meta name="robots" content="index, follow">
+    
+<!-- Canonical URL to avoid duplicate content issues -->
+<link rel="canonical" href="https://www.yourdomain.com">
+    
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.yourdomain.com/">
+<meta property="og:title" content="Celebrity Food Home Pantry Foundation - Fighting Hunger, Building Communities">
+<meta property="og:description" content="Providing food assistance and community support programs to fight hunger in Nigeria.">
+<meta property="og:image" content="https://www.yourdomain.com/assets/og-image.jpg">
+    
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.yourdomain.com/">
+<meta property="twitter:title" content="Celebrity Food Home Pantry Foundation">
+<meta property="twitter:description" content="Providing food assistance and community support programs to fight hunger in Nigeria.">
+<meta property="twitter:image" content="https://www.yourdomain.com/assets/twitter-image.jpg">
+    
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="icon" type="image/x-icon" href="./assets/logo-removebg-preview (1) copy.ico">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1079448428096344"
-          crossorigin="anonymous"></script>
-<script>
-tailwind.config = {
-theme: {
-extend: {
-colors: {
-primary: '#10b981',
-secondary: '#1f2937'
-},
-borderRadius: {
-'none': '0px',
-'sm': '4px',
-DEFAULT: '8px',
-'md': '12px',
-'lg': '16px',
-'xl': '20px',
-'2xl': '24px',
-'3xl': '32px',
-'full': '9999px',
-'button': '8px'
-},
-fontFamily: {
-'inter': ['Inter', 'sans-serif']
-}
-}
-}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1079448428096344" crossorigin="anonymous"></script>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "Celebrity Food Home Pantry Foundation",
+  "url": "https://www.yourdomain.com",
+  "logo": "https://www.yourdomain.com/assets/logo-removebg-preview (1) copy.ico",
+  "description": "Providing food assistance and community support programs to fight hunger in Nigeria.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "No 20 Olusanya Street, Jesugbami",
+    "addressLocality": "Aboru",
+    "addressRegion": "Lagos",
+    "addressCountry": "Nigeria"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+234-808-400-9711",
+    "contactType": "Customer service",
+    "email": "celebrityfoodpantry@gmail.com"
+  },
+  "sameAs": [
+    "https://www.facebook.com/yourpage",
+    "https://www.twitter.com/yourprofile",
+    "https://www.instagram.com/yourprofile"
+  ]
 }
 </script>
+    
 <style>
 :where([class^="ri-"])::before {
-content: "\f3c2";
+  content: "\f3c2";
 }
 body {
-font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 .hero-bg {
-background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/img13.jpg');
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/img13.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .counter {
-font-weight: 700;
-font-size: 3rem;
-color: #10b981;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #10b981;
 }
 .navbar-scrolled {
-background: rgba(255, 255, 255, 0.95);
-backdrop-filter: blur(10px);
-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 .card-hover {
-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .card-hover:hover {
-transform: translateY(-8px);
-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 .donation-card {
-transition: all 0.3s ease;
-border: 2px solid transparent;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 .donation-card:hover {
-border-color: #10b981;
-transform: scale(1.05);
+  border-color: #10b981;
+  transform: scale(1.05);
 }
 .donation-card.selected {
-border-color: #10b981;
-background: #f0fdf4;
+  border-color: #10b981;
+  background: #f0fdf4;
 }
 .testimonial-card {
-min-height: 300px;
-opacity: 0;
-transform: translateX(100px);
-transition: all 0.5s ease;
+  min-height: 300px;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.5s ease;
 }
 .testimonial-card.active {
-opacity: 1;
-transform: translateX(0);
+  opacity: 1;
+  transform: translateX(0);
 }
 .animate-counter {
-animation: countUp 2s ease-out;
+  animation: countUp 2s ease-out;
 }
 @keyframes countUp {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .fade-in {
-opacity: 0;
-transform: translateY(30px);
-transition: all 0.6s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
 }
 .fade-in.visible {
-opacity: 1;
-transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 .mobile-menu {
-transform: translateX(100%);
-transition: transform 0.3s ease;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  width: 80vw;
+  max-width: 320px;
 }
 .mobile-menu.open {
-transform: translateX(0);
+  transform: translateX(0);
+}
+.timeline-line {
+  left: 20px;
+}
+.timeline-dot {
+  left: 12px;
+}
+.event-card {
+  margin-left: 3rem;
+}
+.breadcrumb {
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+.breadcrumb a {
+  color: #10b981;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+@media (min-width: 768px) {
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .timeline-dot {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .event-card {
+    margin-left: 0;
+    width: calc(50% - 2rem);
+  }
+  .event-card:nth-child(odd) {
+    margin-right: 2rem;
+  }
+  .event-card:nth-child(even) {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+@media (max-width: 640px) {
+  .hero-bg {
+    background-attachment: scroll;
+  }
+  .counter {
+    font-size: 2rem;
+  }
 }
 </style>
-</head>
-<body class="bg-white">
-<!-- Navigation -->
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between items-center h-16">
-<div class="flex items-center">
-    <img src="./assets/logo-removebg-preview (1) copy.ico" alt="Hope Foundation Logo" class="h-20 w-20 mr-3 text-2xl text-white" id="nav-logo" style="margin-top: 10px;">
-<!-- <span class="font-['Pacifico'] text-2xl text-white" id="nav-logo">Hope </span> -->
-</div>
-<div class="hidden md:flex items-center space-x-8">
-<a href="#home" class="text-white hover:text-primary transition-colors">Home</a>
-<a href="./page/about.html" class="text-white hover:text-primary transition-colors">About</a>
-<a href="#programs" class="text-white hover:text-primary transition-colors">Programs</a>
-<a href="./page/gallary.html" class="text-white hover:text-primary transition-colors">Gallery</a>
-<a href="#blog" class="text-white hover:text-primary transition-colors">Blog</a>
-<a href="./page/Volunteer.html" class="text-white hover:text-primary transition-colors">Volunteer</a>
-<a href="#contact" class="text-white hover:text-primary transition-colors">Contact</a>
-</div>
-<div class="flex items-center space-x-4">
-<button id="donate-nav-btn" onclick="" class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-green-600 transition-colors whitespace-nowrap">
-Donate Now
-</button>
-<button id="mobile-menu-btn" class="md:hidden text-white">
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-menu-line ri-lg"></i>
-</div>
-</button>
-</div>
-</div>
-</div>
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50">
-<div class="p-6">
-<div class="flex justify-between items-center mb-8">
-<img src="./assets/logo-removebg-preview (1) copy.ico" alt="" srcset="" class="h-20 w-20 mr-3 text-2xl text-white" id="mobile-nav-logo" style="margin-top: 10px;">
-<!-- <span class="font-['Pacifico'] text-xl text-secondary">Hope Foundation</span> -->
-<button id="close-menu" class="text-secondary">
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-close-line ri-lg"></i>
-</div>
-</button>
-</div>
-<div class="space-y-6">
-<a href="#home" class="block text-secondary hover:text-primary transition-colors">Home</a>
-<a href="./page/about.html" class="block text-secondary hover:text-primary transition-colors">About</a>
-<a href="#programs" class="block text-secondary hover:text-primary transition-colors">Programs</a>
-<a href="./page/gallary.html" class="block text-secondary hover:text-primary transition-colors">Stories</a>
-<a href="#blog" class="block text-secondary hover:text-primary transition-colors">Blog</a>
-<a href="./page/Volunteer.html" class="block text-secondary hover:text-primary transition-colors">Volunteer</a>
-<a href="#contact" class="block text-secondary hover:text-primary transition-colors">Contact</a>
-</div>
-</div>
-</div>
-</nav>
-<!-- Hero Section -->
-<section id="home" class="hero-bg min-h-screen flex items-center justify-center relative">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-<div class="text-center text-white">
-<h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in">
-Building Hope,<br>
-<span class="text-primary">Changing Lives</span>
-</h1>
-<p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto fade-in">
-Together, we're creating sustainable solutions to end hunger, provide education, and build stronger communities around the world.
-</p>
-<div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
-<a href="#donate">
-  <button class="bg-primary text-white px-8 py-4 !rounded-button text-lg font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
-    Donate Now
-  </button>
-</a>
-<a href="./page/about.html">
-  <button class="border-2 border-white text-white px-8 py-4 !rounded-button text-lg font-semibold hover:bg-white hover:text-secondary transition-colors whitespace-nowrap">
-Learn More
-</button>
-</a>
 
-</div>
-</div>
-</div>
-<!-- Scroll Indicator -->
-<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-arrow-down-line ri-lg"></i>
-</div>
-</div>
-</section>
-<!-- Impact Statistics -->
-<section class="py-20 bg-gray-50">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#10b981',
+        secondary: '#1f2937'
+      },
+      borderRadius: {
+        'none': '0px',
+        'sm': '4px',
+        DEFAULT: '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '20px',
+        '2xl': '24px',
+        '3xl': '32px',
+        'full': '9999px',
+        'button': '8px'
+      },
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif']
+      },
+      screens: {
+        'xs': '475px',
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-white" style="margin-right: 0;">
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Programs that change lives</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img src="./assets/logo-removebg-preview (1) copy.ico" alt="Hope Foundation Logo" class="h-16 w-16 md:h-20 md:w-20 mr-2 md:mr-3 text-2xl text-white" id="nav-logo">
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+        <a href="#home" class="text-white hover:text-primary transition-colors text-sm lg:text-base">Home</a>
+        <a href="./page/about.html" class="text-white hover:text-primary transition-colors text-sm lg:text-base">About</a>
+        <a href="#programs" class="text-white hover:text-primary transition-colors text-sm lg:text-base">Programs</a>
+        <a href="./page/gallary.html" class="text-white hover:text-primary transition-colors text-sm lg:text-base">Gallery</a>
+        <a href="#blog" class="text-white hover:text-primary transition-colors text-sm lg:text-base">Blog</a>
+        <a href="./page/Volunteer.html" class="text-white hover:text-primary transition-colors text-sm lg:text-base">Volunteer</a>
+        <a href="#contact" class="text-white hover:text-primary transition-colors text-sm lg:text-base">Contact</a>
+      </div>
+
+      <!-- Buttons & Mobile Menu -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <button id="donate-nav-btn" class="bg-primary text-white px-4 py-2 md:px-6 md:py-2 !rounded-button hover:bg-green-600 transition-colors whitespace-nowrap text-sm md:text-base">
+          Donate Now
+        </button>
+        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+          <i class="ri-menu-line ri-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full bg-white shadow-xl z-50 overflow-y-auto">
+    <div class="p-4 sm:p-6">
+      <div class="flex justify-between items-center mb-6">
+        <img src="./assets/logo-removebg-preview (1) copy.ico" alt="" class="h-16 w-16 md:h-20 md:w-20 text-2xl text-white" id="mobile-nav-logo">
+        <button id="close-menu" class="text-secondary focus:outline-none">
+          <i class="ri-close-line ri-lg"></i>
+        </button>
+      </div>
+      <div class="space-y-4">
+        <a href="#home" class="block text-secondary hover:text-primary transition-colors py-2">Home</a>
+        <a href="./page/about.html" class="block text-secondary hover:text-primary transition-colors py-2">About</a>
+        <a href="#programs" class="block text-secondary hover:text-primary transition-colors py-2">Programs</a>
+        <a href="./page/gallary.html" class="block text-secondary hover:text-primary transition-colors py-2">Stories</a>
+        <a href="#blog" class="block text-secondary hover:text-primary transition-colors py-2">Blog</a>
+        <a href="./page/Volunteer.html" class="block text-secondary hover:text-primary transition-colors py-2">Volunteer</a>
+        <a href="#contact" class="block text-secondary hover:text-primary transition-colors py-2">Contact</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeMenuBtn = document.getElementById('close-menu');
+
+  // Open mobile menu
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  // Close mobile menu
+  closeMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = 'auto';
+  });
+
+  // Optional: close menu if user clicks outside it
+  window.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+  });
+</script>
+
+<!-- Hero Section -->
+<section id="home" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
+    <div class="text-center text-white">
+      <!-- Headline -->
+      <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 fade-in leading-tight">
+        Building Hope,<br>
+        <span class="text-primary">Changing Lives</span>
+      </h1>
+
+      <!-- Paragraph -->
+      <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-3xl mx-auto fade-in px-2">
+        Together, we're creating sustainable solutions to end hunger, provide education, and build stronger communities around the world.
+      </p>
+
+      <!-- Buttons -->
+      <div class="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center items-center fade-in px-2">
+        <a href="#donate">
+          <button class="bg-primary text-white px-5 sm:px-6 py-2.5 sm:py-3 !rounded-button text-sm sm:text-base font-semibold hover:bg-green-600 transition-colors whitespace-nowrap w-full xs:w-auto">
+            Donate Now
+          </button>
+        </a>
+        <a href="./page/about.html">
+          <button class="border-2 border-white text-white px-5 sm:px-6 py-2.5 sm:py-3 !rounded-button text-sm sm:text-base font-semibold hover:bg-white hover:text-secondary transition-colors whitespace-nowrap w-full xs:w-auto">
+            Learn More
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+    <div class="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
+      <i class="ri-arrow-down-line ri-lg"></i>
+    </div>
+  </div>
+</section>
+
+<!-- Impact Statistics -->
+<section class="py-12 sm:py-16 md:py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">Our Impact</h2>
+      <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
         Together, we can make a real impact in communities around the world. Help us bring hope and support.
       </p>
     </div>
 
     <!-- Centered Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-center">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 justify-center">
       <div class="text-center fade-in">
-        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary/10 rounded-full">
-          <i class="ri-heart-fill ri-2x text-primary"></i>
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4 bg-primary/10 rounded-full">
+          <i class="ri-heart-fill text-xl sm:text-2xl text-primary"></i>
         </div>
         <div class="counter" data-target="150000">0</div>
-        <p class="text-gray-600 font-medium">Lives Impacted</p>
+        <p class="text-gray-600 font-medium text-sm sm:text-base">Lives Impacted</p>
       </div>
 
       <div class="text-center fade-in">
-        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary/10 rounded-full">
-          <i class="ri-home-heart-fill ri-2x text-primary"></i>
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4 bg-primary/10 rounded-full">
+          <i class="ri-home-heart-fill text-xl sm:text-2xl text-primary"></i>
         </div>
         <div class="counter" data-target="2500">0</div>
-        <p class="text-gray-600 font-medium">Families Supported</p>
+        <p class="text-gray-600 font-medium text-sm sm:text-base">Families Supported</p>
       </div>
 
       <div class="text-center fade-in">
-        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary/10 rounded-full">
-          <i class="ri-home-heart-fill ri-2x text-primary"></i>
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4 bg-primary/10 rounded-full">
+          <i class="ri-restaurant-fill text-xl sm:text-2xl text-primary"></i>
         </div>
         <div class="counter" data-target="9000">0</div>
-        <p class="text-gray-600 font-medium">Meals Distributed</p>
+        <p class="text-gray-600 font-medium text-sm sm:text-base">Meals Distributed</p>
       </div>
 
       <div class="text-center fade-in">
-        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary/10 rounded-full">
-          <i class="ri-graduation-cap-fill ri-2x text-primary"></i>
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4 bg-primary/10 rounded-full">
+          <i class="ri-graduation-cap-fill text-xl sm:text-2xl text-primary"></i>
         </div>
         <div class="counter" data-target="85">0</div>
-        <p class="text-gray-600 font-medium">Empowering Children</p>
+        <p class="text-gray-600 font-medium text-sm sm:text-base">Empowering Children</p>
       </div>
     </div>
   </div>
 </section>
+
 <!-- Google Ads Space -->
-<section class="py-8 bg-white">
+<section class="py-6 sm:py-8 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-gray-100 rounded-lg p-8 text-center">
-      <!-- Google Ads -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-1079448428096344"
-           data-ad-slot="5997714865"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1079448428096344"
-              crossorigin="anonymous"></script>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+    <div class="bg-white rounded-lg p-4 sm:p-6 md:p-8 text-center shadow-sm">
+      <p class="text-gray-500 text-xs mb-2">Sponsored Content</p>
+      <div class="h-32 bg-gray-100 rounded flex items-center justify-center">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1079448428096344" data-ad-slot="8165563268" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Programs Section -->
-<section id="programs" class="py-20 bg-white">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Programs That Change Lives</h2>
-<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-Since September 23 2023 we have been giving out food items   Biweekly till date. Our food distribution day is on Thursday.
-</p>
-</div>
+<section id="programs" class="py-12 sm:py-16 md:py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">Programs That Change Lives</h2>
+      <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+        Since September 23 2023 we have been giving out food items Biweekly till date. Our food distribution day is on Thursday.
+      </p>
+    </div>
 
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+        <img src="./assets/img14.jpg" alt="Nutrition Program" class="w-full h-48 object-cover object-top">
+        <div class="p-5 sm:p-6">
+          <h3 class="text-xl font-bold text-secondary mb-3">Our Programs</h3>
+          <p class="text-gray-600 mb-4 text-sm sm:text-base">
+            Since September 23 2023 we have been giving out food items Biweekly till date. Our food distribution day is on Thursday.
+          </p>
+          <button class="text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap text-sm sm:text-base">
+            Learn More →
+          </button>
+        </div>
+      </div>
 
-<div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in">
-<img src="./assets/img14.jpg"
-alt="Nutrition Program" class="w-full h-48 object-cover object-top">
-<div class="p-6">
-<h3 class="text-xl font-bold text-secondary mb-3">Our Programs</h3>
-<p class="text-gray-600 mb-4">
-Since September 23 2023 we have been giving out food items   Biweekly till date. Our food distribution day is on Thursday.
-</p>
-<button class="text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap">
-Learn More →
-</button>
-</div>
-</div>
+      <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+        <img src="./assets/img1/2.jpg" alt="Education Program" class="w-full h-48 object-cover object-top">
+        <div class="p-5 sm:p-6">
+          <h3 class="text-xl font-bold text-secondary mb-3"> Food Distribution</h3>
+          <p class="text-gray-600 mb-4 text-sm sm:text-base">
+            We presently distribute food items to needy households including: the elderly, widows, special people, nursing mothers, and vulnerable individuals every two weeks on Thursdays at our office
+          </p>
+          <button class="text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap text-sm sm:text-base">
+            Learn More →
+          </button>
+        </div>
+      </div>
 
-<div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in">
-<img src="./assets/img1/2.jpg"
-alt="Education Program" class="w-full h-48 object-cover object-top">
-<div class="p-6">
-<h3 class="text-xl font-bold text-secondary mb-3"> Food Distribution</h3>
-<p class="text-gray-600 mb-4">
-We presently distribute food items to needy households including: the elderly, widows, special people, nursing mothers, and vulnerable individuals every two weeks on Thursdays at our office</p>
-<button class="text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap">
-Learn More →
-</button>
-</div>
-</div>
-
-
-<div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in">
-<img src="./assets/img1/3.jpg"
-alt="Emergency Relief" class="w-full h-48 object-cover object-top">
-<div class="p-6">
-<h3 class="text-xl font-bold text-secondary mb-3"> Community Outreach</h3>
-<p class="text-gray-600 mb-4">
- We are working on onboarding partnerships with local organizations, schools, and healthcare providers, this is why we need you to encourage this great cause towards humanity. In order to offer more food distributions and a wider array of humanity services such as but not limited to workshops, resources for healthy eating etc.</p>
-<button class="text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap">
-Learn More →
-</button>
-</div>
-</div>
-</div>
-</div>
+      <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+        <img src="./assets/img1/3.jpg" alt="Emergency Relief" class="w-full h-48 object-cover object-top">
+        <div class="p-5 sm:p-6">
+          <h3 class="text-xl font-bold text-secondary mb-3"> Community Outreach</h3>
+          <p class="text-gray-600 mb-4 text-sm sm:text-base">
+            We are working on onboarding partnerships with local organizations, schools, and healthcare providers to offer more food distributions and a wider array of services.
+          </p>
+          <button class="text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap text-sm sm:text-base">
+            Learn More →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
 <!-- Donation Section -->
-<section id="donate" class="py-20 bg-primary/5">
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-12">
-<h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Make a Donation</h2>
-<p class="text-xl text-gray-600">
-Your generosity transforms lives. Choose an amount that feels right for you and join our mission of hope.
-</p>
-</div>
-<div class="bg-white rounded-2xl shadow-xl p-8">
-<!-- Donation Type Toggle -->
-<div class="flex justify-center mb-8">
-<div class="bg-gray-100 rounded-full p-1">
-<button id="monthly-btn" class="px-6 py-2 rounded-full bg-primary text-white transition-colors whitespace-nowrap">
-Monthly
-</button>
-<button id="onetime-btn" class="px-6 py-2 rounded-full text-gray-600 hover:text-primary transition-colors whitespace-nowrap">
-One-time
-</button>
-</div>
-</div>
-<!-- Donation Amounts -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-<div class="donation-card bg-white border rounded-xl p-4 text-center cursor-pointer" data-amount="25">
-<div class="text-2xl font-bold text-primary">$25</div>
-<div class="text-sm text-gray-600">Feeds 5 children</div>
-</div>
-<div class="donation-card bg-white border rounded-xl p-4 text-center cursor-pointer" data-amount="50">
-<div class="text-2xl font-bold text-primary">$50</div>
-<div class="text-sm text-gray-600">School supplies</div>
-</div>
-<div class="donation-card bg-white border rounded-xl p-4 text-center cursor-pointer selected" data-amount="100">
-<div class="text-2xl font-bold text-primary">$100</div>
-<div class="text-sm text-gray-600">Medical care</div>
-</div>
-<div class="donation-card bg-white border rounded-xl p-4 text-center cursor-pointer" data-amount="250">
-<div class="text-2xl font-bold text-primary">$250</div>
-<div class="text-sm text-gray-600">Clean water access</div>
-</div>
-</div>
-<!-- Custom Amount -->
-<div class="mb-8">
-<label class="block text-sm font-medium text-gray-700 mb-2">Custom Amount</label>
-<div class="relative">
-<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 mr-3">₦</span>
-<input type="number" class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter amount">
-</div>
-</div>
-<!-- Currency Selection -->
-<div class="mb-8">
-<h3 class="font-semibold text-gray-700 mb-4">Select Currency</h3>
-<div class="flex gap-3">
-<button id="usd-btn" class="flex-1 flex items-center justify-center p-3 border rounded-lg bg-primary text-white hover:bg-green-600 transition-colors whitespace-nowrap">
-<div class="w-6 h-6 flex items-center justify-center mr-2">
-<i class="ri-money-dollar-circle-line"></i>
-</div>
-USD
-</button>
-<button id="ngn-btn" class="flex-1 flex items-center justify-center p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap">
-<div class="w-6 h-6 flex items-center justify-center mr-2">
-₦
-</div>
-NGN
-</button>
-</div>
-</div>
-<!-- Payment Methods -->
-<div class="mb-8">
-<h3 class="font-semibold text-gray-700 mb-4">Payment Method</h3>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-<button id="card-btn" class="payment-method flex items-center justify-center p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap">
-<div class="w-6 h-6 flex items-center justify-center mr-2">
-<i class="ri-bank-card-line"></i>
-</div>
-Card
-</button>
-<button id="google-pay-btn" class="payment-method flex items-center justify-center p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap">
-<div class="w-6 h-6 flex items-center justify-center mr-2">
-<i class="ri-google-fill"></i>
-</div>
-Google Pay
-</button>
-<button id="transfer-btn" class="payment-method flex items-center justify-center p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap">
-<div class="w-6 h-6 flex items-center justify-center mr-2">
-<i class="ri-bank-line"></i>
-</div>
-Bank Transfer
-</button>
-</div>
-</div>
-<!-- Bank Transfer Modal -->
-<div id="transfer-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-<div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
-<div class="flex justify-between items-center mb-6">
-<!-- <div class="font-['Pacifico'] text-2xl text-secondary">Hope Foundation</div> -->
-<button id="close-modal" class="text-gray-400 hover:text-gray-600">
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-close-line ri-lg"></i>
-</div>
-</button>
-</div>
-<div class="space-y-6">
-<div class="text-center mb-6">
-<div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-    <img src="https://i.pinimg.com/736x/ea/96/61/ea9661632c22ca99909ce27eba4e7653.jpg" alt="">
-<!-- <i class="ri-bank-line ri-2x text-primary"></i> -->
-</div>
-<h3 class="text-xl font-bold text-secondary">Bank Transfer Details</h3>
-</div>
-<div class="space-y-4">
-<div>
-<label class="block text-sm text-gray-600 mb-1">Bank Name</label>
-<div class="p-3 bg-gray-50 rounded-lg text-secondary font-medium">United Bank for Africa (UBA)</div>
-</div>
-<div>
-<label class="block text-sm text-gray-600 mb-1">Account Name</label>
-<div class="p-3 bg-gray-50 rounded-lg text-secondary font-medium">Celebrity Food Home Pantry Foundation</div>
-</div>
-<div>
-<label class="block text-sm text-gray-600 mb-1">Account Number</label>
-<div class="relative">
-<div class="p-3 bg-gray-50 rounded-lg text-secondary font-medium">1028535101</div>
-<button class="copy-btn absolute right-3 top-1/2 transform -translate-y-1/2 text-primary hover:text-green-600">
-<div class="w-5 h-5 flex items-center justify-center">
-<i class="ri-file-copy-line"></i>
-</div>
-</button>
-</div>
-</div>
-</div>
-<div class="text-sm text-gray-500 text-center mt-6">
-Please include your name as reference when making the transfer
-</div>
-</div>
-</div>
-</div>
-<!-- Donate Button -->
-<a href="#" onclick="showError()" data-readdy="true">
-  <button class="w-full bg-primary text-white py-4 rounded-lg text-lg font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
-    Donate Now
-  </button>
-</a>
-<!-- Security Badges -->
-<div class="flex justify-center items-center mt-6 space-x-4 text-sm text-gray-500">
-<div class="flex items-center">
-<div class="w-4 h-4 flex items-center justify-center mr-1">
-<i class="ri-shield-check-line"></i>
-</div>
-Secure
-</div>
-<div class="flex items-center">
-<div class="w-4 h-4 flex items-center justify-center mr-1">
-<i class="ri-lock-line"></i>
-</div>
-SSL Encrypted
-</div>
-<div class="flex items-center">
-<div class="w-4 h-4 flex items-center justify-center mr-1">
-<i class="ri-verified-badge-line"></i>
-</div>
-Tax Deductible
-</div>
-</div>
-</div>
-</div>
+<section id="donate" class="py-12 sm:py-16 md:py-20 bg-primary/5">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8 sm:mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">Make a Donation</h2>
+      <p class="text-lg sm:text-xl text-gray-600 px-4">
+        Your generosity transforms lives. Choose an amount that feels right for you and join our mission of hope.
+      </p>
+    </div>
+    <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl p-5 sm:p-6 md:p-8">
+      <!-- Donation Type Toggle -->
+      <div class="flex justify-center mb-6 sm:mb-8">
+        <div class="bg-gray-100 rounded-full p-1">
+          <button id="monthly-btn" class="px-4 sm:px-6 py-2 rounded-full bg-primary text-white transition-colors whitespace-nowrap text-sm sm:text-base">
+            Monthly
+          </button>
+          <button id="onetime-btn" class="px-4 sm:px-6 py-2 rounded-full text-gray-600 hover:text-primary transition-colors whitespace-nowrap text-sm sm:text-base">
+            One-time
+          </button>
+        </div>
+      </div>
+      <!-- Donation Amounts -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="25">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$25</div>
+          <div class="text-xs sm:text-sm text-gray-600">Feeds 5 children</div>
+        </div>
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="50">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$50</div>
+          <div class="text-xs sm:text-sm text-gray-600">School supplies</div>
+        </div>
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer selected" data-amount="100">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$100</div>
+          <div class="text-xs sm:text-sm text-gray-600">Medical care</div>
+        </div>
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="250">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$250</div>
+          <div class="text-xs sm:text-sm text-gray-600">Clean water access</div>
+        </div>
+      </div>
+      <!-- Custom Amount -->
+      <div class="mb-6 sm:mb-8">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Custom Amount</label>
+        <div class="relative">
+          <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 mr-3">₦</span>
+          <input type="number" class="w-full pl-8 pr-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter amount">
+        </div>
+      </div>
+      <!-- Currency Selection -->
+      <div class="mb-6 sm:mb-8">
+        <h3 class="font-semibold text-gray-700 mb-3 sm:mb-4">Select Currency</h3>
+        <div class="flex gap-3">
+          <button id="usd-btn" class="flex-1 flex items-center justify-center p-2 sm:p-3 border rounded-lg bg-primary text-white hover:bg-green-600 transition-colors whitespace-nowrap text-sm">
+            <div class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-money-dollar-circle-line"></i>
+            </div>
+            USD
+          </button>
+          <button id="ngn-btn" class="flex-1 flex items-center justify-center p-2 sm:p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap text-sm">
+            <div class="w-5 h-5 flex items-center justify-center mr-2">
+              ₦
+            </div>
+            NGN
+          </button>
+        </div>
+      </div>
+      <!-- Payment Methods -->
+      <div class="mb-6 sm:mb-8">
+        <h3 class="font-semibold text-gray-700 mb-3 sm:mb-4">Payment Method</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <button id="card-btn" class="payment-method flex items-center justify-center p-2 sm:p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap text-sm">
+            <div class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-bank-card-line"></i>
+            </div>
+            Card
+          </button>
+          <button id="google-pay-btn" class="payment-method flex items-center justify-center p-2 sm:p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap text-sm">
+            <div class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-google-fill"></i>
+            </div>
+            Google Pay
+          </button>
+          <button id="transfer-btn" class="payment-method flex items-center justify-center p-2 sm:p-3 border rounded-lg hover:border-primary transition-colors whitespace-nowrap text-sm">
+            <div class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-bank-line"></i>
+            </div>
+            Bank Transfer
+          </button>
+        </div>
+      </div>
+      <!-- Bank Transfer Modal -->
+      <div id="transfer-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 max-w-md w-full mx-auto overflow-auto max-h-[90vh]">
+          <div class="flex justify-between items-center mb-4 sm:mb-6">
+            <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+              <div class="w-6 h-6 flex items-center justify-center">
+                <i class="ri-close-line ri-lg"></i>
+              </div>
+            </button>
+          </div>
+          <div class="space-y-4 sm:space-y-6">
+            <div class="text-center mb-4 sm:mb-6">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <img src="https://i.pinimg.com/736x/ea/96/61/ea9661632c22ca99909ce27eba4e7653.jpg" alt="" class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold text-secondary">Bank Transfer Details</h3>
+            </div>
+            <div class="space-y-3 sm:space-y-4">
+              <div>
+                <label class="block text-sm text-gray-600 mb-1">Bank Name</label>
+                <div class="p-2 sm:p-3 bg-gray-50 rounded-lg text-secondary font-medium text-sm sm:text-base">United Bank for Africa (UBA)</div>
+              </div>
+              <div>
+                <label class="block text-sm text-gray-600 mb-1">Account Name</label>
+                <div class="p-2 sm:p-3 bg-gray-50 rounded-lg text-secondary font-medium text-sm sm:text-base">Celebrity Food Home Pantry Foundation</div>
+              </div>
+              <div>
+                <label class="block text-sm text-gray-600 mb-1">Account Number</label>
+                <div class="relative">
+                  <div class="p-2 sm:p-3 bg-gray-50 rounded-lg text-secondary font-medium text-sm sm:text-base">1028535101</div>
+                  <button class="copy-btn absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-primary hover:text-green-600">
+                    <div class="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                      <i class="ri-file-copy-line text-sm"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="text-xs sm:text-sm text-gray-500 text-center mt-4 sm:mt-6">
+              Please include your name as reference when making the transfer
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Donate Button -->
+      <a href="#" onclick="showError()" data-readdy="true">
+        <button class="w-full bg-primary text-white py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
+          Donate Now
+        </button>
+      </a>
+      <!-- Security Badges -->
+      <div class="flex flex-wrap justify-center items-center mt-4 sm:mt-6 space-x-3 sm:space-x-4 text-xs sm:text-sm text-gray-500">
+        <div class="flex items-center mb-1">
+          <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center mr-1">
+            <i class="ri-shield-check-line"></i>
+          </div>
+          Secure
+        </div>
+        <div class="flex items-center mb-1">
+          <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center mr-1">
+            <i class="ri-lock-line"></i>
+          </div>
+          SSL Encrypted
+        </div>
+        <div class="flex items-center mb-1">
+          <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center mr-1">
+            <i class="ri-verified-badge-line"></i>
+          </div>
+          Tax Deductible
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
 <!-- Ways to Help -->
-<section class="py-20 bg-white">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Ways to Make a Difference</h2>
-<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-There are many ways to support our mission. Every action, no matter how small, creates positive change.
-</p>
-</div>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="text-center p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors fade-in">
-<div class="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-primary/10 rounded-full">
-<i class="ri-heart-fill ri-2x text-primary"></i>
-</div>
-<h3 class="text-xl font-bold text-secondary mb-4">Donate</h3>
-<p class="text-gray-600 mb-6">
-Make a financial contribution to directly support our programs and reach more communities in need.
-</p>
-<a href="#donate">
-<button class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-green-600 transition-colors whitespace-nowrap">
-Donate Now
-</button>
-</a>
-</div>
-<div class="text-center p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors fade-in">
-<div class="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-primary/10 rounded-full">
-<i class="ri-hand-heart-fill ri-2x text-primary"></i>
-</div>
-<h3 class="text-xl font-bold text-secondary mb-4">Volunteer</h3>
-<p class="text-gray-600 mb-6">
-Join our team of dedicated volunteers and contribute your time and skills to make a direct impact.
-</p>
-<a href="./page/Volunteer.html">
-  <button class="border-2 border-primary text-primary px-6 py-3 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap">
-Join Us
-</button>
-</a>
-
-</div>
-
-<div class="text-center p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors fade-in">
-
-<div class="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-primary/10 rounded-full">
-<i class="ri-user-heart-fill ri-2x text-primary"></i>
-</div>
-<a href="./page/Volunteer.html">
-  <button class="text-xl font-bold text-secondary mb-4">Fundraise</button>
-</a>
-<p class="text-gray-600 mb-6">
-ideas, tools, and resources for hosting fundraising events</p>
-<button class="border-2 border-primary text-primary px-6 py-3 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap">
-Sponsor
-</button>
-</div>
-
-</div>
-</div>
+<section class="py-12 sm:py-16 md:py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">Ways to Make a Difference</h2>
+      <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+        There are many ways to support our mission. Every action, no matter how small, creates positive change.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div class="text-center p-5 sm:p-6 md:p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors fade-in">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-4 sm:mb-6 bg-primary/10 rounded-full">
+          <i class="ri-heart-fill text-xl sm:text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-bold text-secondary mb-3 sm:mb-4">Donate</h3>
+        <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+          Make a financial contribution to directly support our programs and reach more communities in need.
+        </p>
+        <a href="#donate">
+          <button class="bg-primary text-white px-4 sm:px-6 py-2 sm:py-3 !rounded-button hover:bg-green-600 transition-colors whitespace-nowrap text-sm sm:text-base">
+            Donate Now
+          </button>
+        </a>
+      </div>
+      <div class="text-center p-5 sm:p-6 md:p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors fade-in">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-4 sm:mb-6 bg-primary/10 rounded-full">
+          <i class="ri-hand-heart-fill text-xl sm:text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-bold text-secondary mb-3 sm:mb-4">Volunteer</h3>
+        <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+          Join our team of dedicated volunteers and contribute your time and skills to make a direct impact.
+        </p>
+        <a href="./page/Volunteer.html">
+          <button class="border-2 border-primary text-primary px-4 sm:px-6 py-2 sm:py-3 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap text-sm sm:text-base">
+            Join Us
+          </button>
+        </a>
+      </div>
+      <div class="text-center p-5 sm:p-6 md:p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors fade-in">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-4 sm:mb-6 bg-primary/10 rounded-full">
+          <i class="ri-user-heart-fill text-xl sm:text-2xl text-primary"></i>
+        </div>
+        <a href="./page/Volunteer.html">
+          <h3 class="text-xl font-bold text-secondary mb-3 sm:mb-4">Fundraise</h3>
+        </a>
+        <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+          Ideas, tools, and resources for hosting fundraising events
+        </p>
+        <button class="border-2 border-primary text-primary px-4 sm:px-6 py-2 sm:py-3 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap text-sm sm:text-base">
+          Sponsor
+        </button>
+      </div>
+    </div>
+  </div>
 </section>
+
 <!-- Google Ads Space -->
-<section class="py-8 bg-gray-50">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="bg-white rounded-lg p-8 text-center shadow-sm">
-<p class="text-gray-500 text-sm mb-2">Sponsored Content</p>
-<div class="h-32 bg-gray-100 rounded flex items-center justify-center">
-<span class="text-gray-400">Google Ads Space - 970x250</span>
-</div>
-</div>
-</div>
+<section class="py-6 sm:py-8 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-lg p-4 sm:p-6 md:p-8 text-center shadow-sm">
+      <p class="text-gray-500 text-xs mb-2">Sponsored Content</p>
+      <div class="h-32 bg-gray-100 rounded flex items-center justify-center">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1079448428096344" data-ad-slot="8165563268" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    </div>
+  </div>
 </section>
+
 <!-- Testimonials -->
 <section class="dark:text-gray-800">
   <div class="container px-6 py-12 mx-auto">
@@ -636,6 +769,7 @@ Sponsor
     </div>
   </div>
 </section>
+
 <!-- Upcoming Events -->
 <section class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -659,46 +793,47 @@ Sponsor
   </div>
 </section>
 
+
 <!-- Blog Section -->
-<section id="blog" class="py-20 bg-gray-50">
+<section id="blog" class="py-12 sm:py-16 md:py-20 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Latest News & Updates</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">Latest News & Updates</h2>
+      <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
         Stay informed about our ongoing projects, success stories, and ways you can get involved in creating positive change.
       </p>
     </div>
     
-    <div class="grid lg:grid-cols-3 gap-8">
+    <div class="grid lg:grid-cols-3 gap-6 sm:gap-8">
       
       <!-- Featured Post -->
       <div class="lg:col-span-2">
         <article class="bg-white rounded-xl shadow-lg overflow-hidden card-hover fade-in" id="article-1">
-          <img src="./assets/img1/7.jpg" alt="Featured Article" class="w-full h-70 object-top object-cover object-center rounded-lg">
-          <div class="p-8">
-            <div class="flex items-center text-sm text-gray-500 mb-4">
+          <img src="./assets/img1/7.jpg" alt="Featured Article" class="w-full h-48 sm:h-56 md:h-64 object-top object-cover object-center rounded-lg">
+          <div class="p-5 sm:p-6 md:p-8">
+            <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
               <span>August 22, 2024</span>
               <span class="mx-2">•</span>
               <span>5 min read</span>
             </div>
-            <h3 class="text-2xl font-bold text-secondary mb-4">
+            <h3 class="text-xl sm:text-2xl font-bold text-secondary mb-3 sm:mb-4">
               Celebrity Food Home Foundation: Spreading Hope and Love
             </h3>
-            <p class="text-gray-600 mb-6">
-              At Celebrity Food Home Foundation, we believe that small acts of kindness can create a ripple effect of hope in our communities. Our recent outreach program showcased this mission in action, as volunteers, children, and community members came together in a spirit of love and compassion.
+            <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+              At Celebrity Food Home Foundation, we believe that small acts of kindness can create a ripple effect of hope in our communities. Our recent outreach program showcased this mission in action.
             </p>
-            <button class="read-story-btn text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap">
+            <button class="read-story-btn text-primary font-semibold hover:text-green-600 transition-colors whitespace-nowrap text-sm sm:text-base">
               Read Full Story →
             </button>
 
             <!-- Blog Post Modal -->
-            <div id="blog-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" role="dialog" aria-hidden="true">
-              <div class="modal-dialog bg-white rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto m-auto transform transition-all duration-300" style="opacity:0; transform:scale(0.96);">
-                <div class="p-8">
-                  <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold text-secondary">Breaking: 1,000 Families Gain Access to Clean Water</h2>
+            <div id="blog-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 p-4" role="dialog" aria-hidden="true">
+              <div class="modal-dialog bg-white rounded-xl sm:rounded-2xl max-w-4xl w-full mx-auto max-h-[90vh] overflow-y-auto m-auto transform transition-all duration-300" style="opacity:0; transform:scale(0.96);">
+                <div class="p-5 sm:p-6 md:p-8">
+                  <div class="flex justify-between items-center mb-4 sm:mb-6">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-secondary">Breaking: 1,000 Families Gain Access to Clean Water</h2>
                     <button id="close-blog-modal" class="text-gray-400 hover:text-gray-600" aria-label="Close modal">
                       <div class="w-6 h-6 flex items-center justify-center">
                         <i class="ri-close-line ri-lg"></i>
@@ -706,9 +841,9 @@ Sponsor
                     </button>
                   </div>
 
-                  <img src="https://readdy.ai/api/search-image?query=community%20celebration%20with%20families%20and%20children%2C%20diverse%20group%20celebrating%20successful%20program%20completion%2C%20joy%20and%20achievement%2C%20outdoor%20community%20gathering%2C%20hope%20and%20success&width=800&height=400&seq=blog001&orientation=landscape" alt="Featured Article" class="w-full h-96 object-cover object-center rounded-xl mb-6">
+                  <img src="https://readdy.ai/api/search-image?query=community%20celebration%20with%20families%20and%20children%2C%20diverse%20group%20celebrating%20successful%20program%20completion%2C%20joy%20and%20achievement%2C%20outdoor%20community%20gathering%2C%20hope%20and%20success&width=800&height=400&seq=blog001&orientation=landscape" alt="Featured Article" class="w-full h-48 sm:h-56 md:h-64 object-cover object-center rounded-xl mb-4 sm:mb-6">
 
-                  <div class="flex items-center text-sm text-gray-500 mb-6">
+                  <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
                     <span>March 15, 2024</span>
                     <span class="mx-2">•</span>
                     <span>5 min read</span>
@@ -716,46 +851,46 @@ Sponsor
                     <span>By Sarah Thompson</span>
                   </div>
 
-                  <div class="prose max-w-none">
-                    <p class="text-gray-600 mb-4">
+                  <div class="prose max-w-none text-sm sm:text-base">
+                    <p class="text-gray-600 mb-3 sm:mb-4">
                       Our latest water infrastructure project has successfully provided clean, safe drinking water to over 1,000 families in remote villages across Guatemala. This milestone represents months of collaboration with local communities and partners.
                     </p>
-                    <p class="text-gray-600 mb-4">
+                    <p class="text-gray-600 mb-3 sm:mb-4">
                       The project, which began in June 2023, involved the installation of 15 community wells, water treatment facilities, and the establishment of local water management committees. Each committee has been trained in maintenance and sustainable water resource management.
                     </p>
-                    <h3 class="text-xl font-bold text-secondary mb-4">Impact on Communities</h3>
-                    <p class="text-gray-600 mb-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">Impact on Communities</h3>
+                    <p class="text-gray-600 mb-3 sm:mb-4">
                       Prior to this initiative, families in these communities spent an average of 3 hours daily collecting water from distant sources. The new water systems have reduced this time to just minutes, allowing children to attend school regularly and women to engage in income-generating activities.
                     </p>
-                    <p class="text-gray-600 mb-4">
+                    <p class="text-gray-600 mb-3 sm:mb-4">
                       Local health clinics have reported a 60% reduction in waterborne diseases since the project's completion. This improvement in public health has led to increased school attendance and workplace productivity.
                     </p>
-                    <h3 class="text-xl font-bold text-secondary mb-4">Sustainable Development</h3>
-                    <p class="text-gray-600 mb-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">Sustainable Development</h3>
+                    <p class="text-gray-600 mb-3 sm:mb-4">
                       The project's success lies in its community-led approach. Local residents were involved in every stage, from planning to implementation. This ownership ensures the long-term sustainability of the water systems.
                     </p>
-                    <div class="bg-primary/5 rounded-xl p-6 my-6">
-                      <blockquote class="text-lg text-gray-600 italic">
+                    <div class="bg-primary/5 rounded-xl p-4 sm:p-6 my-4 sm:my-6">
+                      <blockquote class="text-gray-600 italic text-sm sm:text-base">
                         "This water system has changed everything for us. Our children are healthier, and I can now focus on my small business instead of spending hours collecting water." - Maria Gonzalez, Community Leader
                       </blockquote>
                     </div>
-                    <h3 class="text-xl font-bold text-secondary mb-4">Looking Ahead</h3>
-                    <p class="text-gray-600 mb-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-secondary mb-3 sm:mb-4">Looking Ahead</h3>
+                    <p class="text-gray-600 mb-3 sm:mb-4">
                       Building on this success, we're planning to expand the program to reach an additional 2,000 families in neighboring regions by the end of 2024. Your continued support makes these life-changing projects possible.
                     </p>
                   </div>
 
-                  <div class="mt-8 pt-8 border-t border-gray-200">
-                    <h4 class="font-bold text-secondary mb-4">Share this story</h4>
-                    <div class="flex space-x-4">
-                      <button class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
-                        <i class="ri-facebook-fill"></i>
+                  <div class="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
+                    <h4 class="font-bold text-secondary mb-3 sm:mb-4 text-sm sm:text-base">Share this story</h4>
+                    <div class="flex space-x-3 sm:space-x-4">
+                      <button class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i class="ri-facebook-fill text-sm sm:text-base"></i>
                       </button>
-                      <button class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
-                        <i class="ri-twitter-x-fill"></i>
+                      <button class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i class="ri-twitter-x-fill text-sm sm:text-base"></i>
                       </button>
-                      <button class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
-                        <i class="ri-linkedin-fill"></i>
+                      <button class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i class="ri-linkedin-fill text-sm sm:text-base"></i>
                       </button>
                     </div>
                   </div>
@@ -769,40 +904,37 @@ Sponsor
       </div>
       
       <!-- Sidebar -->
-      <div class="space-y-6">
+      <div class="space-y-4 sm:space-y-6">
 
         <!-- Recent Posts -->
-        <div id="recent-posts" class="bg-white rounded-xl shadow-lg p-6 fade-in">
-            <h3 class="font-bold text-secondary mb-4">Recent Posts</h3>
-         <div id="posts-container" class="space-y-4">
+        <div id="recent-posts" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 fade-in">
+            <h3 class="font-bold text-secondary mb-3 sm:mb-4 text-lg">Recent Posts</h3>
+         <div id="posts-container" class="space-y-3 sm:space-y-4">
         <!-- Blog posts will be appended here -->
           </div>
       </div>
       
         <!-- Google Ads Space -->
-        <div class="bg-gray-100 rounded-xl p-6 text-center">
+        <div class="bg-gray-100 rounded-xl p-4 sm:p-6 text-center">
           <p class="text-gray-500 text-xs mb-2">Advertisement</p>
           <div class="h-40 bg-gray-200 rounded flex items-center justify-center">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="autorelaxed"
-                 data-ad-client="ca-pub-1079448428096344"
-                 data-ad-slot="1480703591"></ins>
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1079448428096344" data-ad-slot="5128336382" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
         </div>
 
         <!-- Newsletter Signup -->
-        <div class="bg-primary/10 rounded-xl p-6 fade-in">
-          <h3 class="font-bold text-secondary mb-4">Stay Updated</h3>
-          <p class="text-sm text-gray-600 mb-4">
+        <div class="bg-primary/10 rounded-xl p-4 sm:p-6 fade-in">
+          <h3 class="font-bold text-secondary mb-3 sm:mb-4 text-lg">Stay Updated</h3>
+          <p class="text-sm text-gray-600 mb-3 sm:mb-4">
             Get the latest news and impact stories delivered to your inbox.
           </p>
-          <div class="space-y-3">
+          <div class="space-y-2 sm:space-y-3">
             <input 
               type="email" 
               id="newsletter-email" 
               placeholder="Enter your email" 
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+              class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
             <button class="w-full bg-primary text-white py-2 !rounded-button text-sm font-semibold hover:bg-green-600 transition-colors whitespace-nowrap" id="newsletter-btn">
               Subscribe
             </button>
@@ -815,16 +947,15 @@ Sponsor
   </div>
 </section>
 
-
 <!-- FAQ Section -->
-<section class="py-20 bg-white">
+<section class="py-12 sm:py-16 md:py-20 bg-white">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">
         Frequently Asked Questions
       </h2>
-      <p class="text-xl text-gray-600">
+      <p class="text-lg sm:text-xl text-gray-600 px-4">
         Find answers to common questions about our programs, donations, and how you can get involved.
       </p>
     </div>
@@ -836,547 +967,461 @@ Sponsor
   </div>
 </section>
 
-
 <!-- Contact Section -->
-<section id="contact" class="py-20 bg-gray-50">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Get in Touch</h2>
-<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-Have questions about our programs or want to get involved? We'd love to hear from you.
-</p>
-</div>
-<div class="grid lg:grid-cols-2 gap-12">
-<!-- Contact Form -->
-<div class="bg-white rounded-2xl shadow-xl p-8">
-<h3 class="text-2xl font-bold text-secondary mb-6">Send us a Message</h3>
-<form class="space-y-6">
-<div class="grid md:grid-cols-2 gap-6">
-<div>
-<label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-<input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-</div>
-<div>
-<label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-<input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-</div>
-</div>
-<div>
-<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-<input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-</div>
-<div>
-<div class="relative">
-
-<div class="absolute right-3 top-1/2 transform -translate-y-1/2">
-<div class="w-5 h-5 flex items-center justify-center">
-<!-- <i class="ri-arrow-down-s-line text-gray-400"></i> -->
-</div>
-</div>
-</div>
-</div>
-<div>
-<label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-<textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"></textarea>
-</div>
-<button type="submit" class="w-full bg-primary text-white py-4 !rounded-button text-lg font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
-Send Message
-</button>
-</form>
-</div>
-<!-- Contact Info & Map -->
-<div class="space-y-8">
-<!-- Contact Details -->
-<div class="bg-white rounded-2xl shadow-xl p-8">
-<h3 class="text-2xl font-bold text-secondary mb-6">Contact Information</h3>
-<div class="space-y-6">
-<div class="flex items-start gap-4">
-<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
-<i class="ri-map-pin-line ri-lg text-primary"></i>
-</div>
-<div>
-<h4 class="font-semibold text-secondary">Address</h4>
-<p class="text-gray-600">No 20 Olusanya Street, Jesugbami, <br> Aboru, Lagos, Nigeria. </p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
-<i class="ri-phone-line ri-lg text-primary"></i>
-</div>
-<div>
-<h4 class="font-semibold text-secondary">Phone</h4>
-<p class="text-gray-600">+234 (808) 400-9711</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
-<i class="ri-mail-line ri-lg text-primary"></i>
-</div>
-<div>
-<h4 class="font-semibold text-secondary">Email</h4>
-<p class="text-gray-600"> celebrityfoodpantry@gmail.com</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
-<i class="ri-time-line ri-lg text-primary"></i>
-</div>
-<div>
-<h4 class="font-semibold text-secondary">Office Hours</h4>
-<p class="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM<br>Saturday: 10:00 AM - 2:00 PM</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Map -->
-<div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-<div class="h-64 bg-center bg-cover" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');">
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="bg-secondary text-white py-16">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-<div>
-<!-- <d class="font-['Pacifico'] text-2xl mb-6">Hope Foundation</d'"iv> -->
-<img src="./assets/logo-removebg-preview (1) copy.ico" alt="" class= "w-20 h-20">
-<p class="text-gray-300 mb-6">
-Building better communities through sustainable programs that address hunger, education, healthcare, and economic empowerment.
-</p>
-<div class="flex space-x-4">
-<a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
-<i class="ri-facebook-fill"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
-<i class="ri-twitter-x-fill"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
-<i class="ri-instagram-fill"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
-<i class="ri-linkedin-fill"></i>
-</a>
-</div>
-</div>
-<div>
-<h3 class="font-bold text-lg mb-6">Quick Links</h3>
-<ul class="space-y-3">
-<li><a href="./page/about.html" class="text-gray-300 hover:text-primary transition-colors">About Us</a></li>
-<li><a href="#programs" class="text-gray-300 hover:text-primary transition-colors">Our Programs</a></li>
-<li><a href="#stories" class="text-gray-300 hover:text-primary transition-colors">Success Stories</a></li>
-<li><a href="#blog" class="text-gray-300 hover:text-primary transition-colors">News & Updates</a></li>
-<li><a href="#contact" class="text-gray-300 hover:text-primary transition-colors">Contact Us</a></li>
-</ul>
-</div>
-<div>
-<h3 class="font-bold text-lg mb-6">Get Involved</h3>
-<ul class="space-y-3">
-<li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Donate</a></li>
-<li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Volunteer</a></li>
-<li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Sponsor a Child</a></li>
-<li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Corporate Partners</a></li>
-<li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Fundraise</a></li>
-</ul>
-</div>
-
-<div>
-  <h3 class="font-bold text-lg mb-6">Newsletter</h3>
-  <p class="text-gray-300 mb-4">Stay updated with our latest impact stories and ways to help.</p>
-  <div class="space-y-3">
-    <input 
-      type="email" 
-      id="newsletter-email" 
-      placeholder="Enter your email" 
-      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent">
-    
-    <button 
-      id="newsletter-btn"
-      class="w-full bg-primary text-white py-3 !rounded-button font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
-      Subscribe
-    </button>
+<section id="contact" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">Get in Touch</h2>
+      <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+        Have questions about our programs or want to get involved? We'd love to hear from you.
+      </p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-8 sm:gap-12">
+      <!-- Contact Form -->
+      <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl p-5 sm:p-6 md:p-8">
+        <h3 class="text-xl sm:text-2xl font-bold text-secondary mb-4 sm:mb-6">Send us a Message</h3>
+        <form class="space-y-4 sm:space-y-6">
+          <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+              <input type="text" class="w-full px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+              <input type="text" class="w-full px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input type="email" class="w-full px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base">
+            </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+            <textarea rows="5" class="w-full px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none text-sm sm:text-base"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-primary text-white py-3 sm:py-4 !rounded-button text-base sm:text-lg font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
+            Send Message
+          </button>
+        </form>
+      </div>
+      <!-- Contact Info & Map -->
+      <div class="space-y-6 sm:space-y-8">
+        <!-- Contact Details -->
+        <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl p-5 sm:p-6 md:p-8">
+          <h3 class="text-xl sm:text-2xl font-bold text-secondary mb-4 sm:mb-6">Contact Information</h3>
+          <div class="space-y-4 sm:space-y-6">
+            <div class="flex items-start gap-3 sm:gap-4">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
+                <i class="ri-map-pin-line text-lg sm:text-xl text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary text-sm sm:text-base">Address</h4>
+                <p class="text-gray-600 text-sm sm:text-base">No 20 Olusanya Street, Jesugbami, <br> Aboru, Lagos, Nigeria. </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 sm:gap-4">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
+                <i class="ri-phone-line text-lg sm:text-xl text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary text-sm sm:text-base">Phone</h4>
+                <p class="text-gray-600 text-sm sm:text-base">+234 (808) 400-9711</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 sm:gap-4">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
+                <i class="ri-mail-line text-lg sm:text-xl text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary text-sm sm:text-base">Email</h4>
+                <p class="text-gray-600 text-sm sm:text-base">celebrityfoodpantry@gmail.com</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 sm:gap-4">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary/10 rounded-lg flex-shrink-0">
+                <i class="ri-time-line text-lg sm:text-xl text-primary"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary text-sm sm:text-base">Office Hours</h4>
+                <p class="text-gray-600 text-sm sm:text-base">Monday - Friday: 9:00 AM - 5:00 PM<br>Saturday: 10:00 AM - 2:00 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Map -->
+        <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden">
+          <div class="h-48 sm:h-56 md:h-64 bg-center bg-cover" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-</div>
-<div class="border-t border-white/20 pt-8">
-<div class="flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-gray-300 text-sm">
-© 2025 CFPHFoundation. All rights reserved.
-</p>
-<div class="flex items-center space-x-6 text-sm">
-<a href="#" class="text-gray-300 hover:text-primary transition-colors">Privacy Policy</a>
-<a href="#" class="text-gray-300 hover:text-primary transition-colors">Terms of Service</a>
-<div class="flex items-center space-x-2">
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-visa-fill text-gray-300"></i>
-</div>
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-mastercard-fill text-gray-300"></i>
-</div>
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-paypal-fill text-gray-300"></i>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<!-- Footer -->
+<footer class="bg-secondary text-white py-12 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+      <div>
+        <img src="./assets/logo-removebg-preview (1) copy.ico" alt="" class="w-16 h-16 sm:w-20 sm:h-20 mb-4">
+        <p class="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
+          Building better communities through sustainable programs that address hunger, education, healthcare, and economic empowerment.
+        </p>
+        <div class="flex space-x-3 sm:space-x-4">
+          <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+            <i class="ri-facebook-fill text-sm sm:text-base"></i>
+          </a>
+          <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+            <i class="ri-twitter-x-fill text-sm sm:text-base"></i>
+          </a>
+          <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+            <i class="ri-instagram-fill text-sm sm:text-base"></i>
+          </a>
+          <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+            <i class="ri-linkedin-fill text-sm sm:text-base"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-4 sm:mb-6 text-sm sm:text-base">Quick Links</h3>
+        <ul class="space-y-2 sm:space-y-3">
+          <li><a href="./page/about.html" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">About Us</a></li>
+          <li><a href="#programs" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Our Programs</a></li>
+          <li><a href="#stories" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Success Stories</a></li>
+          <li><a href="#blog" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">News & Updates</a></li>
+          <li><a href="#contact" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-4 sm:mb-6 text-sm sm:text-base">Get Involved</h3>
+        <ul class="space-y-2 sm:space-y-3">
+          <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Donate</a></li>
+          <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Volunteer</a></li>
+          <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Sponsor a Child</a></li>
+          <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Corporate Partners</a></li>
+          <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm sm:text-base">Fundraise</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg mb-4 sm:mb-6 text-sm sm:text-base">Newsletter</h3>
+        <p class="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">Stay updated with our latest impact stories and ways to help.</p>
+        <div class="space-y-2 sm:space-y-3">
+          <input 
+            type="email" 
+            id="footer-newsletter-email" 
+            placeholder="Enter your email" 
+            class="w-full px-3 sm:px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+          
+          <button 
+            id="footer-newsletter-btn"
+            class="w-full bg-primary text-white py-2 !rounded-button font-semibold hover:bg-green-600 transition-colors whitespace-nowrap text-sm">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/20 pt-6 sm:pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
+        <p class="text-gray-300 text-xs sm:text-sm">
+          © 2025 CFPHFoundation. All rights reserved.
+        </p>
+        <div class="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm">
+          <a href="#" class="text-gray-300 hover:text-primary transition-colors">Privacy Policy</a>
+          <a href="#" class="text-gray-300 hover:text-primary transition-colors">Terms of Service</a>
+          <div class="flex items-center space-x-2">
+            <div class="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
+              <i class="ri-visa-fill text-gray-300 text-sm sm:text-base"></i>
+            </div>
+            <div class="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
+              <i class="ri-mastercard-fill text-gray-300 text-sm sm:text-base"></i>
+            </div>
+            <div class="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
+              <i class="ri-paypal-fill text-gray-300 text-sm sm:text-base"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
+
 <script id="navbar-scroll">
 document.addEventListener('DOMContentLoaded', function() {
-const navbar = document.getElementById('navbar');
-const navLogo = document.getElementById('nav-logo');
-window.addEventListener('scroll', function() {
-if (window.scrollY > 50) {
-navbar.classList.add('navbar-scrolled');
-navLogo.classList.remove('text-white');
-navLogo.classList.add('text-secondary');
-const navLinks = navbar.querySelectorAll('a');
-navLinks.forEach(link => {
-if (!link.classList.contains('bg-primary')) {
-link.classList.remove('text-white');
-link.classList.add('text-secondary');
-}
-});
-} else {
-navbar.classList.remove('navbar-scrolled');
-navLogo.classList.remove('text-secondary');
-navLogo.classList.add('text-white');
-const navLinks = navbar.querySelectorAll('a');
-navLinks.forEach(link => {
-if (!link.classList.contains('bg-primary')) {
-link.classList.remove('text-secondary');
-link.classList.add('text-white');
-}
-});
-}
-});
-});
-</script>
-<script id="mobile-menu">
-document.addEventListener('DOMContentLoaded', function() {
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const closeMenuBtn = document.getElementById('close-menu');
-mobileMenuBtn.addEventListener('click', function() {
-mobileMenu.classList.add('open');
-});
-closeMenuBtn.addEventListener('click', function() {
-mobileMenu.classList.remove('open');
-});
-mobileMenu.addEventListener('click', function(e) {
-if (e.target === mobileMenu) {
-mobileMenu.classList.remove('open');
-}
-});
+  const navbar = document.getElementById('navbar');
+  const navLogo = document.getElementById('nav-logo');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      navbar.classList.add('navbar-scrolled');
+      navLogo.classList.remove('text-white');
+      navLogo.classList.add('text-secondary');
+      const navLinks = navbar.querySelectorAll('a');
+      navLinks.forEach(link => {
+        if (!link.classList.contains('bg-primary')) {
+          link.classList.remove('text-white');
+          link.classList.add('text-secondary');
+        }
+      });
+    } else {
+      navbar.classList.remove('navbar-scrolled');
+      navLogo.classList.remove('text-secondary');
+      navLogo.classList.add('text-white');
+      const navLinks = navbar.querySelectorAll('a');
+      navLinks.forEach(link => {
+        if (!link.classList.contains('bg-primary')) {
+          link.classList.remove('text-secondary');
+          link.classList.add('text-white');
+        }
+      });
+    }
+  });
 });
 </script>
+
 <script id="fade-in-animation">
 document.addEventListener('DOMContentLoaded', function() {
-const observerOptions = {
-threshold: 0.1,
-rootMargin: '0px 0px -50px 0px'
-};
-const observer = new IntersectionObserver(function(entries) {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('visible');
-setTimeout(() => {
-entry.target.style.transition = 'all 0.3s ease';
-}, 500);
-}
-});
-}, observerOptions);
-document.querySelectorAll('.fade-in').forEach(el => {
-observer.observe(el);
-});
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        setTimeout(() => {
+          entry.target.style.transition = 'all 0.3s ease';
+        }, 500);
+      }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
 });
 </script>
+
 <script id="counter-animation">
 document.addEventListener('DOMContentLoaded', function() {
-const counters = document.querySelectorAll('.counter');
-const observerOptions = {
-threshold: 0.5
-};
-const observer = new IntersectionObserver(function(entries) {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-const counter = entry.target;
-const target = parseInt(counter.getAttribute('data-target'));
-const duration = 1000;
-const increment = target / (duration / 16);
-let current = 0;
-const updateCounter = () => {
-current += increment;
-if (current < target) {
-counter.textContent = Math.floor(current).toLocaleString();
-requestAnimationFrame(updateCounter);
-} else {
-counter.textContent = target.toLocaleString();
-}
-};
-counter.classList.add('animate-counter');
-updateCounter();
-observer.unobserve(counter);
-}
-}); 
-}, observerOptions);
-counters.forEach(counter => {
-observer.observe(counter);
-});
+  const counters = document.querySelectorAll('.counter');
+  const observerOptions = {
+    threshold: 0.5
+  };
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 1000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        const updateCounter = () => {
+          current += increment;
+          if (current < target) {
+            counter.textContent = Math.floor(current).toLocaleString();
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target.toLocaleString();
+          }
+        };
+        counter.classList.add('animate-counter');
+        updateCounter();
+        observer.unobserve(counter);
+      }
+    }); 
+  }, observerOptions);
+  counters.forEach(counter => {
+    observer.observe(counter);
+  });
 });
 </script>
+
 <script id="donation-selection">
 document.addEventListener('DOMContentLoaded', function() {
-const donationCards = document.querySelectorAll('.donation-card');
-const monthlyBtn = document.getElementById('monthly-btn');
-const onetimeBtn = document.getElementById('onetime-btn');
-const usdBtn = document.getElementById('usd-btn');
-const ngnBtn = document.getElementById('ngn-btn');
-const transferBtn = document.getElementById('transfer-btn');
-const transferModal = document.getElementById('transfer-modal');
-const closeModal = document.getElementById('close-modal');
-const paymentMethods = document.querySelectorAll('.payment-method');
-const copyBtn = document.querySelector('.copy-btn');
-let currentCurrency = 'USD';
-const exchangeRate = 1200; // NGN to USD rate
-function updateDonationAmounts(currency) {
-donationCards.forEach(card => {
-const amount = parseInt(card.getAttribute('data-amount'));
-const displayAmount = currency === 'USD' ? amount : amount * exchangeRate;
-const symbol = currency === 'USD' ? '$' : '₦';
-card.querySelector('.text-2xl').textContent = `${symbol}${displayAmount.toLocaleString()}`;
-});
-}
-donationCards.forEach(card => {
-card.addEventListener('click', function() {
-donationCards.forEach(c => c.classList.remove('selected'));
-this.classList.add('selected');
-});
-});
-monthlyBtn.addEventListener('click', function() {
-monthlyBtn.classList.add('bg-primary', 'text-white');
-monthlyBtn.classList.remove('text-gray-600');
-onetimeBtn.classList.remove('bg-primary', 'text-white');
-onetimeBtn.classList.add('text-gray-600');
-});
-onetimeBtn.addEventListener('click', function() {
-onetimeBtn.classList.add('bg-primary', 'text-white');
-onetimeBtn.classList.remove('text-gray-600');
-monthlyBtn.classList.remove('bg-primary', 'text-white');
-monthlyBtn.classList.add('text-gray-600');
-});
-usdBtn.addEventListener('click', function() {
-usdBtn.classList.add('bg-primary', 'text-white');
-usdBtn.classList.remove('text-gray-600');
-ngnBtn.classList.remove('bg-primary', 'text-white');
-ngnBtn.classList.add('text-gray-600');
-currentCurrency = 'USD';
-updateDonationAmounts('USD');
-});
-ngnBtn.addEventListener('click', function() {
-ngnBtn.classList.add('bg-primary', 'text-white');
-ngnBtn.classList.remove('text-gray-600');
-usdBtn.classList.remove('bg-primary', 'text-white');
-usdBtn.classList.add('text-gray-600');
-currentCurrency = 'NGN';
-updateDonationAmounts('NGN');
-});
-paymentMethods.forEach(method => {
-method.addEventListener('click', function() {
-paymentMethods.forEach(m => {
-m.classList.remove('bg-primary', 'text-white');
-m.classList.add('hover:border-primary');
-});
-this.classList.add('bg-primary', 'text-white');
-this.classList.remove('hover:border-primary');
-if (this.id === 'transfer-btn') {
-transferModal.classList.remove('hidden');
-}
-});
-});
-closeModal.addEventListener('click', function() {
-transferModal.classList.add('hidden');
-});
-transferModal.addEventListener('click', function(e) {
-if (e.target === transferModal) {
-transferModal.classList.add('hidden');
-}
-});
-copyBtn.addEventListener('click', function() {
-const accountNumber = '1028535101';
-navigator.clipboard.writeText(accountNumber).then(() => {
-const icon = this.querySelector('i');
-icon.classList.remove('ri-file-copy-line');
-icon.classList.add('ri-check-line');
-setTimeout(() => {
-icon.classList.remove('ri-check-line');
-icon.classList.add('ri-file-copy-line');
-}, 2000);
-});
-});
-});
-</script>
-<script id="testimonial-carousel">
-document.addEventListener('DOMContentLoaded', function() {
-const testimonials = document.querySelectorAll('.testimonial-card');
-const dots = document.querySelectorAll('.testimonial-dot');
-let currentSlide = 0;
-function showSlide(index) {
-testimonials.forEach((testimonial, i) => {
-testimonial.classList.remove('active');
-if (i === index) {
-testimonial.classList.add('active');
-}
-});
-dots.forEach((dot, i) => {
-if (i === index) {
-dot.classList.remove('bg-gray-300');
-dot.classList.add('bg-primary');
-} else {
-dot.classList.remove('bg-primary');
-dot.classList.add('bg-gray-300');
-}
-});
-}
-function nextSlide() {
-currentSlide = (currentSlide + 1) % testimonials.length;
-showSlide(currentSlide);
-}
-dots.forEach((dot, index) => {
-dot.addEventListener('click', function() {
-currentSlide = index;
-showSlide(currentSlide);
-});
-});
-setInterval(nextSlide, 5000);
-});
-</script>
-<script id="faq-accordion">
-document.addEventListener('DOMContentLoaded', function() {
-const faqQuestions = document.querySelectorAll('.faq-question');
-faqQuestions.forEach(question => {
-question.addEventListener('click', function() {
-const faqItem = this.closest('.faq-item');
-const answer = faqItem.querySelector('.faq-answer');
-const icon = this.querySelector('i');
-const isOpen = !answer.classList.contains('hidden');
-document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
-document.querySelectorAll('.faq-question i').forEach(i => {
-i.classList.remove('ri-subtract-line');
-i.classList.add('ri-add-line');
-});
-if (!isOpen) {
-answer.classList.remove('hidden');
-icon.classList.remove('ri-add-line');
-icon.classList.add('ri-subtract-line');
-}
-});
-});
-});
-</script>
-<script id="event-reminder">
-document.addEventListener('DOMContentLoaded', function() {
-const reminderBtns = document.querySelectorAll('.reminder-btn');
-reminderBtns.forEach(btn => {
-btn.addEventListener('click', function() {
-const eventDetails = this.closest('.p-6');
-const title = eventDetails.querySelector('.text-2xl').textContent;
-const subtitle = eventDetails.querySelector('.text-xl').textContent;
-const dateTime = eventDetails.querySelectorAll('.flex.items-center span');
-const date = dateTime[0].textContent;
-const time = dateTime[1].textContent;
-const location = dateTime[2].textContent;
-
-if ('Notification' in window) {
-Notification.requestPermission().then(permission => {
-if (permission === 'granted') {
-const originalContent = this.innerHTML;
-this.innerHTML = '<i class="ri-check-line mr-2"></i>Reminder Set';
-this.classList.add('bg-green-600');
-
-// Parse date and time
-const [month, day, year] = date.split(' ');
-const [startTime, endTime] = time.split(' - ');
-const monthNum = new Date(Date.parse(month + " 1, 2024")).getMonth() + 1;
-const formattedDate = `${year}${monthNum.toString().padStart(2, '0')}${day.replace(',', '').padStart(2, '0')}`;
-
-// Convert time to 24-hour format
-const convertTo24Hour = (time12h) => {
-const [time, modifier] = time12h.split(' ');
-let [hours, minutes] = time.split(':');
-if (hours === '12') {
-hours = '00';
-}
-if (modifier === 'PM') {
-hours = parseInt(hours, 10) + 12;
-}
-return `${hours.toString().padStart(2, '0')}${minutes}00`;
-};
-
-const startDateTime = formattedDate + 'T' + convertTo24Hour(startTime);
-const endDateTime = formattedDate + 'T' + convertTo24Hour(endTime);
-
-const eventText = `${title} - ${subtitle}\nTime: ${time}\nLocation: ${location}`;
-const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent(eventText)}&location=${encodeURIComponent(location)}&dates=${startDateTime}/${endDateTime}`;
-
-window.open(googleCalendarUrl, '_blank');
-
-// Reset button after 2 seconds
-setTimeout(() => {
-this.innerHTML = '<i class="ri-notification-line mr-2"></i>Set Reminder';
-this.classList.remove('bg-green-600');
-}, 2000);
-}
-});
-}
-});
-});
-});
-</script>
-<script id="smooth-scroll">
-document.addEventListener('DOMContentLoaded', function() {
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function (e) {
-e.preventDefault();
-const target = document.querySelector(this.getAttribute('href'));
-if (target) {
-target.scrollIntoView({
-behavior: 'smooth',
-block: 'start'
-});
-}
-});
-});
-const donateNavBtn = document.getElementById('donate-nav-btn');
-if (donateNavBtn) {
-donateNavBtn.addEventListener('click', function() {
-const donateSection = document.getElementById('donate');
-if (donateSection) {
-donateSection.scrollIntoView({
-behavior: 'smooth',
-block: 'start'
-});
-}
-});
-}
-});
-  function showError() {
-    event.preventDefault(); // stop link from reloading the page
-    Swal.fire({
-      icon: 'error',
-      title: 'Transfer Error',
-      text: 'Transaction could not be processed. Please try again or make use of the transfer details provided.',
-      confirmButtonColor: '#16a34a' // green confirm button
+  const donationCards = document.querySelectorAll('.donation-card');
+  const monthlyBtn = document.getElementById('monthly-btn');
+  const onetimeBtn = document.getElementById('onetime-btn');
+  const usdBtn = document.getElementById('usd-btn');
+  const ngnBtn = document.getElementById('ngn-btn');
+  const transferBtn = document.getElementById('transfer-btn');
+  const transferModal = document.getElementById('transfer-modal');
+  const closeModal = document.getElementById('close-modal');
+  const paymentMethods = document.querySelectorAll('.payment-method');
+  const copyBtn = document.querySelector('.copy-btn');
+  let currentCurrency = 'USD';
+  const exchangeRate = 1200; // NGN to USD rate
+  
+  function updateDonationAmounts(currency) {
+    donationCards.forEach(card => {
+      const amount = parseInt(card.getAttribute('data-amount'));
+      const displayAmount = currency === 'USD' ? amount : amount * exchangeRate;
+      const symbol = currency === 'USD' ? '$' : '₦';
+      // FIX: Use a more specific selector to avoid null error
+      const amountElement = card.querySelector('.donation-amount');
+      if (amountElement) {
+        amountElement.textContent = `${symbol}${displayAmount.toLocaleString()}`;
+      }
     });
   }
+  
+  donationCards.forEach(card => {
+    card.addEventListener('click', function() {
+      donationCards.forEach(c => c.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+  
+  monthlyBtn.addEventListener('click', function() {
+    monthlyBtn.classList.add('bg-primary', 'text-white');
+    monthlyBtn.classList.remove('text-gray-600');
+    onetimeBtn.classList.remove('bg-primary', 'text-white');
+    onetimeBtn.classList.add('text-gray-600');
+  });
+  
+  onetimeBtn.addEventListener('click', function() {
+    onetimeBtn.classList.add('bg-primary', 'text-white');
+    onetimeBtn.classList.remove('text-gray-600');
+    monthlyBtn.classList.remove('bg-primary', 'text-white');
+    monthlyBtn.classList.add('text-gray-600');
+  });
+  
+  usdBtn.addEventListener('click', function() {
+    usdBtn.classList.add('bg-primary', 'text-white');
+    usdBtn.classList.remove('text-gray-600');
+    ngnBtn.classList.remove('bg-primary', 'text-white');
+    ngnBtn.classList.add('text-gray-600');
+    currentCurrency = 'USD';
+    updateDonationAmounts('USD');
+  });
+  
+  ngnBtn.addEventListener('click', function() {
+    ngnBtn.classList.add('bg-primary', 'text-white');
+    ngnBtn.classList.remove('text-gray-600');
+    usdBtn.classList.remove('bg-primary', 'text-white');
+    usdBtn.classList.add('text-gray-600');
+    currentCurrency = 'NGN';
+    updateDonationAmounts('NGN');
+  });
+  
+  paymentMethods.forEach(method => {
+    method.addEventListener('click', function() {
+      paymentMethods.forEach(m => {
+        m.classList.remove('bg-primary', 'text-white');
+        m.classList.add('hover:border-primary');
+      });
+      this.classList.add('bg-primary', 'text-white');
+      this.classList.remove('hover:border-primary');
+      if (this.id === 'transfer-btn') {
+        transferModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+  
+  closeModal.addEventListener('click', function() {
+    transferModal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  });
+  
+  transferModal.addEventListener('click', function(e) {
+    if (e.target === transferModal) {
+      transferModal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+  });
+  
+  copyBtn.addEventListener('click', function() {
+    const accountNumber = '1028535101';
+    navigator.clipboard.writeText(accountNumber).then(() => {
+      const icon = this.querySelector('i');
+      icon.classList.remove('ri-file-copy-line');
+      icon.classList.add('ri-check-line');
+      setTimeout(() => {
+        icon.classList.remove('ri-check-line');
+        icon.classList.add('ri-file-copy-line');
+      }, 2000);
+    });
+  });
+});
 </script>
-<!-- <script src="./js/blogModel.js"></script> -->
-<!-- <script type="module" src="./js/firbase.js"></script> -->
+
+<script id="smooth-scroll">
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+  
+  const donateNavBtn = document.getElementById('donate-nav-btn');
+  if (donateNavBtn) {
+    donateNavBtn.addEventListener('click', function() {
+      const donateSection = document.getElementById('donate');
+      if (donateSection) {
+        donateSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  }
+});
+
+function showError() {
+  event.preventDefault(); // stop link from reloading the page
+  Swal.fire({
+    icon: 'error',
+    title: 'Transfer Error',
+    text: 'Transaction could not be processed. Please try again or make use of the transfer details provided.',
+    confirmButtonColor: '#16a34a' // green confirm button
+  });
+}
+</script>
+
+<!-- Load Google Ads script only once -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1079448428096344" crossorigin="anonymous"></script>
+<script>
+  // Initialize Google Ads only once
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof(adsbygoogle) !== 'undefined') {
+      // Only push if adsbygoogle is loaded and hasn't been initialized yet
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.log('Google Ads already initialized');
+      }
+    }
+  });
+</script>
+
+<div class="hidden" vocab="https://schema.org/" typeof="WebPage">
+  <meta property="name" content="Celebrity Food Home Pantry Foundation">
+  <meta property="description" content="Providing food assistance and community support programs to fight hunger in Nigeria.">
+  <meta property="identifier" content="https://www.yourdomain.com">
+</div>
+
+<script>
+// Track outbound links for analytics
+document.addEventListener('DOMContentLoaded', function() {
+  var links = document.querySelectorAll('a');
+  links.forEach(function(link) {
+    if (link.hostname !== window.location.hostname) {
+      link.addEventListener('click', function() {
+        // Send to analytics - outbound link click
+        console.log('Outbound link clicked: ' + link.href);
+      });
+    }
+  });
+});
+</script>
+
+<!-- External Scripts -->
 <script type="module" src="./js/newsletter.js"></script>
 <script type="module" src="./js/form.js"></script>
 <script type="module" src="./js/faq.js"></script>
@@ -1384,10 +1429,6 @@ block: 'start'
 <script type="module" src="./js/events.js"></script>
 <script type="module" src="./js/blog.js"></script>
 <script type="module" src="./js/testimonials.js"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1079448428096344" crossorigin="anonymous"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 </body>
 </html>

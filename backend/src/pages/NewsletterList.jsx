@@ -9,7 +9,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-function MailModal({ isOpen, onClose, onSend }) {
+function MailModal({ isOpen, onClose, onSend, isSending }) {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
@@ -33,15 +33,16 @@ function MailModal({ isOpen, onClose, onSend }) {
           onChange={(e) => setMessage(e.target.value)}
         />
         <div className="flex justify-end gap-3">
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" onClick={onClose} disabled={isSending}>
             Cancel
           </Button>
           <Button
             variant="primary"
             icon={<SendIcon size={16} />}
             onClick={() => onSend(subject, message)}
+            disabled={isSending}
           >
-            Send
+            {isSending ? "Sending..." : "Send"}
           </Button>
         </div>
       </div>
@@ -52,6 +53,7 @@ function MailModal({ isOpen, onClose, onSend }) {
 export default function NewsletterList() {
   const [subscribers, setSubscribers] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   // Fetch subscribers from Firebase RTDB
   useEffect(() => {
@@ -65,6 +67,22 @@ export default function NewsletterList() {
       );
     });
     return () => unsubscribe();
+  }, []);
+
+  // Fetch backend message (for debugging)
+  useEffect(() => {
+    const fetchMessage = async () => {
+      try {
+        const response = await fetch(
+          "https://cfphfback.onrender.com/api/message"
+        );
+        const data = await response.json();
+        console.log("Backend message:", data.message);
+      } catch (error) {
+        console.error("Error fetching backend message:", error);
+      }
+    };
+    fetchMessage();
   }, []);
 
   // Delete subscriber
@@ -88,13 +106,19 @@ export default function NewsletterList() {
   // Send newsletter via backend
   const handleSendMail = async (subject, message) => {
     if (!subject.trim() || !message.trim()) {
-      MySwal.fire("Missing Information", "Please provide both a subject and a message.", "error");
+      MySwal.fire(
+        "Missing Information",
+        "Please provide both a subject and a message.",
+        "error"
+      );
       return;
     }
 
     const emailList = subscribers.map((s) => s.email);
 
     try {
+      setIsSending(true);
+
       MySwal.fire({
         title: "Sending Newsletter...",
         text: "Please wait while we send your emails.",
@@ -104,15 +128,18 @@ export default function NewsletterList() {
         },
       });
 
-      const response = await fetch("http://localhost:5000/api/sendNewsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          subject,
-          html: message,
-          emails: emailList,
-        }),
-      });
+      const response = await fetch(
+        "https://cfphfback.onrender.com/api/sendNewsletter",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            subject,
+            html: message,
+            emails: emailList,
+          }),
+        }
+      );
 
       const result = await response.json();
 
@@ -128,6 +155,8 @@ export default function NewsletterList() {
       }
     } catch (error) {
       MySwal.fire("Error", error.message, "error");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -141,7 +170,13 @@ export default function NewsletterList() {
           <Button
             variant="outline"
             icon={<DownloadIcon size={16} />}
-            onClick={() => MySwal.fire("Coming Soon", "Export CSV feature coming soon!", "info")}
+            onClick={() =>
+              MySwal.fire(
+                "Coming Soon",
+                "Export CSV feature coming soon!",
+                "info"
+              )
+            }
           >
             Export CSV
           </Button>
@@ -159,9 +194,7 @@ export default function NewsletterList() {
         <CardHeader>
           <div className="flex justify-between items-center">
             <h2 className="text-lg font-medium text-gray-900">Subscribers</h2>
-            <span className="text-sm text-gray-500">
-              {subscribers.length} total
-            </span>
+            <span className="text-sm text-gray-500">{subscribers.length} total</span>
           </div>
         </CardHeader>
         <div className="overflow-x-auto">
@@ -211,6 +244,7 @@ export default function NewsletterList() {
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
         onSend={handleSendMail}
+        isSending={isSending}
       />
     </div>
   );

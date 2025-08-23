@@ -252,7 +252,7 @@ tailwind.config = {
         <button id="donate-nav-btn" class="bg-primary text-white px-4 py-2 md:px-6 md:py-2 !rounded-button hover:bg-green-600 transition-colors whitespace-nowrap text-sm md:text-base">
           Donate Now
         </button>
-        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+        <button id="mobile-menu-btn" class="md:hidden text-black focus:outline-none">
           <i class="ri-menu-line ri-lg"></i>
         </button>
       </div>
@@ -260,15 +260,15 @@ tailwind.config = {
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full bg-white shadow-xl z-50 overflow-y-auto">
+  <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full bg-white shadow-xl z-50 overflow-y-auto " >
     <div class="p-4 sm:p-6">
       <div class="flex justify-between items-center mb-6">
-        <img src="./assets/logo-removebg-preview (1) copy.ico" alt="" class="h-16 w-16 md:h-20 md:w-20 text-2xl text-white" id="mobile-nav-logo">
+        <img src="./assets/logo-removebg-preview (1) copy.ico" alt="" class="h-16 w-16 md:h-20 md:w-20 text-2xl text-black" id="mobile-nav-logo">
         <button id="close-menu" class="text-secondary focus:outline-none">
           <i class="ri-close-line ri-lg"></i>
         </button>
       </div>
-      <div class="space-y-4">
+      <div class="space-y-4" >
         <a href="#home" class="block text-secondary hover:text-primary transition-colors py-2">Home</a>
         <a href="./page/about.html" class="block text-secondary hover:text-primary transition-colors py-2">About</a>
         <a href="#programs" class="block text-secondary hover:text-primary transition-colors py-2">Programs</a>
@@ -394,17 +394,19 @@ tailwind.config = {
 </section>
 
 <!-- Google Ads Space -->
-<section class="py-6 sm:py-8 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-lg p-4 sm:p-6 md:p-8 text-center shadow-sm">
-      <p class="text-gray-500 text-xs mb-2">Sponsored Content</p>
-      <div class="h-32 bg-gray-100 rounded flex items-center justify-center">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1079448428096344" data-ad-slot="8165563268" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
-    </div>
-  </div>
-</section>
+<ins class="adsbygoogle" style="display:block"
+     data-ad-client="ca-pub-1079448428096344"
+     data-ad-slot="8165563268"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+<script>
+  if (!window.adsbygoogleDone) {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    window.adsbygoogleDone = true;
+  }
+</script>
+
 
 <!-- Programs Section -->
 <section id="programs" class="py-12 sm:py-16 md:py-20 bg-white">
@@ -681,17 +683,19 @@ tailwind.config = {
 </section>
 
 <!-- Google Ads Space -->
-<section class="py-6 sm:py-8 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-lg p-4 sm:p-6 md:p-8 text-center shadow-sm">
-      <p class="text-gray-500 text-xs mb-2">Sponsored Content</p>
-      <div class="h-32 bg-gray-100 rounded flex items-center justify-center">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1079448428096344" data-ad-slot="8165563268" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
-    </div>
-  </div>
-</section>
+<ins class="adsbygoogle" style="display:block"
+     data-ad-client="ca-pub-1079448428096344"
+     data-ad-slot="8165563268"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+<script>
+  if (!window.adsbygoogleDone) {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    window.adsbygoogleDone = true;
+  }
+</script>
+
 
 <!-- Testimonials -->
 <section class="dark:text-gray-800">
@@ -915,13 +919,15 @@ tailwind.config = {
       </div>
       
         <!-- Google Ads Space -->
-        <div class="bg-gray-100 rounded-xl p-4 sm:p-6 text-center">
-          <p class="text-gray-500 text-xs mb-2">Advertisement</p>
-          <div class="h-40 bg-gray-200 rounded flex items-center justify-center">
-              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1079448428096344" data-ad-slot="5128336382" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          </div>
-        </div>
+        <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1079448428096344"
+     data-ad-slot="5128336382"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
         <!-- Newsletter Signup -->
         <div class="bg-primary/10 rounded-xl p-4 sm:p-6 fade-in">

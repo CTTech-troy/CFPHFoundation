@@ -9,23 +9,24 @@
 <meta name="keywords" content="food pantry, charity Nigeria, hunger relief, food donation, community outreach, volunteer opportunities, Lagos charity">
 <meta name="author" content="Celebrity Food Home Pantry Foundation">
 <meta name="robots" content="index, follow">
+<link rel="stylesheet" href="./page/style.css">
     
 <!-- Canonical URL to avoid duplicate content issues -->
-<link rel="canonical" href="https://www.yourdomain.com">
+<link rel="canonical" href="https://cfphfoundation.org">
     
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://www.yourdomain.com/">
+<meta property="og:url" content="https://cfphfoundation.org/">
 <meta property="og:title" content="Celebrity Food Home Pantry Foundation - Fighting Hunger, Building Communities">
 <meta property="og:description" content="Providing food assistance and community support programs to fight hunger in Nigeria.">
-<meta property="og:image" content="https://www.yourdomain.com/assets/og-image.jpg">
+<meta property="og:image" content="https://cfphfoundation.org/assets/og-image.jpg">
     
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://www.yourdomain.com/">
+<meta property="twitter:url" content="https://cfphfoundation.org">
 <meta property="twitter:title" content="Celebrity Food Home Pantry Foundation">
 <meta property="twitter:description" content="Providing food assistance and community support programs to fight hunger in Nigeria.">
-<meta property="twitter:image" content="https://www.yourdomain.com/assets/twitter-image.jpg">
+<meta property="twitter:image" content="https://cfphfoundation.orgassets/twitter-image.jpg">
     
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,8 +42,8 @@
   "@context": "https://schema.org",
   "@type": "NGO",
   "name": "Celebrity Food Home Pantry Foundation",
-  "url": "https://www.yourdomain.com",
-  "logo": "https://www.yourdomain.com/assets/logo-removebg-preview (1) copy.ico",
+  "url": "https://www.cfphfoundation.org",
+  "logo": "https://cfphfoundation.orgassets/logo-removebg-preview (1) copy.ico",
   "description": "Providing food assistance and community support programs to fight hunger in Nigeria.",
   "address": {
     "@type": "PostalAddress",
@@ -58,9 +59,9 @@
     "email": "celebrityfoodpantry@gmail.com"
   },
   "sameAs": [
-    "https://www.facebook.com/yourpage",
-    "https://www.twitter.com/yourprofile",
-    "https://www.instagram.com/yourprofile"
+    "https://www.facebook.com/cfphfoundation",
+    "https://www.twitter.com/cfphfoundation",
+    "https://www.instagram.com/cfphfoundation"
   ]
 }
 </script>
@@ -227,8 +228,29 @@ tailwind.config = {
 </script>
 </head>
 <body class="bg-white" style="margin-right: 0;">
+<!-- loader overlay (insert right after <body> opens) -->
+<div id="site-loader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
+  <div class="text-center">
+    <div class="spinner" style="width:72px;height:72px;position:relative;">
+      <div></div>   
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+    </div>
+  </div>
+</div>
+
 <!-- Navigation -->
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden">
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-[99999] transition-all duration-300 overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
@@ -281,30 +303,59 @@ tailwind.config = {
   </div>
 </nav>
 
-<script>
+<script id="mobile-menu-script">
+document.addEventListener('DOMContentLoaded', function() {
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeMenuBtn = document.getElementById('close-menu');
 
-  // Open mobile menu
-  mobileMenuBtn.addEventListener('click', () => {
+  if (!mobileMenuBtn || !mobileMenu) return;
+
+  function openMenu() {
     mobileMenu.classList.add('open');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
-  });
+    const firstFocusable = mobileMenu.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+    if (firstFocusable) firstFocusable.focus();
+  }
 
-  // Close mobile menu
-  closeMenuBtn.addEventListener('click', () => {
+  function closeMenu() {
     mobileMenu.classList.remove('open');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = 'auto';
-  });
+    mobileMenuBtn.focus();
+  }
 
-  // Optional: close menu if user clicks outside it
-  window.addEventListener('click', (e) => {
-    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && mobileMenu.classList.contains('open')) {
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = 'auto';
+  mobileMenuBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (mobileMenu.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
     }
   });
+
+  if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
+
+  // Close when clicking outside the menu
+  document.addEventListener('click', function(e) {
+    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && mobileMenu.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+});
 </script>
 
 <!-- Hero Section -->
@@ -378,7 +429,7 @@ tailwind.config = {
         <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4 bg-primary/10 rounded-full">
           <i class="ri-restaurant-fill text-xl sm:text-2xl text-primary"></i>
         </div>
-        <div class="counter" data-target="9000">0</div>
+        <div class="counter" data-target="10000">0</div>
         <p class="text-gray-600 font-medium text-sm sm:text-base">Meals Distributed</p>
       </div>
 
@@ -386,7 +437,7 @@ tailwind.config = {
         <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4 bg-primary/10 rounded-full">
           <i class="ri-graduation-cap-fill text-xl sm:text-2xl text-primary"></i>
         </div>
-        <div class="counter" data-target="85">0</div>
+        <div class="counter" data-target="200">0</div>
         <p class="text-gray-600 font-medium text-sm sm:text-base">Empowering Children</p>
       </div>
     </div>
@@ -485,8 +536,16 @@ tailwind.config = {
       <!-- Donation Amounts -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
         <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="25">
-          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$25</div>
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$10</div>
+          <div class="text-xs sm:text-sm text-gray-600">community outreach</div>
+        </div>
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="25">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$20</div>
           <div class="text-xs sm:text-sm text-gray-600">Feeds 5 children</div>
+        </div>
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="25">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$30</div>
+          <div class="text-xs sm:text-sm text-gray-600">Feeds 10 children</div>
         </div>
         <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="50">
           <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$50</div>
@@ -500,9 +559,17 @@ tailwind.config = {
           <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$250</div>
           <div class="text-xs sm:text-sm text-gray-600">Clean water access</div>
         </div>
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="500">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$500</div>
+          <div class="text-xs sm:text-sm text-gray-600">Community support</div>
+        </div>
+        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="500" id="custom-amount-card">
+          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">Custom</div>
+          <div class="text-xs sm:text-sm text-gray-600">Custom amount</div>
+        </div>
       </div>
       <!-- Custom Amount -->
-      <div class="mb-6 sm:mb-8">
+      <div class="mb-6 sm:mb-8" id="custom-amount-section" style="display: none;">
         <label class="block text-sm font-medium text-gray-700 mb-2">Custom Amount</label>
         <div class="relative">
           <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 mr-3">₦</span>
@@ -596,7 +663,7 @@ tailwind.config = {
         </div>
       </div>
       <!-- Donate Button -->
-      <a href="#" onclick="showError()" data-readdy="true">
+      <a href="#"  data-readdy="true">
         <button class="w-full bg-primary text-white py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-green-600 transition-colors whitespace-nowrap">
           Donate Now
         </button>
@@ -624,6 +691,31 @@ tailwind.config = {
       </div>
     </div>
   </div>
+
+  <!-- Donor Info Modal -->
+<div id="donor-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+  <div class="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-md w-full mx-auto">
+    <h3 class="text-lg sm:text-xl font-bold text-secondary mb-4">Your Donation Details</h3>
+    <form id="donor-form" class="space-y-4">
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Full Name</label>
+        <input type="text" id="donor-name" class="w-full border border-gray-300 rounded-lg p-2 sm:p-3 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="John Doe" required>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Email</label>
+        <input type="email" id="donor-email" class="w-full border border-gray-300 rounded-lg p-2 sm:p-3 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="you@example.com" required>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Message (Optional)</label>
+        <textarea id="donor-message" class="w-full border border-gray-300 rounded-lg p-2 sm:p-3 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Leave a note with your donation"></textarea>
+      </div>
+      <div class="flex justify-between mt-4">
+        <button type="button" id="close-donor-modal" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">Cancel</button>
+        <button type="submit" class="px-6 py-2 rounded-lg bg-primary text-white hover:bg-green-600">Continue</button>
+      </div>
+    </form>
+  </div>
+</div>
 </section>
 
 <!-- Ways to Help -->
@@ -683,7 +775,7 @@ tailwind.config = {
 </section>
 
 <!-- Google Ads Space -->
-<ins class="adsbygoogle" style="display:block"
+<!-- <ins class="adsbygoogle" style="display:block"
      data-ad-client="ca-pub-1079448428096344"
      data-ad-slot="8165563268"
      data-ad-format="auto"
@@ -694,7 +786,7 @@ tailwind.config = {
     (adsbygoogle = window.adsbygoogle || []).push({});
     window.adsbygoogleDone = true;
   }
-</script>
+</script> -->
 
 
 <!-- Testimonials -->
@@ -707,6 +799,13 @@ tailwind.config = {
         <p class="dark:text-gray-600">
           Hear from the people whose lives have been transformed through our programs and the generous supporters who make it possible.
         </p>
+        <div id="button-testi" class="flex justify-center xl:justify-start">
+          <button>
+            <a href="#" class="px-5 py-2.5 text-sm font-medium text-center text-white bg-primary rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300" id="add-testi">
+             Add Testimonials
+            </a>
+          </button>
+        </div>
       </div>
 
       <!-- Testimonials Grid -->
@@ -917,17 +1016,7 @@ tailwind.config = {
         <!-- Blog posts will be appended here -->
           </div>
       </div>
-      
-        <!-- Google Ads Space -->
-        <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1079448428096344"
-     data-ad-slot="5128336382"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+  
 
         <!-- Newsletter Signup -->
         <div class="bg-primary/10 rounded-xl p-4 sm:p-6 fade-in">
@@ -935,13 +1024,16 @@ tailwind.config = {
           <p class="text-sm text-gray-600 mb-3 sm:mb-4">
             Get the latest news and impact stories delivered to your inbox.
           </p>
-          <div class="space-y-2 sm:space-y-3">
+          <div class="space-y-2 sm:space-y-3" id="newsletter-form">
             <input 
               type="email" 
-              id="newsletter-email" 
+              id="footer-newsletter-email"
               placeholder="Enter your email" 
-              class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
-            <button class="w-full bg-primary text-white py-2 !rounded-button text-sm font-semibold hover:bg-green-600 transition-colors whitespace-nowrap" id="newsletter-btn">
+              class="w-full px-3 sm:px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+            
+            <button 
+              id="footer-newsletter-btn"
+              class="w-full bg-primary text-white py-2 !rounded-button font-semibold hover:bg-green-600 transition-colors whitespace-nowrap text-sm">
               Subscribe
             </button>
           </div>
@@ -1074,17 +1166,20 @@ tailwind.config = {
           Building better communities through sustainable programs that address hunger, education, healthcare, and economic empowerment.
         </p>
         <div class="flex space-x-3 sm:space-x-4">
-          <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+          <a href="https://www.facebook.com/@cfphfoundation" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
             <i class="ri-facebook-fill text-sm sm:text-base"></i>
           </a>
-          <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
-            <i class="ri-twitter-x-fill text-sm sm:text-base"></i>
+          <a href="https://www.youtube.com/@cfphfoundation" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+            <i class="ri-youtube-fill"></i>
           </a>
-          <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+          <a href="https://www.instagram.com/cfphfoundation/" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
             <i class="ri-instagram-fill text-sm sm:text-base"></i>
           </a>
           <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
             <i class="ri-linkedin-fill text-sm sm:text-base"></i>
+          </a>
+          <a href="https://www.tiktok.com/@cfphfoundation" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-primary transition-colors">
+            <i class="ri-tiktok-line"></i>
           </a>
         </div>
       </div>
@@ -1112,10 +1207,10 @@ tailwind.config = {
       <div>
         <h3 class="font-bold text-lg mb-4 sm:mb-6 text-sm sm:text-base">Newsletter</h3>
         <p class="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">Stay updated with our latest impact stories and ways to help.</p>
-        <div class="space-y-2 sm:space-y-3">
+        <div class="space-y-2 sm:space-y-3" id="newsletter-form">
           <input 
             type="email" 
-            id="footer-newsletter-email" 
+            id="footer-newsletter-email"
             placeholder="Enter your email" 
             class="w-full px-3 sm:px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
           
@@ -1220,7 +1315,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const duration = 1000;
         const increment = target / (duration / 16);
         let current = 0;
-        const updateCounter = () => {
+               const updateCounter = () => {
           current += increment;
           if (current < target) {
             counter.textContent = Math.floor(current).toLocaleString();
@@ -1241,159 +1336,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script id="donation-selection">
-document.addEventListener('DOMContentLoaded', function() {
-  const donationCards = document.querySelectorAll('.donation-card');
-  const monthlyBtn = document.getElementById('monthly-btn');
-  const onetimeBtn = document.getElementById('onetime-btn');
-  const usdBtn = document.getElementById('usd-btn');
-  const ngnBtn = document.getElementById('ngn-btn');
-  const transferBtn = document.getElementById('transfer-btn');
-  const transferModal = document.getElementById('transfer-modal');
-  const closeModal = document.getElementById('close-modal');
-  const paymentMethods = document.querySelectorAll('.payment-method');
-  const copyBtn = document.querySelector('.copy-btn');
-  let currentCurrency = 'USD';
-  const exchangeRate = 1200; // NGN to USD rate
-  
-  function updateDonationAmounts(currency) {
-    donationCards.forEach(card => {
-      const amount = parseInt(card.getAttribute('data-amount'));
-      const displayAmount = currency === 'USD' ? amount : amount * exchangeRate;
-      const symbol = currency === 'USD' ? '$' : '₦';
-      // FIX: Use a more specific selector to avoid null error
-      const amountElement = card.querySelector('.donation-amount');
-      if (amountElement) {
-        amountElement.textContent = `${symbol}${displayAmount.toLocaleString()}`;
-      }
-    });
-  }
-  
-  donationCards.forEach(card => {
-    card.addEventListener('click', function() {
-      donationCards.forEach(c => c.classList.remove('selected'));
-      this.classList.add('selected');
-    });
-  });
-  
-  monthlyBtn.addEventListener('click', function() {
-    monthlyBtn.classList.add('bg-primary', 'text-white');
-    monthlyBtn.classList.remove('text-gray-600');
-    onetimeBtn.classList.remove('bg-primary', 'text-white');
-    onetimeBtn.classList.add('text-gray-600');
-  });
-  
-  onetimeBtn.addEventListener('click', function() {
-    onetimeBtn.classList.add('bg-primary', 'text-white');
-    onetimeBtn.classList.remove('text-gray-600');
-    monthlyBtn.classList.remove('bg-primary', 'text-white');
-    monthlyBtn.classList.add('text-gray-600');
-  });
-  
-  usdBtn.addEventListener('click', function() {
-    usdBtn.classList.add('bg-primary', 'text-white');
-    usdBtn.classList.remove('text-gray-600');
-    ngnBtn.classList.remove('bg-primary', 'text-white');
-    ngnBtn.classList.add('text-gray-600');
-    currentCurrency = 'USD';
-    updateDonationAmounts('USD');
-  });
-  
-  ngnBtn.addEventListener('click', function() {
-    ngnBtn.classList.add('bg-primary', 'text-white');
-    ngnBtn.classList.remove('text-gray-600');
-    usdBtn.classList.remove('bg-primary', 'text-white');
-    usdBtn.classList.add('text-gray-600');
-    currentCurrency = 'NGN';
-    updateDonationAmounts('NGN');
-  });
-  
-  paymentMethods.forEach(method => {
-    method.addEventListener('click', function() {
-      paymentMethods.forEach(m => {
-        m.classList.remove('bg-primary', 'text-white');
-        m.classList.add('hover:border-primary');
-      });
-      this.classList.add('bg-primary', 'text-white');
-      this.classList.remove('hover:border-primary');
-      if (this.id === 'transfer-btn') {
-        transferModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      }
-    });
-  });
-  
-  closeModal.addEventListener('click', function() {
-    transferModal.classList.add('hidden');
-    document.body.style.overflow = 'auto';
-  });
-  
-  transferModal.addEventListener('click', function(e) {
-    if (e.target === transferModal) {
-      transferModal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
-  });
-  
-  copyBtn.addEventListener('click', function() {
-    const accountNumber = '1028535101';
-    navigator.clipboard.writeText(accountNumber).then(() => {
-      const icon = this.querySelector('i');
-      icon.classList.remove('ri-file-copy-line');
-      icon.classList.add('ri-check-line');
-      setTimeout(() => {
-        icon.classList.remove('ri-check-line');
-        icon.classList.add('ri-file-copy-line');
-      }, 2000);
-    });
-  });
-});
-</script>
-
-<script id="smooth-scroll">
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-  
-  const donateNavBtn = document.getElementById('donate-nav-btn');
-  if (donateNavBtn) {
-    donateNavBtn.addEventListener('click', function() {
-      const donateSection = document.getElementById('donate');
-      if (donateSection) {
-        donateSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  }
-});
-
-function showError() {
-  event.preventDefault(); // stop link from reloading the page
-  Swal.fire({
-    icon: 'error',
-    title: 'Transfer Error',
-    text: 'Transaction could not be processed. Please try again or make use of the transfer details provided.',
-    confirmButtonColor: '#16a34a' // green confirm button
-  });
-}
-</script>
-
 <!-- Load Google Ads script only once -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1079448428096344" crossorigin="anonymous"></script>
 <script>
   // Initialize Google Ads only once
+ 
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof(adsbygoogle) !== 'undefined') {
       // Only push if adsbygoogle is loaded and hasn't been initialized yet
@@ -1409,7 +1356,7 @@ function showError() {
 <div class="hidden" vocab="https://schema.org/" typeof="WebPage">
   <meta property="name" content="Celebrity Food Home Pantry Foundation">
   <meta property="description" content="Providing food assistance and community support programs to fight hunger in Nigeria.">
-  <meta property="identifier" content="https://www.yourdomain.com">
+  <meta property="identifier" content="https://www.cfphfoundation.org">
 </div>
 
 <script>
@@ -1428,6 +1375,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- External Scripts -->
+ <script src="./js/loader.js"></script>
 <script type="module" src="./js/newsletter.js"></script>
 <script type="module" src="./js/form.js"></script>
 <script type="module" src="./js/faq.js"></script>
@@ -1435,6 +1383,167 @@ document.addEventListener('DOMContentLoaded', function() {
 <script type="module" src="./js/events.js"></script>
 <script type="module" src="./js/blog.js"></script>
 <script type="module" src="./js/testimonials.js"></script>
+<script type="module" src="./js/donation.js"></script>
+<script src="./js/env.js"></script>
+<!-- <script type="module" src="./js/monnify.js"></script> -->
 
-</body>
-</html>
+<!-- Firebase (compat) SDKs - load before testimonial modal script -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+<script>
+  // Initialize Firebase app using generated env.js values
+  (function() {
+    if (!window.__ENV || !window.__ENV.FIREBASE_CONFIG) {
+      console.info('No FIREBASE_CONFIG in window.__ENV — skipping Firebase init.');
+      return;
+    }
+    try {
+      const cfg = window.__ENV.FIREBASE_CONFIG;
+      // don't re-init if already present
+      if (!window.firebase || !firebase.apps || !firebase.apps.length) {
+        firebase.initializeApp(cfg);
+      }
+      const db = firebase.firestore();
+      window.firebaseDB = db;
+      console.info('Firebase initialized, Firestore ready.');
+    } catch (err) {
+      console.error('Firebase init error', err);
+    }
+  })();
+</script>
+
+<!-- Testimonial modal (responsive) -->
+<div id="testimonial-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+  <div class="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div class="flex items-center justify-between p-4 sm:p-6 border-b">
+      <h3 class="text-lg sm:text-xl font-semibold text-secondary">Add Testimonial / Volunteer</h3>
+      <button id="close-testi-modal" class="text-gray-500 hover:text-gray-700 p-2" aria-label="Close modal">
+        <i class="ri-close-line ri-lg"></i>
+      </button>
+    </div>
+
+    <div class="p-4 sm:p-6 max-h-[80vh] overflow-y-auto">
+      <form id="testi-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Full name</label>
+          <input id="testi-name" type="text" required placeholder="Jane Doe"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email or phone</label>
+          <input id="testi-contact" type="text" required placeholder="you@example.com or +2348012345678"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Category</label>
+          <input id="testi-category" list="category-list" placeholder="Select or type a category"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
+          <datalist id="category-list">
+            <option value="Volunteer"></option>
+            <option value="Donor"></option>
+            <option value="Beneficiary"></option>
+            <option value="Partner"></option>
+            <option value="Sponsor"></option>
+            <option value="Staff"></option>
+            <option value="Other"></option>
+          </datalist>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Message / Description</label>
+          <textarea id="testi-desc" rows="5" placeholder="Share your experience or volunteer interest..."
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-3 mt-2">
+          <button type="button" id="testi-cancel" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-primary text-white hover:bg-green-600">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script id="testimonial-modal-script">
+document.addEventListener('DOMContentLoaded', function () {
+  const trigger = document.getElementById('add-testi');
+  const modal = document.getElementById('testimonial-modal');
+  const closeBtn = document.getElementById('close-testi-modal');
+  const cancelBtn = document.getElementById('testi-cancel');
+  const form = document.getElementById('testi-form');
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    // focus first input
+    const first = modal.querySelector('input, textarea, button');
+    if (first) first.focus();
+  }
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = 'auto';
+  }
+
+  if (trigger) trigger.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+  // close when clicking backdrop
+  if (modal) {
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const name = (document.getElementById('testi-name') || {}).value || '';
+      const contact = (document.getElementById('testi-contact') || {}).value || '';
+      const category = (document.getElementById('testi-category') || {}).value || '';
+      const message = (document.getElementById('testi-desc') || {}).value || '';
+
+      if (!name.trim() || !contact.trim()) {
+        Swal.fire({ icon: 'warning', title: 'Missing details', text: 'Please provide your name and contact.' });
+        return;
+      }
+
+      const payload = {
+        name: name.trim(),
+        contact: contact.trim(),
+        category: category.trim() || 'Other',
+        message: message.trim(),
+        role: 'testimonials',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp ? firebase.firestore.FieldValue.serverTimestamp() : new Date().toISOString()
+      };
+
+      // if Firestore is available, save there
+      if (window.firebaseDB) {
+        try {
+          await window.firebaseDB.collection('testimonials').add(payload);
+          Swal.fire({ icon: 'success', title: 'Thank you', text: 'Your submission was received.' });
+          form.reset();
+          closeModal();
+        } catch (err) {
+          console.error('Failed to save testimonial to Firestore', err);
+          Swal.fire({ icon: 'error', title: 'Save failed', text: 'Could not save your submission. Please try again later.' });
+        }
+        return;
+      }
+
+      // Fallback: log and show success if no Firebase configured
+      console.info('Testimonial (no Firebase):', payload);
+      Swal.fire({ icon: 'success', title: 'Thank you', text: 'Your submission was received (local).' });
+      form.reset();
+      closeModal();
+    });
+  }
+});
+</script>

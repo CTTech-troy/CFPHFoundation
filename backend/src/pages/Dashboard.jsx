@@ -199,21 +199,21 @@ export default function Dashboard() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">Card Payments</span>
-                <span className="text-sm font-medium">$12,500</span>
+                <span className="text-sm font-medium">$0</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '65%' }}></div>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">Bank Transfers</span>
-                <span className="text-sm font-medium">$8,200</span>
+                <span className="text-sm font-medium">$0</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '40%' }}></div>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">Google Pay</span>
-                <span className="text-sm font-medium">$4,950</span>
+                <span className="text-sm font-medium">$0</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div className="bg-purple-600 h-2.5 rounded-full" style={{ width: '25%' }}></div>

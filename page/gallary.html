@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 <link rel="icon" type="image/x-icon" href="../assets/logo-removebg-preview (1) copy.icobackend">
+<link rel="stylesheet" href="./event.css">
 
 
 <script>
@@ -41,7 +42,7 @@ body { font-family: "Inter", sans-serif; }
 .mobile-menu.open { transform: translateX(0); }
 </style>
 </head>
-<body class="font-inter">
+<div class="font-inter">
 
 <!-- Navbar -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
@@ -93,23 +94,13 @@ body { font-family: "Inter", sans-serif; }
 </section>
 
 <!-- Filter Buttons -->
-<section class="py-16 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex space-x-4 justify-center mb-6">
-      <button class="filter-btn px-4 py-2 bg-gray-200 rounded" data-filter="all">All</button>
-    </div>
-
-    <!-- GALLERY GRID -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="gallery-grid">
-      <p class="col-span-full text-center text-gray-500">Loading images...</p>
-    </div>
-  </div>
-</section>
+<!-- Gallery Grid -->
+<div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 py-12"></div>
 
 <!-- Lightbox -->
-<div class="lightbox fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden" id="lightbox">
-  <img src="" alt="" id="lightbox-img" class="max-w-4xl max-h-[80vh] object-contain">
-  <button class="absolute top-4 right-4 text-white text-2xl" id="close-lightbox"><i class="ri-close-line"></i></button>
+<div id="lightbox" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+  <button id="close-lightbox" class="absolute top-5 right-5 text-white text-3xl"><i class="ri-close-line"></i></button>
+  <img id="lightbox-img" src="" alt="Expanded View" class="max-h-[80%] max-w-[90%] rounded-lg shadow-lg" />
 </div>
 
 <!-- Footer -->
@@ -180,7 +171,6 @@ body { font-family: "Inter", sans-serif; }
 
 <!-- Scripts -->
 <script>
-// Mobile Menu
 const mobileBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const closeBtn = document.getElementById('close-menu');
@@ -228,6 +218,30 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 </script>
+<!-- <script>
+    function weightedRand(spec) {
+      let i, sum = 0, r = Math.random();
+      for (i in spec) {
+        sum += spec[i];
+        if (r <= sum) return i;
+      }
+    }
+
+    const grid = document.getElementById('grid');
+    let n = 0;
+
+    while (n < 40) {
+      const span = weightedRand({1:0.7, 2:0.2, 3:0.1});
+      const url = `assets/img1/${n+1}.jpg`;
+      const colorClass = 'm-color-' + weightedRand({1:0.2, 2:0.2, 3:0.2, 4:0.2, 5:0.2});
+
+      const div = document.createElement('div');
+      div.className = `masonry-item masonry-span-${span} ${colorClass}`;
+      div.style.backgroundImage = `url(${url})`;
+
+      grid.appendChild(div);
+    }
+  </script> -->
 <script src="../js/program.js" type="module"></script>
 </body>
 </html>

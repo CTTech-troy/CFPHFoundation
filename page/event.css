@@ -1,0 +1,19 @@
+
+/* renamed grid -> masonry-grid, card -> masonry-item, span-* -> masonry-span-*, c-* -> m-color-* */
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 2px;
+    grid-auto-rows: min-max(80px, auto);
+    grid-auto-flow: dense;
+}
+
+.m-color-1{ background: #1a535c; color: #ddd;}
+.m-color-2{ background: #4ecdc4;}
+.m-color-3{ background: #bfd7ea;}
+.m-color-4{ background: #ff6b6b;}
+.m-color-5{ background: #ffe66d;}
+
+.masonry-item { min-height: 100px; background-size: cover; background-position: 50% 50%;}
+.masonry-span-2 { grid-column-end: span 2; grid-row-end: span 2; min-height: 200px; }
+.masonry-span-3 { grid-column-end: span 3; grid-row-end: span 3; min-height: 400px; }

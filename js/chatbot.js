@@ -1,4 +1,5 @@
-// simple client-side chatbot UI with Hugging Face AI responses
+// chatbot.js
+
 (function () {
   const toggle = document.getElementById('chatbot-toggle');
   const win = document.getElementById('chatbot-window');
@@ -8,59 +9,42 @@
   const input = document.getElementById('chat-input');
   const body = document.getElementById('chatbot-body');
 
-  if (!toggle || !win) return;
+  if (!toggle || !win || !input || !sendBtn || !body) {
+    console.error("Chatbot: missing required DOM elements.");
+    return;
+  }
 
-  // 🏢 CFPh Foundation Info (Knowledge Base)
-  const COMPANY_INFO = `
-  We are Celebrity Food Pantry Foundation (CFPh Foundation), a non-profit organisation in Lagos, Nigeria.
-  Our mission is fighting hunger and building community by providing food to those in need.
-  Address: No 20 Olusanya Street, Jesugbami, Aboru, Lagos, Nigeria.
-  Contact: Phone +234-808-400-9711 | Email celebrityfoodpantry@gmail.com
-  We accept donations, welcome volunteers, and host community events.
-  Our motto is "Bringing hope to the table, where generosity meets community."
-  `;
+  // 📌 Custom responses (Knowledge Base)
+  const RESPONSES = {
+    "hello": "Hello 👋! How can I help you today?",
+    "hi": "Hi there! 😊 What would you like to know about CFPHFoundation?",
+    "who are you": "We are Celebrity Food Home Pantry Foundation (CFPHFoundation), based in Lagos, Nigeria, fighting hunger and building community.",
+    "what is your mission": "Our mission is to alleviate hunger and malnutrition by providing food assistance to vulnerable individuals and families. :contentReference[oaicite:0]{index=0}",
+    "vision": "Our vision is to create a world where everyone has access to nutritious food and the opportunity to thrive. :contentReference[oaicite:1]{index=1}",
+    "programs": "We run programs like bi-weekly food distribution (every Thursday), community outreach and support for the needy, elderly, widows, etc. :contentReference[oaicite:2]{index=2}",
+    "volunteer": "You can volunteer with us! We welcome volunteers to help in food distribution, community outreach, and other support programs. :contentReference[oaicite:3]{index=3}",
+    "impact": "So far, we have provided food items on over 9,000 occasions to the needy, elderly, widows, and persons with special needs; we have distributed clothes to more than 200 children. :contentReference[oaicite:4]{index=4}",
+    "address": "Our address is No 20 Olusanya Street, Jesugbami, Aboru, Lagos, Nigeria. :contentReference[oaicite:5]{index=5}",
+    "contact": "You can reach us by phone at +234-808-400-9711 or email at celebrityfoodpantry@gmail.com. :contentReference[oaicite:6]{index=6}",
+    "donate": "Thank you for your generosity. You can donate one-time or monthly. All donations help us reach more vulnerable people. :contentReference[oaicite:7]{index=7}",
+    "events": "We run regular outreach and food distribution events, especially bi-weekly food distributions on Thursdays at our office. :contentReference[oaicite:8]{index=8}"
+  };
 
-  // 🔑 Hugging Face API setup
-  const HF_API_KEY = "YOUR_HF_API_KEY"; // replace with your Hugging Face token
-  const MODEL = "google/flan-t5-small"; // small free model
+  // 📌 Fallback message if no response found
+  const FALLBACK = `I’m not sure about that.  
+For more information call 📞 +234-808-400-9711  
+or send us a mail at 📧 celebrityfoodpantry@gmail.com`;
 
-  async function botReply(inputText) {
-    try {
-      const response = await fetch(
-        `https://api-inference.huggingface.co/models/${MODEL}`,
-        {
-          headers: {
-            Authorization: `Bearer ${HF_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify({
-            inputs: `Company Info: ${COMPANY_INFO}\nUser Question: ${inputText}\nAnswer:`,
-            parameters: { max_new_tokens: 200 },
-          }),
-        }
-      );
-
-      const result = await response.json();
-
-      // Hugging Face text output differs by model
-      let reply =
-        result[0]?.generated_text ||
-        result.generated_text ||
-        result[0]?.summary_text;
-
-      if (!reply || reply.length < 10) {
-        reply = `I’m not fully sure about that. 
-Please reach out directly:
-📞 +234-808-400-9711  
-📧 celebrityfoodpantry@gmail.com`;
+  function botReply(inputText) {
+    const lower = inputText.toLowerCase().trim();
+    for (let key in RESPONSES) {
+      // check if the user input contains the key as a word (or closely matches)
+      // Using indexOf so that "what are your programs?" matches "programs"
+      if (lower.includes(key)) {
+        return RESPONSES[key];
       }
-
-      return reply.trim();
-    } catch (err) {
-      console.error("Bot error:", err);
-      return "Oops, something went wrong. Please try again.";
     }
+    return FALLBACK;
   }
 
   function appendMessage(text, who = "bot") {
@@ -74,7 +58,7 @@ Please reach out directly:
     body.scrollTop = body.scrollHeight;
   }
 
-  async function sendMessage() {
+  function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
     appendMessage(text, "user");
@@ -90,14 +74,12 @@ Please reach out directly:
     body.appendChild(typingMsg);
     body.scrollTop = body.scrollHeight;
 
-    // Get AI reply
-    const reply = await botReply(text);
-
-    // Remove typing
-    typingMsg.remove();
-
-    // Show response
-    appendMessage(reply, "bot");
+    // simulate delay
+    setTimeout(() => {
+      typingMsg.remove();
+      const reply = botReply(text);
+      appendMessage(reply, "bot");
+    }, 500);
   }
 
   // keyboard submit
@@ -109,6 +91,7 @@ Please reach out directly:
   });
 
   sendBtn.addEventListener("click", sendMessage);
+
   toggle.addEventListener("click", toggleChat);
   closeBtn && closeBtn.addEventListener("click", closeChat);
   minimizeBtn && minimizeBtn.addEventListener("click", closeChat);
@@ -116,7 +99,7 @@ Please reach out directly:
   function openChat() {
     win.classList.add("open");
     win.setAttribute("aria-hidden", "false");
-    setTimeout(() => input && input.focus(), 220);
+    setTimeout(() => input.focus(), 220);
   }
   function closeChat() {
     win.classList.remove("open");
@@ -128,7 +111,6 @@ Please reach out directly:
     else openChat();
   }
 
-  // close on outside click
   document.addEventListener("click", (e) => {
     if (
       !win.contains(e.target) &&
@@ -139,13 +121,12 @@ Please reach out directly:
     }
   });
 
-  // escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && win.classList.contains("open")) closeChat();
   });
 
-  // entrance animation
   window.addEventListener("load", () => {
+    // optional entrance animation
     toggle.style.transform = "translateY(12px) scale(.98)";
     toggle.style.opacity = "0";
     toggle.style.transition =

@@ -12,7 +12,7 @@ export default function Sidebar({ closeSidebar }) {
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: <HomeIcon size={18} /> },
-    { path: '/media', label: 'Media Manager', icon: <ImageIcon size={18} /> },
+    // { path: '/media', label: 'Media Manager', icon: <ImageIcon size={18} /> },
     { path: '/testimonials', label: 'Testimonials', icon: <MessageSquareQuoteIcon size={18} /> },
     // { path: '/programs', label: 'Programs', icon: <PackageIcon size={18} /> },
     // { path: '/donations', label: 'Donations', icon: <DollarSignIcon size={18} /> },

@@ -1,5 +1,5 @@
 [build]
-  publish = "build"   # set this to the folder that contains index.html after your build
+  publish = "backend/build"
   command = "npm run build"
 
 [[redirects]]

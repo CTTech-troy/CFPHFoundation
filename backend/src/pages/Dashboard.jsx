@@ -23,7 +23,7 @@ export default function Dashboard() {
   const [stats, setStats] = useState([
     {
       title: 'Total Donations',
-      value: '$25,650', 
+      value: '$0', 
       change: '+12%',
       icon: <DollarSignIcon size={24} className="text-green-600" />
     },

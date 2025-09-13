@@ -42,7 +42,7 @@ function renderEvents(events) {
             <div class="flex items-center"><i class="ri-time-line mr-2"></i><span>${event.time}</span></div>
             <div class="flex items-center"><i class="ri-map-pin-line mr-2"></i><span>${event.location}</span></div>
           </div>
-          <button class="reminder-btn bg-primary text-white px-6 py-3 !rounded-button font-semibold hover:bg-green-600 transition-colors whitespace-nowrap" ${userClicked ? 'disabled' : ''}>
+          <button id="remind-me-now" class="reminder-btn bg-primary text-white px-6 py-3 !rounded-button font-semibold hover:bg-green-600 transition-colors whitespace-nowrap" ${userClicked ? 'disabled' : ''}>
             <i class="ri-notification-line mr-2"></i>
             Set Reminder (${reminderCount})
           </button>
@@ -55,6 +55,45 @@ function renderEvents(events) {
     btn.addEventListener('click', async () => {
       btn.disabled = true;
       localStorage.setItem(`reminder_${eventId}`, 'true');
+
+      // Open the existing reminder modal and prefill fields
+      (function openReminderModal(prefill = {}) {
+        const modal = document.getElementById('reminder-modal');
+        if (!modal) return;
+        const titleEl = document.getElementById('reminder-title');
+        const nameEl = document.getElementById('reminder-name');
+        const startEl = document.getElementById('reminder-start');
+        const locationEl = document.getElementById('reminder-location');
+        const usefulBtn = document.getElementById('reminder-useful');
+
+        if (titleEl) titleEl.value = prefill.title || 'CFPHF';
+        if (nameEl) nameEl.value = prefill.name || prefill.title || 'CFPHF';
+        if (locationEl) locationEl.value = prefill.location || '';
+
+        // If event has a parsable date/time try to prefill start
+        if (startEl) {
+          if (prefill.start) {
+            const dt = new Date(prefill.start);
+            if (!isNaN(dt)) startEl.value = dt.toISOString().slice(0,16);
+          } else {
+            const dt = new Date(Date.now() + 3600 * 1000);
+            startEl.value = dt.toISOString().slice(0,16);
+          }
+        }
+
+        if (usefulBtn) usefulBtn.classList.remove('hidden');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        const first = modal.querySelector('input');
+        if (first) first.focus();
+      })({
+        title: event.title,
+        name: event.title,
+        location: event.location,
+        // try to combine date/time if available; leave undefined if not parseable
+        start: (event.date ? event.date : '') + (event.time ? ' ' + event.time : '')
+      });
 
       // Update reminder count in Firebase
       try {

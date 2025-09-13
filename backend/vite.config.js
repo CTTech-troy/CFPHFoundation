@@ -9,4 +9,7 @@ export default defineConfig({
     tailwindcss(), 
     react()
   ],
+  build: {
+    outDir: 'build' // changed: match Netlify publish
+  }
 })

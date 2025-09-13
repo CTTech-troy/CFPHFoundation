@@ -136,64 +136,62 @@ body {
   transform: translateY(0);
 }
 .mobile-menu {
+  display: block; /* ensure visible (off-screen by transform when closed) */
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
   width: 80vw;
-  max-width: 320px;
+  max-width: 360px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 1000001 !important; /* higher than navbar */
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  -webkit-overflow-scrolling: touch;
+  will-change: transform;
+  pointer-events: auto;
 }
+
+/* open state */
 .mobile-menu.open {
   transform: translateX(0);
 }
-.timeline-line {
-  left: 20px;
+
+/* Force black text/icons inside menu when open */
+.mobile-menu.open,
+.mobile-menu.open a,
+.mobile-menu.open button,
+.mobile-menu.open i,
+.mobile-menu.open .text-secondary {
+  color: #000000 !important;
 }
-.timeline-dot {
-  left: 12px;
+
+/* Backdrop sits under the panel but above page content */
+#mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000000 !important; /* just under the menu */
+  display: none; /* toggled by JS */
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: auto;
 }
-.event-card {
-  margin-left: 3rem;
+
+/* visible backdrop */
+#mobile-menu-backdrop.visible {
+  display: block;
+  opacity: 1;
 }
-.breadcrumb {
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  color: #6b7280;
+
+/* Lock body scroll when menu open */
+body.mobile-menu-open {
+  overflow: hidden !important;
 }
-.breadcrumb a {
-  color: #10b981;
-  text-decoration: none;
-}
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
-@media (min-width: 768px) {
-  .timeline-line {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .timeline-dot {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .event-card {
-    margin-left: 0;
-    width: calc(50% - 2rem);
-  }
-  .event-card:nth-child(odd) {
-    margin-right: 2rem;
-  }
-  .event-card:nth-child(even) {
-    margin-left: auto;
-    margin-right: 0;
-  }
-}
-@media (max-width: 640px) {
-  .hero-bg {
-    background-attachment: scroll;
-  }
-  .counter {
-    font-size: 2rem;
-  }
-}
+
+/* If any component has very high z-index, these values still win.
+   Adjust z-index numbers if you have other components above 1,000,000. */
 </style>
 
 <script>
@@ -227,12 +225,26 @@ tailwind.config = {
 }
 </script>
 </head>
-<body class="bg-white" style="margin-right: 0;">
+<body>
 <!-- loader overlay (insert right after <body> opens) -->
 <div id="site-loader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
   <div class="text-center">
     <div class="spinner" style="width:72px;height:72px;position:relative;">
       <div></div>   
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
+      <div></div>    
       <div></div>    
       <div></div>    
       <div></div>    
@@ -281,12 +293,16 @@ tailwind.config = {
     </div>
   </div>
 
+  <!-- KEEP the DOM elements here; JS will move them to body to avoid stacking-context issues -->
+  <!-- Mobile Menu Backdrop -->
+  <div id="mobile-menu-backdrop" class="hidden" aria-hidden="true"></div>
+
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full bg-white shadow-xl z-50 overflow-y-auto " >
+  <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full bg-white shadow-xl z-50 overflow-y-auto" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
     <div class="p-4 sm:p-6">
       <div class="flex justify-between items-center mb-6">
         <img src="./assets/logo-removebg-preview (1) copy.ico" alt="" class="h-16 w-16 md:h-20 md:w-20 text-2xl text-black" id="mobile-nav-logo">
-        <button id="close-menu" class="text-secondary focus:outline-none">
+        <button id="close-menu" class="text-secondary focus:outline-none" aria-label="Close menu">
           <i class="ri-close-line ri-lg"></i>
         </button>
       </div>
@@ -308,21 +324,97 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeMenuBtn = document.getElementById('close-menu');
+  const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
 
   if (!mobileMenuBtn || !mobileMenu) return;
 
+  // Reparent to body to avoid stacking-context problems (nav transforms, z-index, etc.)
+  try {
+    if (mobileBackdrop && mobileBackdrop.parentElement !== document.body) {
+      document.body.appendChild(mobileBackdrop);
+    }
+    if (mobileMenu && mobileMenu.parentElement !== document.body) {
+      document.body.appendChild(mobileMenu);
+    }
+  } catch (err) {
+    console.warn('Could not reparent mobile menu/backdrop', err);
+  }
+
+  // Ensure stable z-index and defaults
+  if (mobileMenu) {
+    mobileMenu.style.zIndex = '1000001';
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileMenu.style.display = 'block';
+  }
+  if (mobileBackdrop) {
+    mobileBackdrop.style.zIndex = '1000000';
+    mobileBackdrop.style.display = 'none';
+    mobileBackdrop.style.opacity = '0';
+    mobileBackdrop.classList.remove('visible');
+    mobileBackdrop.setAttribute('aria-hidden', 'true');
+  }
+
+  function setMobileLinksColor(color) {
+    // force link/icon color inside the mobile menu (inline styles override other rules)
+    mobileMenu.querySelectorAll('a, button, .text-secondary, i').forEach(el => {
+      el.style.color = color;
+    });
+  }
+
   function openMenu() {
     mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+
+    // ensure menu overlays everything
+    mobileMenu.style.zIndex = '1000001';
+    if (mobileBackdrop) {
+      mobileBackdrop.style.display = 'block';
+      mobileBackdrop.setAttribute('aria-hidden', 'false');
+      // trigger transition on next frame
+      requestAnimationFrame(() => mobileBackdrop.classList.add('visible'));
+    }
+
+    document.body.classList.add('mobile-menu-open');
     mobileMenuBtn.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
+
+    // Force internal mobile menu text/icons to black to avoid conflicts with navbar styles
+    setMobileLinksColor('#000000');
+
+    // Also make the hamburger icon (in navbar) black so it looks correct before the menu covers it
+    const btnIcon = mobileMenuBtn.querySelector('i');
+    if (btnIcon) btnIcon.style.color = '#000000';
+
+    // Focus first focusable element inside the opened menu for accessibility
     const firstFocusable = mobileMenu.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
     if (firstFocusable) firstFocusable.focus();
   }
 
   function closeMenu() {
     mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+
+    if (mobileBackdrop) {
+      mobileBackdrop.classList.remove('visible');
+      mobileBackdrop.setAttribute('aria-hidden', 'true');
+      // hide after transition
+      setTimeout(() => {
+        if (mobileBackdrop) mobileBackdrop.style.display = 'none';
+      }, 240);
+    }
+
+    document.body.classList.remove('mobile-menu-open');
     mobileMenuBtn.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = 'auto';
+
+    // remove inline color overrides inside menu
+    mobileMenu.querySelectorAll('a, button, .text-secondary, i').forEach(el => {
+      el.style.color = '';
+    });
+
+    // restore hamburger icon color
+    const btnIcon = mobileMenuBtn.querySelector('i');
+    if (btnIcon) btnIcon.style.color = '';
+
+    // return focus to the hamburger
     mobileMenuBtn.focus();
   }
 
@@ -342,10 +434,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Close when clicking outside the menu
-  document.addEventListener('click', function(e) {
-    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && mobileMenu.classList.contains('open')) {
+  // Clicking the backdrop closes the menu
+  if (mobileBackdrop) {
+    mobileBackdrop.addEventListener('click', function(e) {
       closeMenu();
+    });
+  }
+
+  // Click outside menu closes it
+  document.addEventListener('click', function(e) {
+    if (mobileMenu.classList.contains('open')) {
+      if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && (!mobileBackdrop || e.target !== mobileBackdrop)) {
+        closeMenu();
+      }
     }
   });
 
@@ -353,6 +454,15 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
       closeMenu();
+    }
+  });
+
+  // Accessibility: trap focus inside menu while open (basic)
+  document.addEventListener('focusin', function(e) {
+    if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target)) {
+      // move focus back to first focusable inside menu
+      const firstFocusable = mobileMenu.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable) firstFocusable.focus();
     }
   });
 });
@@ -443,21 +553,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </section>
-
-<!-- Google Ads Space -->
-<ins class="adsbygoogle" style="display:block"
-     data-ad-client="ca-pub-1079448428096344"
-     data-ad-slot="8165563268"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-
-<script>
-  if (!window.adsbygoogleDone) {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    window.adsbygoogleDone = true;
-  }
-</script>
-
 
 <!-- Programs Section -->
 <section id="programs" class="py-12 sm:py-16 md:py-20 bg-white">
@@ -865,12 +960,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Upcoming Events -->
 <section class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Upcoming Events</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        Join us at our upcoming events and be part of creating positive change in communities worldwide.
-      </p>
-    </div>
+  <div class="text-center mb-16">
+    <h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">Upcoming Events</h2>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      Join us at our upcoming events and be part of creating positive change in communities worldwide.
+    </p>
+  </div>
+</div>
 
     <!-- Timeline Events -->
     <div class="relative">
@@ -1221,8 +1317,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <a href="#" class="text-gray-300 hover:text-primary transition-colors">Terms of Service</a>
           <div class="flex items-center space-x-2">
             <div class="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-              <i class="ri-visa-fill text-gray-300 text-sm sm:text-base"></i>
-            </div>
+                           <i class="ri-visa-fill text-gray-300 text-sm sm:text-base"></i            </div>
             <div class="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
               <i class="ri-mastercard-fill text-gray-300 text-sm sm:text-base"></i>
             </div>
@@ -1536,3 +1631,403 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 </script>
+
+<!-- REMINDER: "Remind me now" floating button, modal and handler -->
+<!-- <button id="remind-me-now" title="Remind me" aria-label="Remind me" 
+  class="fixed bottom-6 right-6 z-50 bg-primary text-white rounded-full p-3 shadow-lg hover:bg-green-600">
+  <i class="ri-reminder-line ri-lg"></i>
+  <span id="reminder-badge" class="ml-2 inline-flex items-center justify-center w-6 h-6 text-xs font-semibold bg-white text-primary rounded-full">0</span>
+</button> -->
+
+<div id="reminder-modal" class="fixed inset-0 z-60 hidden items-center justify-center bg-black bg-opacity-50 p-4">
+  <div class="bg-white rounded-xl p-5 max-w-md w-full">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold">Add reminder to your calendar</h3>
+      <button id="reminder-close" class="text-gray-500" aria-label="Close">✕</button>
+    </div>
+
+    <form id="reminder-form" class="space-y-3">
+      <div>
+        <label class="block text-sm text-gray-600">Title</label>
+        <input id="reminder-title" type="text" value="CFPHF" class="w-full border rounded p-2" required>
+      </div>
+
+      <div>
+        <label class="block text-sm text-gray-600">Name</label>
+        <input id="reminder-name" type="text" value="CFPHF" class="w-full border rounded p-2" required>
+      </div>
+
+      <div>
+        <label class="block text-sm text-gray-600">Start (date & time)</label>
+        <input id="reminder-start" type="datetime-local" class="w-full border rounded p-2" required>
+      </div>
+
+      <div>
+        <label class="block text-sm text-gray-600">End (optional)</label>
+        <input id="reminder-end" type="datetime-local" class="w-full border rounded p-2">
+      </div>
+
+      <div>
+        <label class="block text-sm text-gray-600">Location</label>
+        <input id="reminder-location" type="text" value="No 20 Olusanya Street, Jesugbami, Aboru, Lagos, Nigeria" class="w-full border rounded p-2">
+      </div>
+
+      <div class="flex gap-2 justify-end pt-2">
+        <button type="button" id="reminder-cancel" class="px-4 py-2 rounded bg-gray-200">Cancel</button>
+        <button type="submit" id="reminder-create" class="px-4 py-2 rounded bg-primary text-white">Add to calendar</button>
+      </div>
+
+      <div class="flex gap-2 justify-between items-center pt-2">
+        <div id="reminder-info" class="text-sm text-gray-500 mt-2 hidden"></div>
+        <button type="button" id="reminder-useful" class="px-3 py-1 text-sm rounded bg-primary text-white hidden">This was useful</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function() {
+  const openBtn = document.getElementById('remind-me-now');
+  const modal = document.getElementById('reminder-modal');
+  const closeBtn = document.getElementById('reminder-close');
+  const cancelBtn = document.getElementById('reminder-cancel');
+  const form = document.getElementById('reminder-form');
+  const info = document.getElementById('reminder-info');
+  const badge = document.getElementById('reminder-badge');
+  const usefulBtn = document.getElementById('reminder-useful');
+
+  const STORAGE_KEY = 'cfph_reminder_count';
+
+  function readCount() {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY);
+      return v ? parseInt(v, 10) : 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+  function writeCount(n) {
+    try {
+      localStorage.setItem(STORAGE_KEY, String(n));
+    } catch (e) {
+      /* ignore */
+    }
+  }
+  function updateBadge() {
+    const n = readCount();
+    if (badge) badge.textContent = n.toLocaleString();
+  }
+  function incrementCount() {
+    const n = readCount() + 1;
+    writeCount(n);
+    updateBadge();
+    // optional: log to Firestore if available (compat)
+    try {
+      if (window.firebaseDB && window.firebase && firebase.firestore) {
+        // create a small log entry to track adds (safer than modifying a single counter)
+        window.firebaseDB.collection('reminderLogs').add({
+          action: 'added',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp ? firebase.firestore.FieldValue.serverTimestamp() : new Date().toISOString()
+        }).catch(() => {});
+      }
+    } catch (e) {
+      // fail silently
+    }
+  }
+
+  function showModal() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    // set default start to 1 hour from now
+    const startEl = document.getElementById('reminder-start');
+    if (startEl && !startEl.value) {
+      const dt = new Date(Date.now() + 3600 * 1000);
+      startEl.value = dt.toISOString().slice(0,16);
+    }
+    // show useful button when modal open so user can mark usefulness after action
+    if (usefulBtn) usefulBtn.classList.remove('hidden');
+    // focus first input
+    const first = modal.querySelector('input');
+    if (first) first.focus();
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+    info.classList.add('hidden');
+    info.textContent = '';
+    if (usefulBtn) usefulBtn.classList.add('hidden');
+  }
+
+  openBtn && openBtn.addEventListener('click', showModal);
+  closeBtn && closeBtn.addEventListener('click', closeModal);
+  cancelBtn && cancelBtn.addEventListener('click', closeModal);
+  modal && modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+
+  function toICSDate(d) {
+    const pad = (n) => String(n).padStart(2,'0');
+    return d.getUTCFullYear() +
+      pad(d.getUTCMonth()+1) +
+      pad(d.getUTCDate()) + 'T' +
+      pad(d.getUTCHours()) +
+      pad(d.getUTCMinutes()) +
+      pad(d.getUTCSeconds()) + 'Z';
+  }
+
+  function makeUID() {
+    return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,10);
+  }
+
+  function buildICS({title, description, start, end, location}) {
+    const uid = makeUID();
+    const dtstamp = toICSDate(new Date());
+    const dtstart = toICSDate(start);
+    const dtend = toICSDate(end || new Date(start.getTime() + 60*60*1000));
+    return [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//CFPHF//EN',
+      'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      'UID:' + uid,
+      'DTSTAMP:' + dtstamp,
+      'DTSTART:' + dtstart,
+      'DTEND:' + dtend,
+      'SUMMARY:' + (title || '').replace(/\n/g,' '),
+      'DESCRIPTION:' + (description || '').replace(/\n/g,' '),
+      'LOCATION:' + (location || '').replace(/\n/g,' '),
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\\r\\n');
+  }
+
+  function downloadICS(filename, content) {
+    const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // mark count useful when user clicks "This was useful"
+  usefulBtn && usefulBtn.addEventListener('click', function() {
+    incrementCount();
+    info.textContent = 'Thanks — marked as useful.';
+    info.classList.remove('hidden');
+  });
+
+  form && form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const title = (document.getElementById('reminder-title') || {}).value || 'CFPHF';
+    const name = (document.getElementById('reminder-name') || {}).value || 'CFPHF';
+    const startVal = (document.getElementById('reminder-start') || {}).value;
+    const endVal = (document.getElementById('reminder-end') || {}).value;
+    const location = (document.getElementById('reminder-location') || {}).value || '';
+
+    if (!startVal) {
+      info.textContent = 'Please select a start date & time.';
+      info.classList.remove('hidden');
+      return;
+    }
+
+    const start = new Date(startVal);
+    const end = endVal ? new Date(endVal) : new Date(start.getTime() + 60*60*1000);
+    const description = name ? ('Name: ' + name) : '';
+
+    const ics = buildICS({ title, description, start, end, location });
+    const filename = (title.replace(/[^a-z0-9]/gi, '_') || 'reminder') + '.ics';
+
+    try {
+      downloadICS(filename, ics);
+
+      // increment count automatically when calendar file is created/downloaded
+      incrementCount();
+
+      info.textContent = 'An .ics file was downloaded. On iOS open it to add to Calendar. Thanks — reminder created.';
+      info.classList.remove('hidden');
+      // keep modal open to let user confirm; they can close when done
+    } catch (err) {
+      console.error(err);
+      info.textContent = 'Could not create calendar file. Please try on a desktop or use the iOS share sheet to open the .ics.';
+      info.classList.remove('hidden');
+    }
+  });
+
+  // initialize badge on load
+  document.addEventListener('DOMContentLoaded', updateBadge);
+})();
+</script>
+
+<!-- Chatbot floating button + window -->
+<style>
+  /* Chatbot styles + responsive + animation */
+  #chatbot-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 64px;
+    height: 64px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg,#06b6d4,#3b82f6);
+    box-shadow: 0 10px 30px rgba(59,130,246,0.18), 0 6px 12px rgba(0,0,0,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    z-index:9999;
+    cursor:pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+    animation: chat-bob 3s ease-in-out infinite;
+    will-change: transform;
+  }
+  #chatbot-toggle:active { transform: scale(.95); }
+
+  @keyframes chat-bob {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  #chatbot-window {
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    width: 360px;
+    max-width: calc(100% - 40px);
+    height: 480px;
+    max-height: 80vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(15,23,42,0.25);
+    z-index:9998;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform-origin: bottom right;
+    transform: scale(.95) translateY(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .24s cubic-bezier(.2,.9,.2,1), opacity .18s ease;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  #chatbot-window.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #chatbot-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:12px 14px;
+    border-bottom: 1px solid rgba(15,23,42,0.06);
+    background: linear-gradient(90deg,#10b981,#10b981);
+    color:white;
+  }
+
+  #chatbot-body {
+    padding:12px;
+    overflow:auto;
+    flex:1;
+    background: linear-gradient(180deg, #fbfdff, #fff);
+  }
+
+  .msg { margin:8px 0; display:flex; gap:8px; align-items:flex-end; }
+  .msg.bot { justify-content:flex-start; }
+  .msg.user { justify-content:flex-end; }
+  .bubble {
+    max-width:75%;
+    padding:10px 12px;
+    border-radius:12px;
+    font-size:14px;
+    line-height:1.3;
+    box-shadow: 0 4px 12px rgba(2,6,23,0.06);
+  }
+  .bubble.bot { background:#f1f5f9; color:#0f172a; border-bottom-left-radius:4px; }
+  .bubble.user { background:#10b981; color:white; border-bottom-right-radius:4px; }
+
+  #chatbot-footer {
+    display:flex;
+    gap:8px;
+    padding:10px;
+    border-top:1px solid rgba(15,23,42,0.04);
+    align-items:center;
+    background:linear-gradient(180deg,#fff,#fbfdff);
+  }
+  #chat-input {
+    flex:1;
+    padding:10px 12px;
+    border-radius:999px;
+    border:1px solid rgba(2,6,23,0.06);
+    outline:none;
+    font-size:14px;
+  }
+  #chat-send {
+    background:#10b981;
+    color:white;
+    padding:8px 12px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+  }
+
+  /* responsive: full width on small screens */
+  @media (max-width:420px) {
+    #chatbot-window {
+      right: 10px;
+      left: 10px;
+      bottom: 90px;
+      width: auto;
+      height: 70vh;
+      max-height: 70vh;
+    }
+    #chatbot-toggle { right: 14px; bottom: 14px; width:56px; height:56px; }
+  }
+</style>
+
+<div id="chatbot-root">
+  <button id="chatbot-toggle" aria-label="Open chat">
+    <!-- chat icon -->
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" fill="white" opacity="0.95"/>
+    </svg>
+  </button>
+
+  <div id="chatbot-window" role="dialog" aria-live="polite" aria-hidden="true">
+    <div id="chatbot-header">
+      <div style="display:flex;gap:10px;align-items:center">
+        <strong>CFPHF Chat</strong>
+        <small style="opacity:.9;font-size:12px">We’re here to help</small>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="chatbot-minimize" title="Minimize" style="background:transparent;border:none;color:rgba(255,255,255,0.95);cursor:pointer;font-weight:700">—</button>
+        <button id="chatbot-close" title="Close" style="background:transparent;border:none;color:rgba(255,255,255,0.95);cursor:pointer;font-weight:700">✕</button>
+      </div>
+    </div>
+
+    <div id="chatbot-body" tabindex="0">
+      <!-- messages injected here -->
+      <div class="msg bot"><div class="bubble bot">Hi — how can CFPHF help you today? Try "events", "volunteer", or "donate".</div></div>
+    </div>
+
+    <div id="chatbot-footer">
+      <input id="chat-input" placeholder="Type a message..." aria-label="Type a message" />
+      <button id="chat-send">Send</button>
+    </div>
+  </div>
+</div>
+
+<script src="./js/chatbot.js" defer></script>
+
+</body>
+</html>

@@ -58,7 +58,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   gtag('config', 'G-MBC0E5Q96G');
 </script>
-
 <!-- End Google Tag Manager -->
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -588,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="text-center mb-12">
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6">Programs That Change Lives</h2>
       <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-        Since September 23 2023 we have been giving out food items Biweekly till date. Our food distribution day is on Thursday.
+        Since September 23rd, 2023, we have been distributing food items biweekly to date. Our food distribution day is Thursdays
       </p>
     </div>
 
@@ -659,25 +658,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Donation Amounts -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
       
-        <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="50">
-          <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$50</div>
+        <!-- <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="50"> -->
+          <!-- <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$50</div> -->
           <!-- <div class="text-xs sm:text-sm text-gray-600">School supplies</div> -->
-        </div>
+        <!-- </div> -->
         <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer selected" data-amount="100">
           <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$100</div>
-          <!-- <div class="text-xs sm:text-sm text-gray-600">Medical care</div> -->
+          <div class="text-xs sm:text-sm text-gray-600" id="custom-amount-text">Monthly</div>
         </div>
         <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="250">
           <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$250</div>
-          <!-- <div class="text-xs sm:text-sm text-gray-600">Clean water access</div> -->
+          <div class="text-xs sm:text-sm text-gray-600" id="custom-amount-text">Monthly</div>
         </div>
         <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="500">
           <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">$500</div>
-          <!-- <div class="text-xs sm:text-sm text-gray-600">Community support</div> -->
+          <div class="text-xs sm:text-sm text-gray-600" id="custom-amount-text">Monthly</div>
         </div>
         <div class="donation-card bg-white border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center cursor-pointer" data-amount="500" id="custom-amount-card">
           <div class="text-lg sm:text-xl md:text-2xl font-bold text-primary donation-amount">Custom</div>
-          <div class="text-xs sm:text-sm text-gray-600">Custom amount</div>
+          <div class="text-xs sm:text-sm text-gray-600" id="custom-amount-text">Monthly</div>
         </div>
       </div>
       <!-- Custom Amount -->
@@ -805,29 +804,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <!-- Donor Info Modal -->
-<div id="donor-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-  <div class="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-md w-full mx-auto">
-    <h3 class="text-lg sm:text-xl font-bold text-secondary mb-4">Your Donation Details</h3>
-    <form id="donor-form" class="space-y-4">
-      <div>
-        <label class="block text-sm text-gray-600 mb-1">Full Name</label>
-        <input type="text" id="donor-name" class="w-full border border-gray-300 rounded-lg p-2 sm:p-3 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="John Doe" required>
-      </div>
-      <div>
-        <label class="block text-sm text-gray-600 mb-1">Email</label>
-        <input type="email" id="donor-email" class="w-full border border-gray-300 rounded-lg p-2 sm:p-3 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="you@example.com" required>
-      </div>
-      <div>
-        <label class="block text-sm text-gray-600 mb-1">Message (Optional)</label>
-        <textarea id="donor-message" class="w-full border border-gray-300 rounded-lg p-2 sm:p-3 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Leave a note with your donation"></textarea>
-      </div>
-      <div class="flex justify-between mt-4">
-        <button type="button" id="close-donor-modal" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">Cancel</button>
-        <button type="submit" class="px-6 py-2 rounded-lg bg-primary text-white hover:bg-green-600">Continue</button>
-      </div>
-    </form>
-  </div>
-</div>
+
 </section>
 
 <!-- Ways to Help -->

@@ -93,46 +93,118 @@ document.addEventListener('DOMContentLoaded', function() {
   if (donateAnchor) {
     donateAnchor.addEventListener('click', function(e) {
       e.preventDefault();
-      // if a card is selected use it, else use custom input
+
       const card = document.querySelector('.donation-card.selected');
-      if (card) {
-        openDonorModalWithAmount(card.getAttribute('data-amount'));
-      } else if (customInput && customInput.value) {
-        // when custom amount exists interpret it in currentCurrency
-        const v = Number(customInput.value) || 0;
-        const symbol = currentCurrency === 'USD' ? '$' : '₦';
-        let disp = donorModal.querySelector('#donation-amount-display');
-        if (!disp) {
-          disp = document.createElement('div');
-          disp.id = 'donation-amount-display';
-          disp.className = 'mb-3 text-lg font-semibold text-primary';
-          const formTop = donorForm && donorForm.firstElementChild ? donorForm.firstElementChild : donorModal.querySelector('h3');
-          if (formTop && formTop.parentNode) formTop.parentNode.insertBefore(disp, formTop.nextSibling);
-        }
-        disp.textContent = `${symbol}${v.toLocaleString()} (${currentCurrency})`;
-        donorModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+      const isCustom = card && card.id === 'custom-amount-card';
+      let displayAmount = 0;
+      const symbol = currentCurrency === 'USD' ? '$' : '₦';
+
+      // Preset cards store base USD in data-amount and must be converted when NGN selected.
+      if (card && !isCustom && card.getAttribute('data-amount')) {
+        const base = Number(card.getAttribute('data-amount')) || 0;
+        displayAmount = (currentCurrency === 'USD') ? base : Math.round(base * exchangeRate);
+      } else if ((isCustom || !card) && customInput && customInput.value) {
+        // Custom input is entered in the currently selected currency (no conversion).
+        displayAmount = Number(customInput.value) || 0;
       } else {
-        // nothing selected — open modal anyway
-        openDonorModalWithAmount(0);
+        displayAmount = 0;
+      }
+
+      // nicely formatted string
+      const displayStr = `${symbol}${displayAmount.toLocaleString()}`;
+
+      const openTransferModal = () => {
+        if (transferModal) {
+          transferModal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          // prefills transfer amount input if present
+          const transferAmountInput = document.querySelector('#transfer-form input[name="amount"], #transfer-amount');
+          if (transferAmountInput) transferAmountInput.value = displayAmount;
+        }
+      };
+
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          icon: 'info',
+          title: 'We accept bank transfer only',
+          html: `Please use bank transfer to complete your donation.<br><strong>Suggested amount:</strong> ${displayStr}`,
+          showCancelButton: true,
+          confirmButtonText: 'Transfer Now',
+          cancelButtonText: 'Cancel',
+          confirmButtonColor: '#16a34a'
+        }).then(result => {
+          if (result.isConfirmed) openTransferModal();
+        });
+      } else {
+        if (confirm(`We accept bank transfer only.\nSuggested amount: ${displayStr}\nOpen transfer instructions?`)) {
+          openTransferModal();
+        }
+      }
+    });
+  }
+
+  // handle transfer form submission (shows success and closes modal)
+  const transferForm = document.getElementById('transfer-form');
+  if (transferForm) {
+    transferForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // read some fields for the success message if present
+      const name = transferForm.querySelector('input[name="name"]')?.value || '';
+      const amountVal = transferForm.querySelector('input[name="amount"]')?.value || '';
+
+      const successMsg = name
+        ? `Thank you ${name}. Your transfer of ${amountVal} has been recorded.`
+        : `Your transfer of ${amountVal} has been recorded.`;
+
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Transfer recorded',
+          text: successMsg,
+          confirmButtonColor: '#16a34a'
+        }).then(() => {
+          transferModal && transferModal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+          transferForm.reset();
+        });
+      } else {
+        alert(successMsg);
+        transferModal && transferModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        transferForm.reset();
       }
     });
   }
 
   // monthly / onetime toggles (guard nulls)
   if (monthlyBtn && onetimeBtn) {
-    monthlyBtn.addEventListener('click', function() {
-      monthlyBtn.classList.add('bg-primary', 'text-white');
-      monthlyBtn.classList.remove('text-gray-600');
-      onetimeBtn.classList.remove('bg-primary', 'text-white');
-      onetimeBtn.classList.add('text-gray-600');
-    });
-    onetimeBtn.addEventListener('click', function() {
-      onetimeBtn.classList.add('bg-primary', 'text-white');
-      onetimeBtn.classList.remove('text-gray-600');
-      monthlyBtn.classList.remove('bg-primary', 'text-white');
-      monthlyBtn.classList.add('text-gray-600');
-    });
+    // update UI and the custom amount label depending on selected donation type
+    function setDonationType(isMonthly) {
+      if (isMonthly) {
+        monthlyBtn.classList.add('bg-primary', 'text-white');
+        monthlyBtn.classList.remove('text-gray-600');
+        onetimeBtn.classList.remove('bg-primary', 'text-white');
+        onetimeBtn.classList.add('text-gray-600');
+        // update all occurrences (page currently uses duplicate IDs) to "Monthly"
+        document.querySelectorAll('#custom-amount-text').forEach(el => el.textContent = 'Monthly');
+        window.__donationIsMonthly = true;
+      } else {
+        monthlyBtn.classList.remove('bg-primary', 'text-white');
+        monthlyBtn.classList.add('text-gray-600');
+        onetimeBtn.classList.add('bg-primary', 'text-white');
+        onetimeBtn.classList.remove('text-gray-600');
+        // update all occurrences (page currently uses duplicate IDs) to "One-time"
+        document.querySelectorAll('#custom-amount-text').forEach(el => el.textContent = 'One-time');
+        window.__donationIsMonthly = false;
+      }
+    }
+
+    monthlyBtn.addEventListener('click', function() { setDonationType(true); });
+    onetimeBtn.addEventListener('click', function() { setDonationType(false); });
+
+    // Initialize state (respect existing markup if monthly already styled, otherwise default to monthly)
+    const initiallyMonthly = monthlyBtn.classList.contains('bg-primary') || !onetimeBtn.classList.contains('bg-primary');
+    setDonationType(initiallyMonthly);
   }
 
   // currency buttons
@@ -155,22 +227,83 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // payment methods
-  paymentMethods.forEach(method => {
+  // New/changed code: implement amount updates and force-only-transfer payment method
+
+  // convert and update visible donation amount labels (data-amount is treated as base USD)
+  function updateDonationAmounts(currency) {
+    const cards = document.querySelectorAll('.donation-card');
+    cards.forEach(card => {
+      const amountEl = card.querySelector('.donation-amount');
+      if (!amountEl) return;
+      // keep "Custom" label for the custom card
+      if (card.id === 'custom-amount-card') {
+        amountEl.textContent = 'Custom';
+        return;
+      }
+      const base = Number(card.getAttribute('data-amount')) || 0;
+      const displayValue = currency === 'USD' ? base : Math.round(base * exchangeRate);
+      const symbol = currency === 'USD' ? '$' : '₦';
+      amountEl.textContent = `${symbol}${displayValue.toLocaleString()}`;
+    });
+
+    // update the small currency symbol in the custom input if present
+    const customSectionSymbol = document.querySelector('#custom-amount-section span');
+    if (customSectionSymbol) {
+      customSectionSymbol.textContent = currency === 'USD' ? '$' : '₦';
+    }
+  }
+
+  // Hide Card and Google Pay UI elements and ensure only Bank Transfer is available
+  (function enforceTransferOnly() {
+    const cardBtn = document.getElementById('card-btn');
+    const googlePayBtn = document.getElementById('google-pay-btn');
+    const transferOnly = document.getElementById('transfer-btn');
+
+    // hide other payment buttons (visual removal)
+    if (cardBtn) cardBtn.style.display = 'none';
+    if (googlePayBtn) googlePayBtn.style.display = 'none';
+
+    // Recompute the list of paymentMethod handlers to only include visible ones (transfer)
+    // Replace the global paymentMethods NodeList usage by a filtered list where needed below.
+    // (We keep existing paymentMethods variable untouched in-place; handlers below will use filtered list.)
+    window.__availablePaymentMethods = Array.from(document.querySelectorAll('.payment-method'))
+      .filter(el => el && getComputedStyle(el).display !== 'none');
+
+    // Make transfer selected by default if it's present
+    if (transferOnly) {
+      // remove selection styles from others (defensive)
+      Array.from(document.querySelectorAll('.payment-method')).forEach(m => {
+        m.classList.remove('bg-primary', 'text-white');
+        m.classList.add('hover:border-primary');
+      });
+      transferOnly.classList.add('bg-primary', 'text-white');
+      transferOnly.classList.remove('hover:border-primary');
+
+      // ensure transfer modal is ready to open if clicked
+      transferOnly.addEventListener('click', function () {
+        const transferModal = document.getElementById('transfer-modal');
+        transferModal && transferModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+  })();
+
+  // payment methods - use the filtered available list to attach click handlers (only transfer remains)
+  const availablePaymentMethods = window.__availablePaymentMethods || Array.from(document.querySelectorAll('.payment-method')).filter(el => el && getComputedStyle(el).display !== 'none');
+  availablePaymentMethods.forEach(method => {
     method.addEventListener('click', function() {
-      paymentMethods.forEach(m => {
+      availablePaymentMethods.forEach(m => {
         m.classList.remove('bg-primary', 'text-white');
         m.classList.add('hover:border-primary');
       });
       this.classList.add('bg-primary', 'text-white');
       this.classList.remove('hover:border-primary');
 
-      // open transfer modal only for transfer
+      // open transfer modal only for transfer (we only have transfer visible)
       if (this.id === 'transfer-btn') {
         transferModal && transferModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       } else {
-        // if card or google-pay selected, keep selection and close transfer modal if open
         transferModal && transferModal.classList.add('hidden');
         document.body.style.overflow = 'auto';
       }
